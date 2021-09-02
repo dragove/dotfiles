@@ -10,8 +10,10 @@ import qualified Data.Map as M
 
 myKeys = [ ((mod4Mask, xK_p), spawn "rofi -show combi")
          , ((mod4Mask, xK_s), spawn "flameshot gui")
-         , ((0, xF86XK_AudioRaiseVolume), spawn "pamixer -i 3")
-         , ((0, xF86XK_AudioLowerVolume), spawn "pamixer -d 3")
+         , ((0, xF86XK_AudioRaiseVolume), spawn "volumeControl.sh up")
+         , ((0, xF86XK_AudioLowerVolume), spawn "volumeControl.sh down")
+         , ((0, xF86XK_MonBrightnessUp), spawn "brightnessControl.sh up")
+         , ((0, xF86XK_MonBrightnessDown), spawn "brightnessControl.sh down")
 	 ]
 
 
