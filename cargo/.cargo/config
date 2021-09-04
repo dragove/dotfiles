@@ -1,7 +1,7 @@
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
 
-# 替换成你偏好的镜像源
+# Use the prefered mirror
 replace-with = 'ustc'
 
 [source.tuna]
