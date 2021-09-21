@@ -8,6 +8,9 @@ map [fullscreen] f toggle_fullscreen
 # Open document in fit-width mode by default
 set adjust-open "best-fit"
 
+# Copy to clipboard
+set selection-clipboard clipboard
+
 set font "FuraCode Nerd Font 16"
 
 # Dracular color scheme
