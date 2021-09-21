@@ -1,0 +1,61 @@
+# Zathura configuration file
+# See man `man zathurarc'
+map i recolor
+map R rotate
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+
+# Open document in fit-width mode by default
+set adjust-open "best-fit"
+
+# One page per row by default
+set pages-per-row 1
+
+#stop at page boundries
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+
+#zoom settings
+set zoom-min 10
+set guioptions ""
+
+set font "FuraCode Nerd Font 16"
+
+# Base16 Nord
+# Author: arcticicestudio
+
+set default-bg                  "#2E3440"
+set default-fg                  "#3B4252"
+
+set statusbar-fg                "#D8DEE9"
+set statusbar-bg                "#434C5E"
+
+set inputbar-bg                 "#2E3440"
+set inputbar-fg                 "#8FBCBB"
+
+set notification-bg             "#2E3440"
+set notification-fg             "#8FBCBB"
+
+set notification-error-bg       "#2E3440"
+set notification-error-fg       "#BF616A"
+
+set notification-warning-bg     "#2E3440"
+set notification-warning-fg     "#BF616A"
+
+set highlight-color             "#EBCB8B"
+set highlight-active-color      "#81A1C1"
+
+set completion-bg               "#3B4252"
+set completion-fg               "#81A1C1"
+
+set completion-highlight-fg     "#8FBCBB"
+set completion-highlight-bg     "#81A1C1"
+
+set recolor-lightcolor          "#2E3440"
+set recolor-darkcolor           "#ECEFF4"
+
+set recolor                     "false"
+set recolor-keephue             "false"
+
