@@ -1,13 +1,12 @@
-Config { font = "xft:Noto Sans CJK SC-12"
-       , additionalFonts = []
+Config { font = "xft:Noto Sans CJK SC-12,FuraCode Nerd Font-12"
        , borderColor = "black"
-       , border = TopB
-       , bgColor = "#282c34"
+       , border = BottomB
+       , bgColor = "#28342c"
        , fgColor = "#abb2bf"
        , position = Top
        , textOffset = -1
        , iconOffset = -1
-       , alpha = 220
+       , alpha = 230
        , lowerOnStart = False
        , hideOnStart = False
        , pickBroadest = False
@@ -16,28 +15,25 @@ Config { font = "xft:Noto Sans CJK SC-12"
        , allDesktops = True
        , overrideRedirect = True
        , commands = [
-               Run Network "wlan0" ["-L","0","-H","32","--normal","green","--high","red"] 10
-             , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
-             , Run Battery [ "--template" , "Batt: <acstatus>"
-               , "--Low"      , "10"        -- units: %
-               , "--High"     , "80"        -- units: %
-               , "--low"      , "red"
-               , "--normal"   , "orange"
-               , "--high"     , "green"
-               , "--" -- battery specific options
-                      -- discharging status
-               , "-o"	, "<left>% (<timeleft>)"
-                      -- AC "on" status
-               , "-O"	, "<fc=#dAA520>Charging</fc>"
-                      -- charged status
-               , "-i"	, "<fc=#006000>Charged</fc>"
-             ] 50
-             , Run Memory ["-t","Mem: <usedratio>%"] 10
-             , Run Swap [ ] 10
-             , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-             , Run UnsafeStdinReader
-             ]
-, sepChar = "%"
-, alignSep = "}{"
-, template = "%UnsafeStdinReader% } %cpu% | %memory% * %swap% | %wlan0% { <fc=#ee9a00>%date%</fc> | %battery% | %uname% "
+              Run DynNetwork [] 10
+            , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+            , Run Memory ["-t" ,"RAM: <usedratio>%"] 10
+            , Run Battery [ "--template" , "Batt: <acstatus>"
+              , "--Low"      , "10"        -- units: %
+              , "--High"     , "80"        -- units: %
+              , "--low"      , "red"
+              , "--normal"   , "orange"
+              , "--high"     , "green"
+              , "--" -- battery specific options
+                    -- discharging status
+              , "-o"	, "<left>% (<timeleft>)"
+                    -- AC "on" status
+              , "-O"	, "<fc=#dAA520>Charging</fc>"
+                    -- charged status
+              , "-i"	, "<fc=#006000>Charged</fc>"
+            ] 50
+            , Run Date "%d %b %T" "date" 10
+            , Run UnsafeStdinReader
+            ]
+, template = "%UnsafeStdinReader% } %cpu% | %memory% | %dynnetwork% { %battery% | %date% |"
 }
