@@ -1,3 +1,5 @@
 [user]
 	name = dragove
 	email = dragove@qq.com
+[pull]
+	rebase = true
