@@ -1,4 +1,4 @@
-picom -cCGb -o 0.95 -O 0.1 -I 0.1 --experimental-backends
+picom -b --experimental-backends
 xsetroot -cursor_name left_ptr
 setxkbmap -option caps:swapescape
 ~/.fehbg
