@@ -2,18 +2,13 @@ import XMonad
 
 import Graphics.X11.ExtraTypes.XF86
 
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 
 import XMonad.Util.EZConfig
 import XMonad.Util.Loggers
-import XMonad.Util.Ungrab
 import XMonad.Util.ClickableWorkspaces
-
-import XMonad.Layout.Magnifier
 
 import XMonad.Hooks.EwmhDesktops
 
@@ -55,21 +50,19 @@ myLayout = tiled ||| Mirror tiled ||| Full
 
 myXmobarPP :: PP
 myXmobarPP = def
-    { ppSep             = magenta " • "
-    , ppTitleSanitize   = xmobarStrip
-    , ppCurrent         = wrap " " "" . xmobarBorder "Top" "#8be9fd" 2
-    , ppHidden          = white . wrap " " ""
-    , ppHiddenNoWindows = lowWhite . wrap " " ""
-    , ppUrgent          = red . wrap (yellow "!") (yellow "!")
-    , ppOrder           = \[ws, l, _, wins] -> [ws, l, wins]
-    , ppExtras          = [logTitles formatFocused formatUnfocused]
+    { ppSep              = magenta " • "
+    , ppTitleSanitize    = xmobarStrip
+    , ppCurrent          = wrap " " "" . xmobarBorder "Top" "#8be9fd" 2
+    , ppHidden           = white . wrap " " ""
+    , ppHiddenNoWindows  = const ""
+    , ppUrgent           = red . wrap (yellow "!") (yellow "!")
+    , ppOrder            = \[ws, l, _, wins] -> [ws, l, wins]
+    , ppExtras           = [logTitles formatFocused formatUnfocused]
     }
   where
     formatFocused   = wrap (white    "[") (white    "]") . magenta . ppWindow
     formatUnfocused = wrap (lowWhite "[") (lowWhite "]") . blue    . ppWindow
 
-    -- | Windows should have *some* title, which should not not exceed a
-    -- sane length.
     ppWindow :: String -> String
     ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
 
