@@ -2,15 +2,17 @@ import XMonad
 
 import Graphics.X11.ExtraTypes.XF86
 
+import XMonad.Layout.NoBorders
+
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.EwmhDesktops
 
 import XMonad.Util.EZConfig
 import XMonad.Util.Loggers
 import XMonad.Util.ClickableWorkspaces
 
-import XMonad.Hooks.EwmhDesktops
 
 
 main :: IO ()
@@ -21,10 +23,12 @@ main = xmonad
      $ myConfig
 
 myConfig = def
-    { terminal   = "kitty"
-    , modMask    = mod4Mask      -- Rebind Mod to the Super key
-    , layoutHook = myLayout      -- Use custom layouts
-    , manageHook = myManageHook  -- Match on certain windows
+    { terminal           = "kitty"
+    , modMask            = mod4Mask
+    , layoutHook         = myLayout
+    , manageHook         = myManageHook
+    , focusedBorderColor = "#3579A8"
+    , normalBorderColor  = "#000000"
     }
   `additionalKeys`
   [ ((mod4Mask, xK_p), spawn "rofi -show combi"),
@@ -41,7 +45,7 @@ myManageHook = composeAll
     , isDialog            --> doFloat
     ]
 
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = smartBorders (tiled ||| Mirror tiled ||| Full)
   where
     tiled    = Tall nmaster delta ratio
     nmaster  = 1      -- Default number of windows in the master pane
