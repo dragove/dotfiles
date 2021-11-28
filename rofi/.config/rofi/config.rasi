@@ -1,0 +1,8 @@
+configuration {
+	font: "FuraCode Nerd Font 16";
+	show-icons: true;
+	icon-theme: "Papirus";
+  combi-modi: "drun,run";
+}
+
+@theme "slate"
