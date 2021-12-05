@@ -1,7 +1,4 @@
 *.o
-/xmonad/.xmonad/xmonad.hi
-/xmonad/.xmonad/xmonad.errors
-/xmonad/.xmonad/xmonad-x86_64-linux
-/xmonad/.xmonad/build-x86_64-linux
+/xmonad/.config/xmonad/stack.yaml
 /scripts/Workspace/Scripts/datagrip
 /scripts/Workspace/Scripts/idea
