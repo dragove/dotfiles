@@ -1,4 +1,5 @@
 *.o
 /xmonad/.config/xmonad/stack.yaml
 /scripts/Workspace/Scripts/datagrip
+/scripts/Workspace/Scripts/pycharm
 /scripts/Workspace/Scripts/idea
