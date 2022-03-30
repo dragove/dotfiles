@@ -23,7 +23,7 @@ main = xmonad
      $ myConfig
 
 myConfig = def
-    { terminal           = "kitty"
+    { terminal           = "wezterm"
     , modMask            = mod4Mask
     , layoutHook         = myLayout
     , manageHook         = myManageHook
