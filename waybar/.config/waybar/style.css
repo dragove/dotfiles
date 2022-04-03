@@ -180,13 +180,13 @@
     padding-bottom: 2px;
     padding-left: 10px;
     padding-right: 10px;
-    color: #888888;
+    color: #999999;
 }
 
 #workspaces button.focused {
-    border-color: #4c7899;
-    color: white;
-    background-color: #285577;
+    border-color: #eeeeee;
+    color: #eeeeee;
+    background-color: #282c34;
 }
 
 #workspaces button.urgent {
