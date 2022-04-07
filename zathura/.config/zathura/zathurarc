@@ -9,7 +9,7 @@ map [fullscreen] f toggle_fullscreen
 set adjust-open "best-fit"
 
 # Copy to clipboard
-set selection-clipboard clipboard
+# set selection-clipboard clipboard
 
 set font "FuraCode Nerd Font 16"
 

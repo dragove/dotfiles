@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term wezterm
+set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -191,6 +191,13 @@ input type:touchpad {
     # Audio Volumne Control
     bindsym XF86AudioRaiseVolume exec volumeControl.sh up
     bindsym XF86AudioLowerVolume exec volumeControl.sh down
+
+#
+# utilities
+#
+    # translate clipboard
+    bindsym $mod+t exec transtify.sh
+
 #
 # Resizing containers:
 #
