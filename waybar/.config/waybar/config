@@ -27,8 +27,8 @@
     ],
     "modules-right": [
         "network",
-        "memory",
         "cpu",
+        "memory",
         "temperature",
         "custom/keyboard-layout",
         "battery",

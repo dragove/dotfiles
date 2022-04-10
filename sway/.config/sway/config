@@ -23,7 +23,7 @@ set $menu sirula
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-exec_always mpvpaper -p -o "no-audio loop" eDP-1 ~/Videos/laniwp.mp4
+exec_always swaybg -i /home/dove/Pictures/Wallpaper/acg2.gy_45.jpg
 #
 # Example configuration:
 #
@@ -197,6 +197,7 @@ input type:touchpad {
 #
     # translate clipboard
     bindsym $mod+t exec transtify.sh
+    bindsym $mod+Shift+s exec snapshot.sh
 
 #
 # Resizing containers:
