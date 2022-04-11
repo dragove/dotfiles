@@ -1,13 +1,34 @@
 # zsh config
-HISTFILE=${HISTFILE:-${ZDOTDIR:-${HOME}}/.zsh_history}
+HISTFILE=~/.cache/zsh_history
 HISTSIZE=5000
 SAVEHIST=10000
 
-LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
-export LS_COLORS
 
-# set key-bindings to Emacs mode
+setopt printexitvalue
+setopt CORRECT
+setopt CORRECT_ALL
+
+
+# Prompt
+# 'Magenta username' @ 'hostname' 'current dir' ('Git info')
+setopt prompt_subst
+PROMPT='%F{blue}%n%f@%m %2~ %# '
+
+
 bindkey -e
+
+# Completion
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# case-insensitive, allow completion from the middle of a word
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
+zstyle ':completion:*' menu select=1
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
 
 # alias
 alias grep='grep --colour=auto'
@@ -32,20 +53,9 @@ man() {
     man "$@"
 }
 
-# load inner plugins
-autoload -U colors
-colors
-setopt menucomplete
-autoload compinit
-compinit
-
-zstyle ':completion:*' menu select
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-
-# enable starship
-eval "$(starship init zsh)"
 # source some plugins
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+
