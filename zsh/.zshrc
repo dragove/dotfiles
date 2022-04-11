@@ -9,26 +9,20 @@ setopt CORRECT
 setopt CORRECT_ALL
 
 
-# Prompt
-# 'Magenta username' @ 'hostname' 'current dir' ('Git info')
+autoload -U colors
+colors
+# Simple Prompt username@hostname dir %
 setopt prompt_subst
 PROMPT='%F{blue}%n%f@%m %2~ %# '
 
-
+# Use Emacs keybindings
 bindkey -e
 
 # Completion
-# The following lines were added by compinstall
-
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# case-insensitive, allow completion from the middle of a word
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 zstyle ':completion:*' menu select=1
-
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
+
 
 # alias
 alias grep='grep --colour=auto'
