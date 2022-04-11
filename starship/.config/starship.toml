@@ -1,0 +1,10 @@
+# Inserts a blank line between shell prompts
+add_newline = false
+
+[username]
+show_always = true
+style_user = "bold blue"
+
+[directory]
+style = "bold"
+
