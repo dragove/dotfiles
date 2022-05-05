@@ -15,6 +15,8 @@ colors
 setopt prompt_subst
 PROMPT='%F{blue}%n%f@%m %2~ %# '
 
+# use autocde
+setopt  autocd
 # Use Emacs keybindings
 bindkey -e
 
