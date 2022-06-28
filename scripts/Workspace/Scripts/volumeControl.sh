@@ -14,13 +14,14 @@ function get_volume {
 }
 
 function is_mute {
-  pamixer --get-mute
+    res=$(pamixer --get-mute)
+    $res
 }
 
 function send_notification {
   iconSound="audio-volume-high"
   iconMuted="audio-volume-muted"
-  if is_mute ; then
+  if  is_mute ; then
     dunstify -i $iconMuted -r 2593 -u normal "mute"
   else
     volume=$(get_volume)
