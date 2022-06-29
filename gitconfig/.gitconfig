@@ -5,3 +5,7 @@
 	rebase = true
 [init]
 	defaultBranch = master
+[color]
+	ui = true
+[core]
+	editor = nvim

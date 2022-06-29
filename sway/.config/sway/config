@@ -23,7 +23,7 @@ set $menu fuzzel
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-exec_always swaybg -i /home/dove/Pictures/Wallpaper/acg2.gy_45.jpg
+exec_always swaybg -i /home/dove/Pictures/Wallpaper/acg.gy_14.jpg
 #
 # Example configuration:
 #
@@ -31,7 +31,7 @@ exec_always swaybg -i /home/dove/Pictures/Wallpaper/acg2.gy_45.jpg
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-default_border none 0
+default_border none
 
 ### Idle configuration
 #
@@ -68,6 +68,7 @@ input type:touchpad {
     tap enabled
     tap_button_map lrm
     natural_scroll enabled
+    scroll_factor .2
 }
 ### Key bindings
 #
@@ -87,7 +88,7 @@ input type:touchpad {
     # Despite the name, also works for non-floating windows.
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
-    floating_modifier $mod normal
+    floating_modifier $mod
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
@@ -232,4 +233,3 @@ bar {
     swaybar_command waybar
 }
 
-include /etc/sway/config.d/*
