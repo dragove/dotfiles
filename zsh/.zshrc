@@ -21,7 +21,8 @@ setopt  autocd
 bindkey -e
 
 # Completion
-zstyle ':completion:*' menu select=1
+zstyle ':completion:*' menu select 
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 autoload -Uz compinit
 compinit
 
