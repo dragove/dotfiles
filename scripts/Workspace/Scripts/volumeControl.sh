@@ -45,7 +45,11 @@ case $1 in
     ;;
   mute)
     # toggle mute
-    pamixer -m
+    if is_mute ; then
+        pamixer -u
+    else
+        pamixer -m
+    fi
     send_notification
     ;;
 esac

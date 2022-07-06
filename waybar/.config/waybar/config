@@ -1,15 +1,4 @@
-// =============================================================================
-//
-// Waybar configuration
-//
-// Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
-//
-// =============================================================================
-
 {
-    // -------------------------------------------------------------------------
-    // Global configuration
-    // -------------------------------------------------------------------------
 
     "layer": "top",
 
@@ -19,11 +8,9 @@
     "height": 30,
 
     "modules-left": [
-        "sway/workspaces",
-        "sway/mode"
+        "wlr/workspaces"
     ],
     "modules-center": [
-        "sway/window"
     ],
     "modules-right": [
         "network",
@@ -110,37 +97,8 @@
         "tooltip-format": "{ifname}: {ipaddr}"
     },
 
-    "sway/mode": {
-        "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
-        "tooltip": false
+    "wlr/workspaces": {
     },
-
-    "sway/window": {
-        "format": "{}",
-        "max-length": 120
-    },
-
-    "sway/workspaces": {
-        "all-outputs": false,
-        "disable-scroll": true
-    },
-
-    //"pulseaudio": {
-    //    //"scroll-step": 1,
-    //    "format": "{icon}  {volume}%",
-    //    "format-bluetooth": "{icon}  {volume}%",
-    //    "format-muted": "",
-    //    "format-icons": {
-    //        "headphones": "",
-    //        "handsfree": "",
-    //        "headset": "",
-    //        "phone": "",
-    //        "portable": "",
-    //        "car": "",
-    //        "default": ["", ""]
-    //    },
-    //    "on-click": "pavucontrol"
-    //},
 
     "temperature": {
       "critical-threshold": 80,
