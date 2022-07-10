@@ -189,6 +189,12 @@
     background-color: #282c34;
 }
 
+#workspaces button.focused {
+    border-color: #eeeeee;
+    color: #eeeeee;
+    background-color: #282c34;
+}
+
 #workspaces button.urgent {
     border-color: #c9545d;
     color: #c9545d;
