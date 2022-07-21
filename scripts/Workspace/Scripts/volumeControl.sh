@@ -21,15 +21,20 @@ function is_mute {
 function send_notification {
   iconSound="audio-volume-high"
   iconMuted="audio-volume-muted"
+  notify_path="$XDG_RUNTIME_DIR"/.volume_notif
+  notif=$(flock "$notify_path" cat "$notify_path")
+  if ! echo "$notif" | grep "[[:digit:]]"; then
+      notif=444
+  fi
   if  is_mute ; then
-    dunstify -i $iconMuted -r 2593 -u normal "mute"
+    notify-send -i $iconMuted -p -r "$notif" "mute" > "$notify_path"
   else
     volume=$(get_volume)
     # Make the bar with the special character ─ (it's not dash -)
     # https://en.wikipedia.org/wiki/Box-drawing_character
     bar=$(seq --separator="─" 0 "$((volume / 5))" | sed 's/[0-9]//g')
     # Send the notification
-    dunstify -i $iconSound -r 2593 -u normal "$bar"
+    notify-send -i $iconSound -p -r "$notif" "$bar" > "$notify_path"
   fi
 }
 
