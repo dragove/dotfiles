@@ -1,6 +1,4 @@
 {
-    "gtk-layer-shell": false,
-
     "layer": "top",
 
     "position": "top",
