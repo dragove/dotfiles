@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term foot
+set $term wezterm-gui
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -47,7 +47,7 @@ default_border none
 # resumed. It will also lock your screen before your computer goes to sleep.
 exec_always fcitx5 -d --replace
 exec_always /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec_always dunst
+exec_always mako
 ### Input configuration
 #
 # Example configuration:
