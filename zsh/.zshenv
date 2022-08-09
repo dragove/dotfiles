@@ -1,5 +1,8 @@
 path+=(~/.local/bin;~/Workspace/Scripts)
 
+# use bat as man pager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 
 export EDITOR=nvim
 export BROWSER=firefox
