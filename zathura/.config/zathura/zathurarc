@@ -16,6 +16,7 @@ set smooth-scroll "true"
 set scroll-full-overlap 0.01
 set scroll-step 100
 
+set window-title-basename "true"
 #zoom settings
 set zoom-min 10
 set guioptions ""
@@ -24,40 +25,47 @@ set guioptions ""
 # Copy to clipboard
 # set selection-clipboard clipboard
 
-set font "inconsolata 15"
+set font "Noto Sans CJK SC 15"
 
 # Dracular color scheme
 
-set default-bg "#000000" #00
-set default-fg "#F7F7F6" #01
+set notification-error-bg       "#ff5555" # Red
+set notification-error-fg       "#f8f8f2" # Foreground
+set notification-warning-bg     "#ffb86c" # Orange
+set notification-warning-fg     "#44475a" # Selection
+set notification-bg             "#282a36" # Background
+set notification-fg             "#f8f8f2" # Foreground
 
-set statusbar-fg "#B0B0B0" #04
-set statusbar-bg "#202020" #01
+set completion-bg               "#282a36" # Background
+set completion-fg               "#6272a4" # Comment
+set completion-group-bg         "#282a36" # Background
+set completion-group-fg         "#6272a4" # Comment
+set completion-highlight-bg     "#44475a" # Selection
+set completion-highlight-fg     "#f8f8f2" # Foreground
 
-set inputbar-bg "#151515" #00 currently not used
-set inputbar-fg "#FFFFFF" #02
+set index-bg                    "#282a36" # Background
+set index-fg                    "#f8f8f2" # Foreground
+set index-active-bg             "#44475a" # Current Line
+set index-active-fg             "#f8f8f2" # Foreground
 
-set notification-error-bg "#AC4142" #08
-set notification-error-fg "#151515" #00
+set inputbar-bg                 "#282a36" # Background
+set inputbar-fg                 "#f8f8f2" # Foreground
+set statusbar-bg                "#282a36" # Background
+set statusbar-fg                "#f8f8f2" # Foreground
 
-set notification-warning-bg "#AC4142" #08
-set notification-warning-fg "#151515" #00
+set highlight-color             "#ffb86c" # Orange
+set highlight-active-color      "#ff79c6" # Pink
 
-set highlight-color "#F4BF75" #0A
-set highlight-active-color "#6A9FB5" #0D
+set default-bg                  "#282a36" # Background
+set default-fg                  "#f8f8f2" # Foreground
 
-set completion-highlight-fg "#151515" #02
-set completion-highlight-bg "#90A959" #0C
-
-set completion-bg "#303030" #02
-set completion-fg "#E0E0E0" #0C
-
-set notification-bg "#90A959" #0B
-set notification-fg "#151515" #00
+set render-loading              true
+set render-loading-fg           "#282a36" # Background
+set render-loading-bg           "#f8f8f2" # Foreground
 
 set recolor "true"
-set recolor-lightcolor "#000000" #00
-set recolor-darkcolor "#E0E0E0" #06
+set recolor-lightcolor          "#282a36" # Background
+set recolor-darkcolor           "#f8f8f2" # Foreground
 set recolor-reverse-video "true"
 set recolor-keephue "true"
 
