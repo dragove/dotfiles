@@ -7,5 +7,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   # exec sway --unsupported-gpu
   exec Hyprland
+  # exec startx
 fi
 
