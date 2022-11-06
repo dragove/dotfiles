@@ -4,7 +4,7 @@ return {
     font = wezterm.font("FiraCode Nerd Font"),
     font_size = 16,
     hide_tab_bar_if_only_one_tab = true,
-    window_background_opacity = 0.9,
+    -- window_background_opacity = 0.9,
     window_padding = {
         left = 4,
         right = 4,

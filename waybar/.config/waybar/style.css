@@ -50,7 +50,7 @@
 #waybar {
     border-radius: 8px;
     color: white;
-    background: rgba(40, 44, 52, 0.9);
+    background: #282c34;
     font-family: FiraCode Nerd Font, Cantarell, Noto Sans, sans-serif;
     font-size: 13px;
 }
