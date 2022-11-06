@@ -52,7 +52,6 @@
     background: #282c34;
     font-family: FiraCode Nerd Font, Cantarell, Noto Sans, sans-serif;
     font-size: 13px;
-    opacity: 0.9;
 }
 
 /* Each module */
@@ -172,6 +171,15 @@
 
 #window {
     font-weight: bold;
+}
+
+
+button {
+    color: white;
+}
+
+label {
+    all: unset;
 }
 
 #workspaces button {

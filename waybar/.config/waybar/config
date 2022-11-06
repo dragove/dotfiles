@@ -12,7 +12,7 @@
     ],
     "modules-center": [
         "sway/window",
-        "custom/hyprtitle"
+        "hyprland/window"
     ],
     "modules-right": [
         "network",
@@ -66,14 +66,6 @@
         }
     },
 
-    "custom/hyprtitle": {
-      "exec": "hyprctl activewindow -j | jq -r '.title'",
-      "interval": 1,
-      "format": "{}",
-      "signal": 1,
-      "tooltip": false
-    },
-
     "memory": {
         "interval": 5,
         "format": " {}%", // Icon: memory
@@ -92,6 +84,7 @@
     },
 
     "wlr/workspaces": {
+        "on-click": "activate"
     },
 
     "temperature": {
