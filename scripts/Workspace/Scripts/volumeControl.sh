@@ -18,26 +18,6 @@ function is_mute {
     $res
 }
 
-function send_notification {
-  iconSound="audio-volume-high"
-  iconMuted="audio-volume-muted"
-  notify_path="$XDG_RUNTIME_DIR"/.volume_notif
-  notif=$(flock "$notify_path" cat "$notify_path")
-  if ! echo "$notif" | grep "[[:digit:]]"; then
-      notif=444
-  fi
-  if  is_mute ; then
-    notify-send -i $iconMuted -p -r "$notif" "mute" > "$notify_path"
-  else
-    volume=$(get_volume)
-    # Make the bar with the special character ─ (it's not dash -)
-    # https://en.wikipedia.org/wiki/Box-drawing_character
-    bar=$(seq --separator="─" 0 "$((volume / 5))" | sed 's/[0-9]//g')
-    # Send the notification
-    notify-send -i $iconSound -p -r "$notif" "$bar" > "$notify_path"
-  fi
-}
-
 case $1 in
   up)
     # set the volume on (if it was muted)
@@ -55,6 +35,5 @@ case $1 in
     else
         pamixer -m
     fi
-    send_notification
     ;;
 esac

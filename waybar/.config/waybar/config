@@ -3,8 +3,6 @@
 
     "position": "top",
 
-    "margin": "4px 4px 0 4px",
-
     // If height property would be not present, it'd be calculated dynamically
     "height": 28,
 

@@ -48,7 +48,6 @@
 
 /* The whole bar */
 #waybar {
-    border-radius: 8px;
     color: white;
     background: #282c34;
     font-family: FiraCode Nerd Font, Cantarell, Noto Sans, sans-serif;
@@ -183,11 +182,6 @@ label {
     all: unset;
 }
 
-#workspaces button:nth-child(1) {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
 #workspaces button {
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
@@ -199,11 +193,13 @@ label {
 #workspaces button.active {
     color: #eeeeee;
     background-color: #282c34;
+    border-top: 2px solid white; 
 }
 
 #workspaces button.focused {
     color: #eeeeee;
     background-color: #282c34;
+    border-top: 2px solid white; 
 }
 
 #workspaces button.urgent {
