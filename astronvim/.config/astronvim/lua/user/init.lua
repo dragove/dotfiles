@@ -1,3 +1,3 @@
 return {
-  colorscheme = "onedarkpro"
+  colorscheme = "onedark"
 }
