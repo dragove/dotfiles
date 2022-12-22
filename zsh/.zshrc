@@ -36,6 +36,8 @@ alias ll='ls --color=auto --human-readable --group-directories-first --classify 
 alias la='ls --color=auto --human-readable --group-directories-first --classify -la'
 alias vim=nvim
 alias vi=nvim
+alias parui="paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro sudo paru -S"
+alias parur="paru -Qq | fzf --multi --preview 'paru -Qi {1}' | xargs -ro sudo paru -Rns"
 
 # functions
 man() {

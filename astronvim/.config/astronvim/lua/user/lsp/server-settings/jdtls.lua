@@ -22,6 +22,26 @@ return function()
     os = "linux"
   end
 
+  local settings = {
+    java = {
+      codeGeneration = {
+        generateComments = true,
+        hashCodeEquals = {
+          useInstanceof = true,
+          useJava7Objects = true,
+        },
+        useBlocks = true,
+      },
+      implementationsCodeLens = { enabled = true },
+      referencesCodeLens = { enabled = true },
+      saveActions = { organizeImports = true },
+      signatureHelp = { enabled = true },
+      symbols = {
+        includeSourceMethodDeclarations = true,
+      },
+    }
+  }
+
   -- return the server config
   return {
     cmd = {
@@ -46,14 +66,13 @@ return function()
       workspace_dir,
     },
     root_dir = root_dir,
-    on_attach = function(client, bufnr)
-      require 'jdtls.setup'.add_commands()
-      require 'jdtls'.setup_dap()
-    end,
+    settings = settings,
     init_options = {
       bundles = {
-        vim.fn.glob(debug_install_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"
-          , 1)
+        vim.fn.glob(debug_install_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar", 1),
+      },
+      extendedClientCapabilities = {
+        progressReportProvider = false,
       }
     }
   }
