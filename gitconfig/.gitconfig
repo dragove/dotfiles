@@ -9,3 +9,4 @@
 	ui = true
 [core]
 	editor = nvim
+	autocrlf = input

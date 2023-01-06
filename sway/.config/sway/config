@@ -24,7 +24,7 @@ set $menu fuzzel
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 exec_always systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-# exec_always swaybg -i /home/dove/Pictures/Wallpaper/acg.gy_14.jpg
+exec_always swaybg -i /home/dove/Pictures/Wallpaper/1.jpg
 #
 # Example configuration:
 #
