@@ -38,6 +38,9 @@ alias vim=nvim
 alias vi=nvim
 alias parui="paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S"
 alias parur="paru -Qq | fzf --multi --preview 'paru -Qi {1}' | xargs -ro paru -Rns"
+if [[ "$TERM" == "xterm-kitty" ]] then
+  alias ssh="kitty +kitten ssh"
+fi
 
 # functions
 man() {
