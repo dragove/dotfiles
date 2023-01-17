@@ -1,3 +1,4 @@
 return {
-  "jdtls"
+  "jdtls",
+  "rust_analyzer",
 }
