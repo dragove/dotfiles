@@ -1,3 +1,4 @@
+sleep 1
 swww init
 while true;
 do
