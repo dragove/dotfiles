@@ -1,5 +1,4 @@
-swww-daemon &
-sleep 1
+swww init
 while true;
 do
   ls -d ~/Pictures/Wallpaper/* | sort -R | while read file;
