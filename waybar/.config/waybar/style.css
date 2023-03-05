@@ -190,16 +190,20 @@ label {
     color: #666666;
 }
 
+#custom-arch {
+    margin-right: 8px;
+}
+
 #workspaces button.active {
     color: #eeeeee;
     background-color: #282c34;
-    border-top: 2px solid white; 
+    border-bottom: 2px solid white;
 }
 
 #workspaces button.focused {
     color: #eeeeee;
     background-color: #282c34;
-    border-top: 2px solid white; 
+    border-bottom: 2px solid white;
 }
 
 #workspaces button.urgent {
