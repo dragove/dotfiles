@@ -13,7 +13,7 @@ autoload -U colors
 colors
 # Simple Prompt username@hostname dir %
 setopt prompt_subst
-PROMPT='%F{blue}%n%f@%m %2~ %# '
+PROMPT='%F{blue}%n%f@%m %2~ > '
 
 # use autocde
 setopt  autocd
