@@ -10,6 +10,8 @@
  * Keyframes
  * -------------------------------------------------------------------------- */
 
+@import "frappe.css";
+
 @keyframes blink-warning {
     70% {
         color: white;
@@ -48,8 +50,8 @@
 
 /* The whole bar */
 #waybar {
-    color: white;
-    background: #282c34;
+    color: @text;
+    background: @base;
     font-family: FiraCode Nerd Font, Cantarell, Noto Sans, sans-serif;
     font-size: 13px;
 }
@@ -196,15 +198,15 @@ label {
 }
 
 #workspaces button.active {
-    color: #eeeeee;
-    background-color: #282c34;
-    border-bottom: 2px solid white;
+    color: @subtext1;
+    background-color: @mantle;
+    border-bottom: 2px solid @subtext1;
 }
 
 #workspaces button.focused {
-    color: #eeeeee;
-    background-color: #282c34;
-    border-bottom: 2px solid white;
+    color: @subtext1;
+    background-color: @mantle;
+    border-bottom: 2px solid @subtext1;
 }
 
 #workspaces button.urgent {
