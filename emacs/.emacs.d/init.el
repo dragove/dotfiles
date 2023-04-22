@@ -84,12 +84,6 @@ Otherwise the startup will be very slow. "
 (require 'init-package)
 (require 'init-custom)
 (require 'init-meow)
-;
-; ;; Preferences
-; (require 'init-base)
-; (require 'init-hydra)
-;
-; (require 'init-ui)
 (require 'init-edit)
 ; (require 'init-ivy)
 ; (require 'init-company)
