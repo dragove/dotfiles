@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t no-byte-compile: t -*-
 
-(defvar elpaca-installer-version 0.3)
+(defvar elpaca-installer-version 0.4)
 (defvar elpaca-directory "~/.local/share/emacs/elpaca/")
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))

@@ -29,11 +29,10 @@
   (global-ligature-mode t))
 
 ;; theme config
-(elpaca (catppuccin :host github :repo "catppuccin/emacs")
-  :init (load-theme 'catppuccin t)
+(use-package catppuccin-theme :elpaca (catppuccin-theme :host github :repo "catppuccin/emacs")
   :config
   (setq catppuccin-flavor 'frappe)
-  (catppuccin-reload))
+  (load-theme 'catppuccin t))
 
 
 (provide 'init-custom)
