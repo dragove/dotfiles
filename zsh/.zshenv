@@ -1,4 +1,4 @@
-path+=(~/.local/bin;~/Workspace/Scripts)
+path+=(~/.local/bin;~/Workspace/Scripts;~/.ghcup/bin)
 
 # use bat as man pager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"

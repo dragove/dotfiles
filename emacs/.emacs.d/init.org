@@ -1,0 +1,342 @@
+#+title:  Emacs Configuration
+#+author: dragove
+#+startup: overview
+#+property: header-args :mkdirp yes :tangle yes :results silent :noweb yes
+
+#+begin_quote
+This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfolio's .emacs.d]]
+#+end_quote
+
+* Bootstraping
+** Early Init
+:PROPERTIES:
+:header-args: :results silent :tangle ~/.emacs.d/early-init.el
+:END:
+
+#+begin_src emacs-lisp :lexical t
+  ;;; early-init.el --- Early initialization. -*- lexical-binding: t -*-
+  (setq package-enable-at-startup nil)
+  (setq inhibit-default-init nil)
+
+  ;; disable native comp warnings
+  (setq native-comp-async-report-warnings-errors nil)
+  ;; Set eln-cache dir
+  (when (boundp 'native-comp-eln-load-path)
+    (startup-redirect-eln-cache (expand-file-name "~/.cache/emacs/eln-cache/" user-emacs-directory)))
+
+  ;; In noninteractive sessions, prioritize non-byte-compiled source files to
+  ;; prevent the use of stale byte-code. Otherwise, it saves us a little IO time
+  ;; to skip the mtime checks on every *.elc file.
+  (setq load-prefer-newer noninteractive)
+
+  ;; Skipping a bunch of regular expression searching in the =file-name-handler-alist= should improve start time.
+  (defvar default-file-name-handler-alist file-name-handler-alist)
+  (setq file-name-handler-alist nil)
+#+end_src
+
+*** Garbage Collection
+#+begin_src emacs-lisp :lexical t
+  (setq gc-cons-threshold most-positive-fixnum
+        gc-cons-percentage 1)
+
+  (defun +gc-after-focus-change ()
+    "Run GC when frame loses focus."
+    (run-with-idle-timer
+     5 nil
+     (lambda () (unless (frame-focus-state) (garbage-collect)))))
+
+  (defun +reset-init-values ()
+    (run-with-idle-timer
+     1 nil
+     (lambda ()
+       (setq file-name-handler-alist default-file-name-handler-alist
+             gc-cons-percentage 0.1
+             gc-cons-threshold 100000000)
+       (message "gc-cons-threshold & file-name-handler-alist restored")
+       (when (boundp 'after-focus-change-function)
+         (add-function :after after-focus-change-function #'+gc-after-focus-change)))))
+  (with-eval-after-load 'elpaca
+    (add-hook 'elpaca-after-init-hook '+reset-init-values))
+#+end_src
+
+*** Disable Default UI
+#+begin_src emacs-lisp :lexical t
+  ;; Inhibit resizing frame
+  (setq frame-inhibit-implied-resize t)
+
+  ;; disable startup screen and silent bell
+  (setq ring-bell-function #'ignore
+        inhibit-startup-screen t)
+
+  ;; Prevent instructions on how to close an emacsclient frame.
+  (setq server-client-instructions nil)
+
+  ;; disable menu-bar tool-bar scroll-bar stuff
+  (push '(menu-bar-lines . 0) default-frame-alist)
+  (push '(tool-bar-lines . 0) default-frame-alist)
+  (push '(vertical-scroll-bars) default-frame-alist)
+
+  ;; Prevent flashing of unstyled modeline at startup
+  (setq-default mode-line-format nil)
+#+end_src
+
+
+*** Font Config
+#+begin_src emacs-lisp :lexical t
+(set-face-attribute 'default nil :family "FiraCode Nerd Font" :height 160)
+#+end_src
+
+*** Ignore X Resources
+#+begin_src emacs-lisp :lexical t
+(advice-add #'x-apply-session-resources :override #'ignore)
+#+end_src
+
+** lexical binding
+The following line turns on lexical binding for performance reasons.
+#+begin_src emacs-lisp :lexical t
+;; -*- lexical-binding: t; -*-
+#+end_src
+
+** Profiling
+This function displays how long Emacs took to start.
+It's a rough way of knowing when/if I need to optimize my init file.
+#+begin_src emacs-lisp :lexical t
+  (add-hook 'elpaca-after-init-hook
+            (lambda ()
+              (message "Emacs loaded in %s with %d garbage collections."
+                       (format "%.2f seconds"
+                               (float-time
+                                (time-subtract (current-time) before-init-time)))
+                       gcs-done)))
+#+end_src
+
+** Emacs Defaults
+
+#+begin_src emacs-lisp :lexical t
+  ;; Better defaults
+  (setq inhibit-splash-screen t)
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
+  (setq adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*")
+  (setq adaptive-fill-first-line-regexp "^* *$")
+  (setq delete-by-moving-to-trash t)         ; Deleting files go to OS's trash folder
+  (setq make-backup-files nil)               ; Forbide to make backup files
+  (setq auto-save-default nil)               ; Disable auto save
+  (setq set-mark-command-repeat-pop t)       ; Repeating C-SPC after popping mark pops it again
+
+  (setq-default major-mode 'text-mode)
+
+  (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
+  (setq sentence-end-double-space nil)
+
+  ;; Tab and Space
+  ;; Permanently indent with spaces, never with TABs
+  (setq-default c-basic-offset   4
+                tab-width        4
+                indent-tabs-mode nil)
+
+  ;; initial-buffer-choice
+  (setq initial-buffer-choice t) ;;*scratch*
+
+#+end_src
+
+** Elpaca
+#+begin_quote
+An elisp package manager
+
+https://github.com/progfolio/elpaca
+#+end_quote
+
+*** Installer
+#+begin_src emacs-lisp :lexical t
+  (defvar elpaca-installer-version 0.4)
+  (defvar elpaca-directory "~/.local/share/emacs/elpaca/")
+  (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+  (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+  (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+                                :ref nil
+                                :files (:defaults (:exclude "extensions"))
+                                :build (:not elpaca--activate-package)))
+  (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+         (build (expand-file-name "elpaca/" elpaca-builds-directory))
+         (order (cdr elpaca-order))
+         (default-directory repo))
+    (add-to-list 'load-path (if (file-exists-p build) build repo))
+    (unless (file-exists-p repo)
+      (make-directory repo t)
+      (condition-case-unless-debug err
+          (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                   ((zerop (call-process "git" nil buffer t "clone"
+                                         (plist-get order :repo) repo)))
+                   ((zerop (call-process "git" nil buffer t "checkout"
+                                         (or (plist-get order :ref) "--"))))
+                   (emacs (concat invocation-directory invocation-name))
+                   ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                         "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                   ((require 'elpaca))
+                   ((elpaca-generate-autoloads "elpaca" repo)))
+              (kill-buffer buffer)
+            (error "%s" (with-current-buffer buffer (buffer-string))))
+        ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+    (unless (require 'elpaca-autoloads nil t)
+      (require 'elpaca)
+      (elpaca-generate-autoloads "elpaca" repo)
+      (load "./elpaca-autoloads")))
+  (add-hook 'after-init-hook #'elpaca-process-queues)
+  (elpaca `(,@elpaca-order))
+  (setq elpaca-queue-limit 30)
+
+  (elpaca elpaca-use-package
+    (elpaca-use-package-mode)
+    (setq elpaca-use-package-by-default t))
+
+  (elpaca-wait)
+#+end_src
+
+** Theme and UI stuff
+
+*** Ligature Support
+#+begin_src emacs-lisp :lexical t
+(use-package ligature
+  :config
+  ;; Enable the "www" ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; Enable all Cascadia Code ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                       "\\\\" "://"))
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
+#+end_src
+
+*** Catppuccin Theme
+#+begin_src emacs-lisp :lexical t
+;; theme config
+(use-package catppuccin-theme
+  :config
+  (setq catppuccin-flavor 'frappe)
+  (load-theme 'catppuccin t))
+#+end_src
+*** Doom Modeline
+#+begin_src emacs-lisp :lexical t
+  (use-package doom-modeline
+    :ensure t
+    :init (doom-modeline-mode 1))
+#+end_src
+
+** Editing
+*** Auto Tangle Mode
+#+begin_src emacs-lisp :lexical t
+(use-package auto-tangle-mode
+  :elpaca (auto-tangle-mode
+           :host github
+           :repo "progfolio/auto-tangle-mode.el"
+           :local-repo "auto-tangle-mode")
+  :commands (auto-tangle-mode))
+#+end_src
+
+*** Meow
+#+begin_src emacs-lisp :lexical t
+  (defun meow-setup ()
+    (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+    (meow-motion-overwrite-define-key
+     '("j" . meow-next)
+     '("k" . meow-prev)
+     '("<escape>" . ignore))
+    (meow-leader-define-key
+     ;; SPC j/k will run the original command in MOTION state.
+     '("j" . "H-j")
+     '("k" . "H-k")
+     ;; Use SPC (0-9) for digit arguments.
+     '("1" . meow-digit-argument)
+     '("2" . meow-digit-argument)
+     '("3" . meow-digit-argument)
+     '("4" . meow-digit-argument)
+     '("5" . meow-digit-argument)
+     '("6" . meow-digit-argument)
+     '("7" . meow-digit-argument)
+     '("8" . meow-digit-argument)
+     '("9" . meow-digit-argument)
+     '("0" . meow-digit-argument)
+     '("/" . meow-keypad-describe-key)
+     '("?" . meow-cheatsheet))
+    (meow-normal-define-key
+     '("0" . meow-expand-0)
+     '("9" . meow-expand-9)
+     '("8" . meow-expand-8)
+     '("7" . meow-expand-7)
+     '("6" . meow-expand-6)
+     '("5" . meow-expand-5)
+     '("4" . meow-expand-4)
+     '("3" . meow-expand-3)
+     '("2" . meow-expand-2)
+     '("1" . meow-expand-1)
+     '("-" . negative-argument)
+     '(";" . meow-reverse)
+     '("," . meow-inner-of-thing)
+     '("." . meow-bounds-of-thing)
+     '("[" . meow-beginning-of-thing)
+     '("]" . meow-end-of-thing)
+     '("a" . meow-append)
+     '("A" . meow-open-below)
+     '("b" . meow-back-word)
+     '("B" . meow-back-symbol)
+     '("c" . meow-change)
+     '("d" . meow-delete)
+     '("D" . meow-backward-delete)
+     '("e" . meow-next-word)
+     '("E" . meow-next-symbol)
+     '("f" . meow-find)
+     '("g" . meow-cancel-selection)
+     '("G" . meow-grab)
+     '("h" . meow-left)
+     '("H" . meow-left-expand)
+     '("i" . meow-insert)
+     '("I" . meow-open-above)
+     '("j" . meow-next)
+     '("J" . meow-next-expand)
+     '("k" . meow-prev)
+     '("K" . meow-prev-expand)
+     '("l" . meow-right)
+     '("L" . meow-right-expand)
+     '("m" . meow-join)
+     '("n" . meow-search)
+     '("o" . meow-block)
+     '("O" . meow-to-block)
+     '("p" . meow-yank)
+     '("q" . meow-quit)
+     '("Q" . meow-goto-line)
+     '("r" . meow-replace)
+     '("R" . meow-swap-grab)
+     '("s" . meow-kill)
+     '("t" . meow-till)
+     '("u" . meow-undo)
+     '("U" . meow-undo-in-selection)
+     '("v" . meow-visit)
+     '("w" . meow-mark-word)
+     '("W" . meow-mark-symbol)
+     '("x" . meow-line)
+     '("X" . meow-goto-line)
+     '("y" . meow-save)
+     '("Y" . meow-sync-grab)
+     '("z" . meow-pop-selection)
+     '("'" . repeat)
+     '("<escape>" . ignore)))
+
+  (use-package meow
+    :init (meow-global-mode)
+    :config (meow-setup))
+#+end_src
