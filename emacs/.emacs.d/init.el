@@ -63,6 +63,14 @@
 
 ;; -*- lexical-binding: t; -*-
 
+(add-hook 'elpaca-after-init-hook
+          (lambda ()
+            (message "Emacs loaded in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract (current-time) before-init-time)))
+                     gcs-done)))
+
 ;; Better defaults
 (setq inhibit-splash-screen t)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
@@ -90,9 +98,17 @@
 ;; use utf-8 coding system
 (set-default-coding-systems 'utf-8)
 
+;; yes-or-no to y-or-n
+(fset 'yes-or-no-p 'y-or-n-p)
+
 ;; use relative number
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (defvar elpaca-installer-version 0.4)
 (defvar elpaca-directory "~/.local/share/emacs/elpaca/")

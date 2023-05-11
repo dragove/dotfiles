@@ -1,7 +1,7 @@
 #+title:  Emacs Configuration
 #+author: dragove
 #+startup: overview
-#+property: header-args :mkdirp yes :tangle yes :results silent :noweb yes
+#+property: header-args :mkdirp yes :tangle ~/.emacs.d/init.el :results silent :noweb yes
 #+auto_tangle: t
 
 #+begin_quote
@@ -142,10 +142,17 @@ It's a rough way of knowing when/if I need to optimize my init file.
   ;; use utf-8 coding system
   (set-default-coding-systems 'utf-8)
 
+  ;; yes-or-no to y-or-n
+  (fset 'yes-or-no-p 'y-or-n-p)
+
   ;; use relative number
   (setq display-line-numbers-type 'relative)
   (global-display-line-numbers-mode)
-
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  shell-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
 
 ** Elpaca
@@ -666,3 +673,4 @@ https://github.com/progfolio/elpaca
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
 )
 #+end_src
+
