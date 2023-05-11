@@ -95,6 +95,13 @@
 ;; initial-buffer-choice
 (setq initial-buffer-choice t) ;;*scratch*
 
+;; use utf-8 coding system
+(set-default-coding-systems 'utf-8)
+
+;; use relative number
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode)
+
 (defvar elpaca-installer-version 0.4)
 (defvar elpaca-directory "~/.local/share/emacs/elpaca/")
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))

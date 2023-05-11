@@ -139,6 +139,13 @@ It's a rough way of knowing when/if I need to optimize my init file.
   ;; initial-buffer-choice
   (setq initial-buffer-choice t) ;;*scratch*
 
+  ;; use utf-8 coding system
+  (set-default-coding-systems 'utf-8)
+
+  ;; use relative number
+  (setq display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode)
+
 #+end_src
 
 ** Elpaca
