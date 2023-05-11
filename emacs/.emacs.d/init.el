@@ -63,14 +63,6 @@
 
 ;; -*- lexical-binding: t; -*-
 
-(add-hook 'elpaca-after-init-hook
-          (lambda ()
-            (message "Emacs loaded in %s with %d garbage collections."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract (current-time) before-init-time)))
-                     gcs-done)))
-
 ;; Better defaults
 (setq inhibit-splash-screen t)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
