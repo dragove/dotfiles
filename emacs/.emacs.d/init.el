@@ -17,27 +17,11 @@
 (defvar default-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 1)
-
-(defun +gc-after-focus-change ()
-  "Run GC when frame loses focus."
-  (run-with-idle-timer
-   5 nil
-   (lambda () (unless (frame-focus-state) (garbage-collect)))))
-
-(defun +reset-init-values ()
-  (run-with-idle-timer
-   1 nil
-   (lambda ()
-     (setq file-name-handler-alist default-file-name-handler-alist
-           gc-cons-percentage 0.1
-           gc-cons-threshold 100000000)
-     (message "gc-cons-threshold & file-name-handler-alist restored")
-     (when (boundp 'after-focus-change-function)
-       (add-function :after after-focus-change-function #'+gc-after-focus-change)))))
-(with-eval-after-load 'elpaca
-  (add-hook 'elpaca-after-init-hook '+reset-init-values))
+(let ((normal-gc-cons-threshold (* 20 1024 1024))
+      (init-gc-cons-threshold (* 128 1024 1024)))
+  (setq gc-cons-threshold init-gc-cons-threshold)
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
 ;; Inhibit resizing frame
 (setq frame-inhibit-implied-resize t)
@@ -109,6 +93,34 @@
                 shell-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+;; Delete the current file
+
+(defun delete-this-file ()
+  "Delete the current file, and kill the buffer."
+  (interactive)
+  (unless (buffer-file-name)
+    (error "No file is currently being edited"))
+  (when (yes-or-no-p (format "Really delete '%s'?"
+                             (file-name-nondirectory buffer-file-name)))
+    (delete-file (buffer-file-name))
+    (kill-this-buffer)))
+
+
+;; Rename the current file
+
+(defun rename-this-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (unless filename
+      (error "Buffer '%s' is not visiting a file!" name))
+    (progn
+      (when (file-exists-p filename)
+        (rename-file filename new-name 1))
+      (set-visited-file-name new-name)
+      (rename-buffer new-name))))
 
 (defvar elpaca-installer-version 0.4)
 (defvar elpaca-directory "~/.local/share/emacs/elpaca/")
@@ -187,6 +199,48 @@
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1))
+
+(use-package helpful
+  :bind (([remap describe-function] . helpful-callable)
+         ([remap describe-command]  . helpful-command)
+         ([remap describe-variable] . helpful-variable)
+         ([remap describe-key]      . helpful-key)
+         ([remap describe-symbol]   . helpful-symbol)
+         ("C-c C-d"                 . helpful-at-point)
+         :map helpful-mode-map
+         ("r"                       . remove-hook-at-point))
+  :hook (helpful-mode . cursor-sensor-mode) ; for remove-advice button
+  :init
+  (with-no-warnings
+    (with-eval-after-load 'counsel
+      (setq counsel-describe-function-function #'helpful-callable
+            counsel-describe-variable-function #'helpful-variable
+            counsel-describe-symbol-function #'helpful-symbol
+            counsel-descbinds-function #'helpful-callable))
+
+    (with-eval-after-load 'apropos
+      ;; patch apropos buttons to call helpful instead of help
+      (dolist (fun-bt '(apropos-function apropos-macro apropos-command))
+        (button-type-put
+         fun-bt 'action
+         (lambda (button)
+           (helpful-callable (button-get button 'apropos-symbol)))))
+      (dolist (var-bt '(apropos-variable apropos-user-option))
+        (button-type-put
+         var-bt 'action
+         (lambda (button)
+           (helpful-variable (button-get button 'apropos-symbol)))))))
+  :config
+  (with-no-warnings
+    ;; Open the buffer in other window
+    (defun my-helpful--navigate (button)
+      "Navigate to the path this BUTTON represents."
+      (find-file-other-window (substring-no-properties (button-get button 'path)))
+      ;; We use `get-text-property' to work around an Emacs 25 bug:
+      (-when-let (pos (get-text-property button 'position
+                                         (marker-buffer button)))
+        (helpful--goto-char-widen pos)))
+    (advice-add #'helpful--navigate :override #'my-helpful--navigate)))
 
 (use-package org-auto-tangle
   :defer t
@@ -281,6 +335,8 @@
 (use-package meow
   :init (meow-global-mode)
   :config (meow-setup))
+
+(electric-pair-mode 1)
 
 ;; Enable vertico
 (use-package vertico
@@ -528,7 +584,9 @@
   ;; This is recommended since Dabbrev can be used globally (M-/).
   ;; See also `corfu-exclude-modes'.
   :init
-  (global-corfu-mode))
+  (global-corfu-mode)
+  :config
+  (add-hook 'meow-insert-exit-hook 'corfu-quit))
 
 ;; A few more useful configurations...
 (use-package emacs
@@ -581,3 +639,69 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
 )
+
+;; Configure Tempel
+(use-package tempel
+  ;; Require trigger prefix before template name when completing.
+  ;; :custom
+  ;; (tempel-trigger-prefix "<")
+
+  :bind (("M-+" . tempel-complete) ;; Alternative tempel-expand
+         ("M-*" . tempel-insert))
+
+  :init
+
+  ;; Setup completion at point
+  (defun tempel-setup-capf ()
+    ;; Add the Tempel Capf to `completion-at-point-functions'.
+    ;; `tempel-expand' only triggers on exact matches. Alternatively use
+    ;; `tempel-complete' if you want to see all matches, but then you
+    ;; should also configure `tempel-trigger-prefix', such that Tempel
+    ;; does not trigger too often when you don't expect it. NOTE: We add
+    ;; `tempel-expand' *before* the main programming mode Capf, such
+    ;; that it will be tried first.
+    (setq-local completion-at-point-functions
+                (cons #'tempel-expand
+                      completion-at-point-functions)))
+
+  (add-hook 'prog-mode-hook 'tempel-setup-capf)
+  (add-hook 'text-mode-hook 'tempel-setup-capf)
+
+  ;; Optionally make the Tempel templates available to Abbrev,
+  ;; either locally or globally. `expand-abbrev' is bound to C-x '.
+  ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
+  ;; (global-tempel-abbrev-mode)
+  )
+
+;; Optional: Add tempel-collection.
+;; The package is young and doesn't have comprehensive coverage.
+(use-package tempel-collection)
+
+(use-package org
+  :config
+  (require 'org-tempo)
+  (setq org-adapt-indentation nil)
+  (setq org-hide-leading-stars t)
+  (setq org-startup-folded t)
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-ellipsis " ▾")
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+  (setq org-image-actual-width nil)
+  (setq org-display-remote-inline-images 'download))
+
+(use-package org-modern
+  :config (with-eval-after-load 'org (global-org-modern-mode)))
+
+(use-package git-gutter
+  :config
+  (setq git-gutter:modified-sign "⏽")
+  (setq git-gutter:added-sign "⏽")
+  (setq git-gutter:deleted-sign "⏽"))
+
+(use-package magit
+  :bind (("C-M-g" . magit-status-here)))
+
+(use-package vterm
+  :ensure t)
