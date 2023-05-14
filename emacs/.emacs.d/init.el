@@ -137,6 +137,7 @@
   (add-to-list 'load-path (if (file-exists-p build) build repo))
   (unless (file-exists-p repo)
     (make-directory repo t)
+    (when (< emacs-major-version 28) (require 'subr-x))
     (condition-case-unless-debug err
         (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
                  ((zerop (call-process "git" nil buffer t "clone"
@@ -157,7 +158,6 @@
     (load "./elpaca-autoloads")))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
-(setq elpaca-queue-limit 30)
 
 (elpaca elpaca-use-package
   (elpaca-use-package-mode)
@@ -679,7 +679,6 @@
 
 (use-package org
   :config
-  (require 'org-tempo)
   (setq org-adapt-indentation nil)
   (setq org-hide-leading-stars t)
   (setq org-startup-folded t)
@@ -689,7 +688,16 @@
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
   (setq org-image-actual-width nil)
-  (setq org-display-remote-inline-images 'download))
+  (setq org-display-remote-inline-images 'download)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (emacs-lisp . t)
+     (C . t)
+     (scheme . t)
+     (latex . t)
+     (js . t)
+     (plantuml . t))))
 
 (use-package org-modern
   :config (with-eval-after-load 'org (global-org-modern-mode)))
