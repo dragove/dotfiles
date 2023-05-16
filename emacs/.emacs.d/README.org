@@ -68,7 +68,24 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
 
 *** Font Config
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil :family "FiraCode Nerd Font" :height 160)
+(when (display-graphic-p)
+    ;; Set default font
+    (set-face-attribute 'default
+                        nil
+                        :font "FiraCode Nerd Font"
+                        :height 150)
+
+    ;; Fixed-pitch (monospaced) fonts 等宽字体
+    (set-face-attribute 'fixed-pitch
+                        nil
+                        :font "FiraCode Nerd Font"
+                        :height 150)
+
+    ;; CJK fonts
+    (set-fontset-font t 'han (font-spec :family "Noto Serif CJK SC" :weight 'semi-bold :slant 'normal))
+    (set-fontset-font t 'kana (font-spec :family "Noto Serif CJK JP" :weight 'semi-bold :slant 'normal))
+    ;; Emoji
+    (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
 #+end_src
 
 *** Ignore X Resources
@@ -98,44 +115,45 @@ It's a rough way of knowing when/if I need to optimize my init file.
 ** Emacs
 *** Defaults
 #+begin_src emacs-lisp
-  ;; Better defaults
-  (setq inhibit-splash-screen t)
-  (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
-  (setq adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*")
-  (setq adaptive-fill-first-line-regexp "^* *$")
-  (setq delete-by-moving-to-trash t)         ; Deleting files go to OS's trash folder
-  (setq make-backup-files nil)               ; Forbide to make backup files
-  (setq auto-save-default nil)               ; Disable auto save
-  (setq set-mark-command-repeat-pop t)       ; Repeating C-SPC after popping mark pops it again
+    ;; Better defaults
+    (setq inhibit-splash-screen t)
+    (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
+    (setq adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*")
+    (setq adaptive-fill-first-line-regexp "^* *$")
+    (setq delete-by-moving-to-trash t)         ; Deleting files go to OS's trash folder
+    (setq make-backup-files nil)               ; Forbide to make backup files
+    (setq auto-save-default nil)               ; Disable auto save
+    (setq set-mark-command-repeat-pop t)       ; Repeating C-SPC after popping mark pops it again
 
-  (setq-default major-mode 'text-mode)
+    (setq-default major-mode 'text-mode)
 
-  (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
-  (setq sentence-end-double-space nil)
+    (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
+    (setq sentence-end-double-space nil)
 
-  ;; Tab and Space
-  ;; Permanently indent with spaces, never with TABs
-  (setq-default c-basic-offset   4
-                tab-width        4
-                indent-tabs-mode nil)
+    ;; Tab and Space
+    ;; Permanently indent with spaces, never with TABs
+    (setq-default c-basic-offset   4
+                  tab-width        4
+                  indent-tabs-mode nil)
 
-  ;; initial-buffer-choice
-  (setq initial-buffer-choice t) ;;*scratch*
+    ;; initial-buffer-choice
+    (setq initial-buffer-choice t) ;;*scratch*
 
-  ;; use utf-8 coding system
-  (set-default-coding-systems 'utf-8)
+    ;; use utf-8 coding system
+    (set-default-coding-systems 'utf-8)
 
-  ;; yes-or-no to y-or-n
-  (fset 'yes-or-no-p 'y-or-n-p)
+    ;; yes-or-no to y-or-n
+    (fset 'yes-or-no-p 'y-or-n-p)
 
-  ;; use relative number
-  (setq display-line-numbers-type 'relative)
-  (global-display-line-numbers-mode)
-  (dolist (mode '(org-mode-hook
-                  term-mode-hook
-                  shell-mode-hook
-                  eshell-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+    ;; use relative number
+    (setq display-line-numbers-type 'relative)
+    (global-display-line-numbers-mode)
+    (dolist (mode '(org-mode-hook
+                    term-mode-hook
+                    shell-mode-hook
+                    eshell-mode-hook
+                    pdf-view-mode-hook))
+      (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
 
 *** Useful Functions
@@ -827,3 +845,4 @@ https://github.com/progfolio/elpaca
   (use-package vterm
     :ensure t)
 #+end_src
+

@@ -41,7 +41,24 @@
 ;; Prevent flashing of unstyled modeline at startup
 (setq-default mode-line-format nil)
 
-(set-face-attribute 'default nil :family "FiraCode Nerd Font" :height 160)
+(when (display-graphic-p)
+    ;; Set default font
+    (set-face-attribute 'default
+                        nil
+                        :font "FiraCode Nerd Font"
+                        :height 150)
+
+    ;; Fixed-pitch (monospaced) fonts 等宽字体
+    (set-face-attribute 'fixed-pitch
+                        nil
+                        :font "FiraCode Nerd Font"
+                        :height 150)
+
+    ;; CJK fonts
+    (set-fontset-font t 'han (font-spec :family "Noto Serif CJK SC" :weight 'semi-bold :slant 'normal))
+    (set-fontset-font t 'kana (font-spec :family "Noto Serif CJK JP" :weight 'semi-bold :slant 'normal))
+    ;; Emoji
+    (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
 
 (advice-add #'x-apply-session-resources :override #'ignore)
 
@@ -91,7 +108,8 @@
 (dolist (mode '(org-mode-hook
                 term-mode-hook
                 shell-mode-hook
-                eshell-mode-hook))
+                eshell-mode-hook
+                pdf-view-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Delete the current file
