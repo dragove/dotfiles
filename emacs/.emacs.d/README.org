@@ -783,8 +783,8 @@ https://github.com/progfolio/elpaca
 
     (add-hook 'prog-mode-hook 'tempel-setup-capf)
     (add-hook 'text-mode-hook 'tempel-setup-capf)
-
-    ;; Optionally make the Tempel templates available to Abbrev,
+    (add-hook 'org-mode-hook 'tempel-setup-capf)
+        ;; Optionally make the Tempel templates available to Abbrev,
     ;; either locally or globally. `expand-abbrev' is bound to C-x '.
     ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
     ;; (global-tempel-abbrev-mode)
