@@ -728,6 +728,3 @@
 
 (use-package magit
   :bind (("C-M-g" . magit-status-here)))
-
-(use-package vterm
-  :ensure t)
