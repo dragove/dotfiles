@@ -5,3 +5,6 @@ eshell
 transient
 server
 elpa
+org-roam.db
+.org-id-locations
+bookmarks

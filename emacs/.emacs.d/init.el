@@ -217,6 +217,9 @@
   :ensure t
   :init (doom-modeline-mode 1))
 
+(use-package ace-window
+  :bind (("M-o" . ace-window)))
+
 (use-package helpful
   :bind (([remap describe-function] . helpful-callable)
          ([remap describe-command]  . helpful-command)
@@ -258,6 +261,12 @@
                                          (marker-buffer button)))
         (helpful--goto-char-widen pos)))
     (advice-add #'helpful--navigate :override #'my-helpful--navigate)))
+
+(use-package pulsar
+  :config
+  (pulsar-global-mode))
+
+(use-package command-log-mode)
 
 (use-package org-auto-tangle
   :defer t
@@ -353,7 +362,11 @@
   :init (meow-global-mode)
   :config (meow-setup))
 
-(electric-pair-mode 1)
+(use-package elec-pair
+  :elpaca nil
+  :ensure nil
+  :hook (after-init . electric-pair-mode)
+  :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 
 ;; Enable vertico
 (use-package vertico
@@ -694,6 +707,13 @@
 ;; The package is young and doesn't have comprehensive coverage.
 (use-package tempel-collection)
 
+(use-package vundo
+  :bind ("C-x u" . vundo)
+  :config (setq vundo-glyph-alist vundo-unicode-symbols))
+
+(use-package avy
+  :bind (("C-:" . avy-goto-char)))
+
 (use-package org
   :config
   (setq org-adapt-indentation nil)
@@ -719,6 +739,22 @@
 (use-package org-modern
   :config (with-eval-after-load 'org (global-org-modern-mode)))
 
+(use-package org-roam
+  :custom
+  (org-roam-directory "~/Documents/roam")
+  (org-roam-dailies-directory "daily/")
+  :config
+  (org-roam-db-autosync-mode))
+(use-package org-roam-ui
+  :elpaca (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+  :after org-roam
+  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
+
 (use-package git-gutter
   :config
   (setq git-gutter:modified-sign "⏽")
@@ -734,12 +770,3 @@
   (setq geiser-chez-binary "chez"
         geiser-default-implementation '(chez))
   (add-hook 'scheme-mode-hook 'geiser-mode))
-(use-package paredit
-  :config
-  (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-  (add-hook 'scheme-mode-hook           #'enable-paredit-mode))

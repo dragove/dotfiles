@@ -283,6 +283,11 @@ https://github.com/progfolio/elpaca
     :ensure t
     :init (doom-modeline-mode 1))
 #+end_src
+*** Ace Window
+#+begin_src emacs-lisp
+  (use-package ace-window
+    :bind (("M-o" . ace-window)))
+#+end_src
 *** Helpful
 #+begin_src emacs-lisp
 (use-package helpful
@@ -327,8 +332,17 @@ https://github.com/progfolio/elpaca
         (helpful--goto-char-widen pos)))
     (advice-add #'helpful--navigate :override #'my-helpful--navigate)))
 #+end_src
-
-** editing
+*** Pulsar
+#+begin_src emacs-lisp
+(use-package pulsar
+  :config
+  (pulsar-global-mode))
+#+end_src
+*** Command Log
+#+begin_src emacs-lisp
+  (use-package command-log-mode)
+#+end_src
+** Editing
 *** Auto Tangle Mode
 #+begin_src emacs-lisp
 (use-package org-auto-tangle
@@ -429,7 +443,11 @@ https://github.com/progfolio/elpaca
 #+end_src
 *** Auto Pair
 #+begin_src emacs-lisp
-  (electric-pair-mode 1)
+  (use-package elec-pair
+    :elpaca nil
+    :ensure nil
+    :hook (after-init . electric-pair-mode)
+    :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 #+end_src
 *** Vertico
 #+begin_src emacs-lisp
@@ -794,6 +812,18 @@ https://github.com/progfolio/elpaca
   (use-package tempel-collection)
 #+end_src
 
+*** Vundo
+#+begin_src emacs-lisp
+  (use-package vundo
+    :bind ("C-x u" . vundo)
+    :config (setq vundo-glyph-alist vundo-unicode-symbols))
+#+end_src
+
+*** Avy
+#+begin_src emacs-lisp
+    (use-package avy
+      :bind (("C-:" . avy-goto-char)))
+#+end_src
 ** Org Mode
 *** Defaults
 #+begin_src emacs-lisp
@@ -824,6 +854,24 @@ https://github.com/progfolio/elpaca
   (use-package org-modern
     :config (with-eval-after-load 'org (global-org-modern-mode)))
 #+end_src
+*** Org Roam
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :custom
+    (org-roam-directory "~/Documents/roam")
+    (org-roam-dailies-directory "daily/")
+    :config
+    (org-roam-db-autosync-mode))
+  (use-package org-roam-ui
+    :elpaca (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+    :after org-roam
+    :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+#+end_src
 ** Git Integration
 *** Git Gutter
 #+begin_src emacs-lisp
@@ -847,13 +895,5 @@ https://github.com/progfolio/elpaca
     (setq geiser-chez-binary "chez"
           geiser-default-implementation '(chez))
     (add-hook 'scheme-mode-hook 'geiser-mode))
-  (use-package paredit
-    :config
-    (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-    (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-    (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-    (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-    (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-    (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-    (add-hook 'scheme-mode-hook           #'enable-paredit-mode))
 #+end_src
+
