@@ -268,6 +268,19 @@
 
 (use-package command-log-mode)
 
+(use-package super-save
+  :ensure t
+  :config
+  (super-save-mode +1)
+  (add-to-list 'super-save-triggers 'ace-window)
+  (add-to-list 'super-save-hook-triggers 'find-file-hook)
+  (setq super-save-remote-files nil))
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
 (use-package org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
@@ -559,7 +572,7 @@
   ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
   ;;;; 5. No project support
   ;; (setq consult-project-function nil)
-)
+  )
 
 (use-package embark
   :ensure t
@@ -668,7 +681,7 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-dict)
   ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
-)
+  )
 
 ;; Configure Tempel
 (use-package tempel
@@ -697,7 +710,7 @@
   (add-hook 'prog-mode-hook 'tempel-setup-capf)
   (add-hook 'text-mode-hook 'tempel-setup-capf)
   (add-hook 'org-mode-hook 'tempel-setup-capf)
-      ;; Optionally make the Tempel templates available to Abbrev,
+  ;; Optionally make the Tempel templates available to Abbrev,
   ;; either locally or globally. `expand-abbrev' is bound to C-x '.
   ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
   ;; (global-tempel-abbrev-mode)

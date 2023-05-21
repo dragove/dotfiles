@@ -115,45 +115,45 @@ It's a rough way of knowing when/if I need to optimize my init file.
 ** Emacs
 *** Defaults
 #+begin_src emacs-lisp
-    ;; Better defaults
-    (setq inhibit-splash-screen t)
-    (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
-    (setq adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*")
-    (setq adaptive-fill-first-line-regexp "^* *$")
-    (setq delete-by-moving-to-trash t)         ; Deleting files go to OS's trash folder
-    (setq make-backup-files nil)               ; Forbide to make backup files
-    (setq auto-save-default nil)               ; Disable auto save
-    (setq set-mark-command-repeat-pop t)       ; Repeating C-SPC after popping mark pops it again
+  ;; Better defaults
+  (setq inhibit-splash-screen t)
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
+  (setq adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*")
+  (setq adaptive-fill-first-line-regexp "^* *$")
+  (setq delete-by-moving-to-trash t)         ; Deleting files go to OS's trash folder
+  (setq make-backup-files nil)               ; Forbide to make backup files
+  (setq auto-save-default nil)               ; Disable auto save
+  (setq set-mark-command-repeat-pop t)       ; Repeating C-SPC after popping mark pops it again
 
-    (setq-default major-mode 'text-mode)
+  (setq-default major-mode 'text-mode)
 
-    (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
-    (setq sentence-end-double-space nil)
+  (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
+  (setq sentence-end-double-space nil)
 
-    ;; Tab and Space
-    ;; Permanently indent with spaces, never with TABs
-    (setq-default c-basic-offset   4
-                  tab-width        4
-                  indent-tabs-mode nil)
+  ;; Tab and Space
+  ;; Permanently indent with spaces, never with TABs
+  (setq-default c-basic-offset   4
+                tab-width        4
+                indent-tabs-mode nil)
 
-    ;; initial-buffer-choice
-    (setq initial-buffer-choice t) ;;*scratch*
+  ;; initial-buffer-choice
+  (setq initial-buffer-choice t) ;;*scratch*
 
-    ;; use utf-8 coding system
-    (set-default-coding-systems 'utf-8)
+  ;; use utf-8 coding system
+  (set-default-coding-systems 'utf-8)
 
-    ;; yes-or-no to y-or-n
-    (fset 'yes-or-no-p 'y-or-n-p)
+  ;; yes-or-no to y-or-n
+  (fset 'yes-or-no-p 'y-or-n-p)
 
-    ;; use relative number
-    (setq display-line-numbers-type 'relative)
-    (global-display-line-numbers-mode)
-    (dolist (mode '(org-mode-hook
-                    term-mode-hook
-                    shell-mode-hook
-                    eshell-mode-hook
-                    pdf-view-mode-hook))
-      (add-hook mode (lambda () (display-line-numbers-mode 0))))
+  ;; use relative number
+  (setq display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode)
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  shell-mode-hook
+                  eshell-mode-hook
+                  pdf-view-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
 
 *** Useful Functions
@@ -243,39 +243,39 @@ https://github.com/progfolio/elpaca
 ** Theme and UI stuff
 *** Ligature Support
 #+begin_src emacs-lisp
-(use-package ligature
-  :config
-  ;; Enable the "www" ligature in every possible major mode
-  (ligature-set-ligatures 't '("www"))
-  ;; Enable traditional ligature support in eww-mode, if the
-  ;; `variable-pitch' face supports it
-  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-  ;; Enable all Cascadia Code ligatures in programming modes
-  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
-                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
-                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-                                       "\\\\" "://"))
-  ;; Enables ligature checks globally in all buffers. You can also do it
-  ;; per mode with `ligature-mode'.
-  (global-ligature-mode t))
+  (use-package ligature
+    :config
+    ;; Enable the "www" ligature in every possible major mode
+    (ligature-set-ligatures 't '("www"))
+    ;; Enable traditional ligature support in eww-mode, if the
+    ;; `variable-pitch' face supports it
+    (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+    ;; Enable all Cascadia Code ligatures in programming modes
+    (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                         ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                         "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                         "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                         "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                         "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                         "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                         "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                         ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                         "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                         "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                         "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                         "\\\\" "://"))
+    ;; Enables ligature checks globally in all buffers. You can also do it
+    ;; per mode with `ligature-mode'.
+    (global-ligature-mode t))
 #+end_src
 
 *** Catppuccin Theme
 #+begin_src emacs-lisp
-;; theme config
-(use-package catppuccin-theme
-  :config
-  (setq catppuccin-flavor 'frappe)
-  (load-theme 'catppuccin t))
+  ;; theme config
+  (use-package catppuccin-theme
+    :config
+    (setq catppuccin-flavor 'frappe)
+    (load-theme 'catppuccin t))
 #+end_src
 *** Doom Modeline
 #+begin_src emacs-lisp
@@ -290,64 +290,81 @@ https://github.com/progfolio/elpaca
 #+end_src
 *** Helpful
 #+begin_src emacs-lisp
-(use-package helpful
-  :bind (([remap describe-function] . helpful-callable)
-         ([remap describe-command]  . helpful-command)
-         ([remap describe-variable] . helpful-variable)
-         ([remap describe-key]      . helpful-key)
-         ([remap describe-symbol]   . helpful-symbol)
-         ("C-c C-d"                 . helpful-at-point)
-         :map helpful-mode-map
-         ("r"                       . remove-hook-at-point))
-  :hook (helpful-mode . cursor-sensor-mode) ; for remove-advice button
-  :init
-  (with-no-warnings
-    (with-eval-after-load 'counsel
-      (setq counsel-describe-function-function #'helpful-callable
-            counsel-describe-variable-function #'helpful-variable
-            counsel-describe-symbol-function #'helpful-symbol
-            counsel-descbinds-function #'helpful-callable))
+  (use-package helpful
+    :bind (([remap describe-function] . helpful-callable)
+           ([remap describe-command]  . helpful-command)
+           ([remap describe-variable] . helpful-variable)
+           ([remap describe-key]      . helpful-key)
+           ([remap describe-symbol]   . helpful-symbol)
+           ("C-c C-d"                 . helpful-at-point)
+           :map helpful-mode-map
+           ("r"                       . remove-hook-at-point))
+    :hook (helpful-mode . cursor-sensor-mode) ; for remove-advice button
+    :init
+    (with-no-warnings
+      (with-eval-after-load 'counsel
+        (setq counsel-describe-function-function #'helpful-callable
+              counsel-describe-variable-function #'helpful-variable
+              counsel-describe-symbol-function #'helpful-symbol
+              counsel-descbinds-function #'helpful-callable))
 
-    (with-eval-after-load 'apropos
-      ;; patch apropos buttons to call helpful instead of help
-      (dolist (fun-bt '(apropos-function apropos-macro apropos-command))
-        (button-type-put
-         fun-bt 'action
-         (lambda (button)
-           (helpful-callable (button-get button 'apropos-symbol)))))
-      (dolist (var-bt '(apropos-variable apropos-user-option))
-        (button-type-put
-         var-bt 'action
-         (lambda (button)
-           (helpful-variable (button-get button 'apropos-symbol)))))))
-  :config
-  (with-no-warnings
-    ;; Open the buffer in other window
-    (defun my-helpful--navigate (button)
-      "Navigate to the path this BUTTON represents."
-      (find-file-other-window (substring-no-properties (button-get button 'path)))
-      ;; We use `get-text-property' to work around an Emacs 25 bug:
-      (-when-let (pos (get-text-property button 'position
-                                         (marker-buffer button)))
-        (helpful--goto-char-widen pos)))
-    (advice-add #'helpful--navigate :override #'my-helpful--navigate)))
+      (with-eval-after-load 'apropos
+        ;; patch apropos buttons to call helpful instead of help
+        (dolist (fun-bt '(apropos-function apropos-macro apropos-command))
+          (button-type-put
+           fun-bt 'action
+           (lambda (button)
+             (helpful-callable (button-get button 'apropos-symbol)))))
+        (dolist (var-bt '(apropos-variable apropos-user-option))
+          (button-type-put
+           var-bt 'action
+           (lambda (button)
+             (helpful-variable (button-get button 'apropos-symbol)))))))
+    :config
+    (with-no-warnings
+      ;; Open the buffer in other window
+      (defun my-helpful--navigate (button)
+        "Navigate to the path this BUTTON represents."
+        (find-file-other-window (substring-no-properties (button-get button 'path)))
+        ;; We use `get-text-property' to work around an Emacs 25 bug:
+        (-when-let (pos (get-text-property button 'position
+                                           (marker-buffer button)))
+          (helpful--goto-char-widen pos)))
+      (advice-add #'helpful--navigate :override #'my-helpful--navigate)))
 #+end_src
 *** Pulsar
 #+begin_src emacs-lisp
-(use-package pulsar
-  :config
-  (pulsar-global-mode))
+  (use-package pulsar
+    :config
+    (pulsar-global-mode))
 #+end_src
 *** Command Log
 #+begin_src emacs-lisp
   (use-package command-log-mode)
 #+end_src
 ** Editing
+*** Auto Save
+#+begin_src emacs-lisp
+  (use-package super-save
+    :ensure t
+    :config
+    (super-save-mode +1)
+    (add-to-list 'super-save-triggers 'ace-window)
+    (add-to-list 'super-save-hook-triggers 'find-file-hook)
+    (setq super-save-remote-files nil))
+#+end_src
+*** Editor Config
+#+begin_src emacs-lisp
+  (use-package editorconfig
+    :ensure t
+    :config
+    (editorconfig-mode 1))
+#+end_src
 *** Auto Tangle Mode
 #+begin_src emacs-lisp
-(use-package org-auto-tangle
-  :defer t
-  :hook (org-mode . org-auto-tangle-mode))
+  (use-package org-auto-tangle
+    :defer t
+    :hook (org-mode . org-auto-tangle-mode))
 #+end_src
 *** Meow
 #+begin_src emacs-lisp
@@ -526,132 +543,132 @@ https://github.com/progfolio/elpaca
 
 *** Marginalia
 #+begin_src emacs-lisp
-(use-package marginalia
-  :ensure t
-  :config
-  (marginalia-mode))
+  (use-package marginalia
+    :ensure t
+    :config
+    (marginalia-mode))
 #+end_src
 
 *** Consult
 #+begin_src emacs-lisp
   ;; Example configuration for Consult
-(use-package consult
-  ;; Replace bindings. Lazily loaded due by `use-package'.
-  :bind (;; C-c bindings in `mode-specific-map'
-         ("C-c M-x" . consult-mode-command)
-         ("C-c h" . consult-history)
-         ("C-c k" . consult-kmacro)
-         ("C-c m" . consult-man)
-         ("C-c i" . consult-info)
-         ([remap Info-search] . consult-info)
-         ;; C-x bindings in `ctl-x-map'
-         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-         ;; Custom M-# bindings for fast register access
-         ("M-#" . consult-register-load)
-         ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
-         ("C-M-#" . consult-register)
-         ;; Other custom bindings
-         ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-         ;; M-g bindings in `goto-map'
-         ("M-g e" . consult-compile-error)
-         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-         ("M-g g" . consult-goto-line)             ;; orig. goto-line
-         ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-         ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
-         ("M-g m" . consult-mark)
-         ("M-g k" . consult-global-mark)
-         ("M-g i" . consult-imenu)
-         ("M-g I" . consult-imenu-multi)
-         ;; M-s bindings in `search-map'
-         ("M-s d" . consult-find)
-         ("M-s D" . consult-locate)
-         ("M-s g" . consult-grep)
-         ("M-s G" . consult-git-grep)
-         ("M-s r" . consult-ripgrep)
-         ("M-s l" . consult-line)
-         ("M-s L" . consult-line-multi)
-         ("M-s k" . consult-keep-lines)
-         ("M-s u" . consult-focus-lines)
-         ;; Isearch integration
-         ("M-s e" . consult-isearch-history)
-         :map isearch-mode-map
-         ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-         ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-         ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-         ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
-         ;; Minibuffer history
-         :map minibuffer-local-map
-         ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-         ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+  (use-package consult
+    ;; Replace bindings. Lazily loaded due by `use-package'.
+    :bind (;; C-c bindings in `mode-specific-map'
+           ("C-c M-x" . consult-mode-command)
+           ("C-c h" . consult-history)
+           ("C-c k" . consult-kmacro)
+           ("C-c m" . consult-man)
+           ("C-c i" . consult-info)
+           ([remap Info-search] . consult-info)
+           ;; C-x bindings in `ctl-x-map'
+           ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+           ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+           ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+           ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+           ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+           ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+           ;; Custom M-# bindings for fast register access
+           ("M-#" . consult-register-load)
+           ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+           ("C-M-#" . consult-register)
+           ;; Other custom bindings
+           ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+           ;; M-g bindings in `goto-map'
+           ("M-g e" . consult-compile-error)
+           ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+           ("M-g g" . consult-goto-line)             ;; orig. goto-line
+           ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+           ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+           ("M-g m" . consult-mark)
+           ("M-g k" . consult-global-mark)
+           ("M-g i" . consult-imenu)
+           ("M-g I" . consult-imenu-multi)
+           ;; M-s bindings in `search-map'
+           ("M-s d" . consult-find)
+           ("M-s D" . consult-locate)
+           ("M-s g" . consult-grep)
+           ("M-s G" . consult-git-grep)
+           ("M-s r" . consult-ripgrep)
+           ("M-s l" . consult-line)
+           ("M-s L" . consult-line-multi)
+           ("M-s k" . consult-keep-lines)
+           ("M-s u" . consult-focus-lines)
+           ;; Isearch integration
+           ("M-s e" . consult-isearch-history)
+           :map isearch-mode-map
+           ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+           ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+           ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+           ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+           ;; Minibuffer history
+           :map minibuffer-local-map
+           ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+           ("M-r" . consult-history))                ;; orig. previous-matching-history-element
 
-  ;; Enable automatic preview at point in the *Completions* buffer. This is
-  ;; relevant when you use the default completion UI.
-  :hook (completion-list-mode . consult-preview-at-point-mode)
+    ;; Enable automatic preview at point in the *Completions* buffer. This is
+    ;; relevant when you use the default completion UI.
+    :hook (completion-list-mode . consult-preview-at-point-mode)
 
-  ;; The :init configuration is always executed (Not lazy)
-  :init
+    ;; The :init configuration is always executed (Not lazy)
+    :init
 
-  ;; Optionally configure the register formatting. This improves the register
-  ;; preview for `consult-register', `consult-register-load',
-  ;; `consult-register-store' and the Emacs built-ins.
-  (setq register-preview-delay 0.5
-        register-preview-function #'consult-register-format)
+    ;; Optionally configure the register formatting. This improves the register
+    ;; preview for `consult-register', `consult-register-load',
+    ;; `consult-register-store' and the Emacs built-ins.
+    (setq register-preview-delay 0.5
+          register-preview-function #'consult-register-format)
 
-  ;; Optionally tweak the register preview window.
-  ;; This adds thin lines, sorting and hides the mode line of the window.
-  (advice-add #'register-preview :override #'consult-register-window)
+    ;; Optionally tweak the register preview window.
+    ;; This adds thin lines, sorting and hides the mode line of the window.
+    (advice-add #'register-preview :override #'consult-register-window)
 
-  ;; Use Consult to select xref locations with preview
-  (setq xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
+    ;; Use Consult to select xref locations with preview
+    (setq xref-show-xrefs-function #'consult-xref
+          xref-show-definitions-function #'consult-xref)
 
-  ;; Configure other variables and modes in the :config section,
-  ;; after lazily loading the package.
-  :config
+    ;; Configure other variables and modes in the :config section,
+    ;; after lazily loading the package.
+    :config
 
-  ;; Optionally configure preview. The default value
-  ;; is 'any, such that any key triggers the preview.
-  ;; (setq consult-preview-key 'any)
-  ;; (setq consult-preview-key "M-.")
-  ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
-  ;; For some commands and buffer sources it is useful to configure the
-  ;; :preview-key on a per-command basis using the `consult-customize' macro.
-  (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep
-   consult-bookmark consult-recent-file consult-xref
-   consult--source-bookmark consult--source-file-register
-   consult--source-recent-file consult--source-project-recent-file
-   ;; :preview-key "M-."
-   :preview-key '(:debounce 0.4 any))
+    ;; Optionally configure preview. The default value
+    ;; is 'any, such that any key triggers the preview.
+    ;; (setq consult-preview-key 'any)
+    ;; (setq consult-preview-key "M-.")
+    ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
+    ;; For some commands and buffer sources it is useful to configure the
+    ;; :preview-key on a per-command basis using the `consult-customize' macro.
+    (consult-customize
+     consult-theme :preview-key '(:debounce 0.2 any)
+     consult-ripgrep consult-git-grep consult-grep
+     consult-bookmark consult-recent-file consult-xref
+     consult--source-bookmark consult--source-file-register
+     consult--source-recent-file consult--source-project-recent-file
+     ;; :preview-key "M-."
+     :preview-key '(:debounce 0.4 any))
 
-  ;; Optionally configure the narrowing key.
-  ;; Both < and C-+ work reasonably well.
-  (setq consult-narrow-key "<") ;; "C-+"
+    ;; Optionally configure the narrowing key.
+    ;; Both < and C-+ work reasonably well.
+    (setq consult-narrow-key "<") ;; "C-+"
 
-  ;; Optionally make narrowing help available in the minibuffer.
-  ;; You may want to use `embark-prefix-help-command' or which-key instead.
-  ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+    ;; Optionally make narrowing help available in the minibuffer.
+    ;; You may want to use `embark-prefix-help-command' or which-key instead.
+    ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
 
-  ;; By default `consult-project-function' uses `project-root' from project.el.
-  ;; Optionally configure a different project root function.
-  ;;;; 1. project.el (the default)
-  ;; (setq consult-project-function #'consult--default-project--function)
-  ;;;; 2. vc.el (vc-root-dir)
-  ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
-  ;;;; 3. locate-dominating-file
-  ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-  ;;;; 4. projectile.el (projectile-project-root)
-  ;; (autoload 'projectile-project-root "projectile")
-  ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
-  ;;;; 5. No project support
-  ;; (setq consult-project-function nil)
-)
+    ;; By default `consult-project-function' uses `project-root' from project.el.
+    ;; Optionally configure a different project root function.
+    ;;;; 1. project.el (the default)
+    ;; (setq consult-project-function #'consult--default-project--function)
+    ;;;; 2. vc.el (vc-root-dir)
+    ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+    ;;;; 3. locate-dominating-file
+    ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+    ;;;; 4. projectile.el (projectile-project-root)
+    ;; (autoload 'projectile-project-root "projectile")
+    ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
+    ;;;; 5. No project support
+    ;; (setq consult-project-function nil)
+    )
 #+end_src
 
 *** Embark
@@ -736,40 +753,40 @@ https://github.com/progfolio/elpaca
 *** Cape
 #+begin_src emacs-lisp
   ;; Add extensions
-(use-package cape
-  ;; Bind dedicated completion commands
-  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
-  :bind (("C-c p p" . completion-at-point) ;; capf
-         ("C-c p t" . complete-tag)        ;; etags
-         ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
-         ("C-c p h" . cape-history)
-         ("C-c p f" . cape-file)
-         ("C-c p k" . cape-keyword)
-         ("C-c p s" . cape-symbol)
-         ("C-c p a" . cape-abbrev)
-         ("C-c p l" . cape-line)
-         ("C-c p w" . cape-dict)
-         ("C-c p \\" . cape-tex)
-         ("C-c p _" . cape-tex)
-         ("C-c p ^" . cape-tex)
-         ("C-c p &" . cape-sgml)
-         ("C-c p r" . cape-rfc1345))
-  :init
-  ;; Add `completion-at-point-functions', used by `completion-at-point'.
-  ;; NOTE: The order matters!
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-  ;;(add-to-list 'completion-at-point-functions #'cape-history)
-  ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
-  ;;(add-to-list 'completion-at-point-functions #'cape-tex)
-  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
-  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
-  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
-  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
-  ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
-  ;;(add-to-list 'completion-at-point-functions #'cape-line)
-)
+  (use-package cape
+    ;; Bind dedicated completion commands
+    ;; Alternative prefix keys: C-c p, M-p, M-+, ...
+    :bind (("C-c p p" . completion-at-point) ;; capf
+           ("C-c p t" . complete-tag)        ;; etags
+           ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
+           ("C-c p h" . cape-history)
+           ("C-c p f" . cape-file)
+           ("C-c p k" . cape-keyword)
+           ("C-c p s" . cape-symbol)
+           ("C-c p a" . cape-abbrev)
+           ("C-c p l" . cape-line)
+           ("C-c p w" . cape-dict)
+           ("C-c p \\" . cape-tex)
+           ("C-c p _" . cape-tex)
+           ("C-c p ^" . cape-tex)
+           ("C-c p &" . cape-sgml)
+           ("C-c p r" . cape-rfc1345))
+    :init
+    ;; Add `completion-at-point-functions', used by `completion-at-point'.
+    ;; NOTE: The order matters!
+    (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+    (add-to-list 'completion-at-point-functions #'cape-file)
+    (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+    ;;(add-to-list 'completion-at-point-functions #'cape-history)
+    ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
+    ;;(add-to-list 'completion-at-point-functions #'cape-tex)
+    ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+    ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+    ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+    ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+    ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
+    ;;(add-to-list 'completion-at-point-functions #'cape-line)
+    )
 #+end_src
 
 *** Temple Snippet
@@ -801,7 +818,7 @@ https://github.com/progfolio/elpaca
     (add-hook 'prog-mode-hook 'tempel-setup-capf)
     (add-hook 'text-mode-hook 'tempel-setup-capf)
     (add-hook 'org-mode-hook 'tempel-setup-capf)
-        ;; Optionally make the Tempel templates available to Abbrev,
+    ;; Optionally make the Tempel templates available to Abbrev,
     ;; either locally or globally. `expand-abbrev' is bound to C-x '.
     ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
     ;; (global-tempel-abbrev-mode)
@@ -821,8 +838,8 @@ https://github.com/progfolio/elpaca
 
 *** Avy
 #+begin_src emacs-lisp
-    (use-package avy
-      :bind (("C-:" . avy-goto-char)))
+  (use-package avy
+    :bind (("C-:" . avy-goto-char)))
 #+end_src
 ** Org Mode
 *** Defaults
