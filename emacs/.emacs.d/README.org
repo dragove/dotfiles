@@ -827,6 +827,8 @@ https://github.com/progfolio/elpaca
 ** Org Mode
 *** Defaults
 #+begin_src emacs-lisp
+  (use-package jupyter
+    :init (setenv "PYDEVD_DISABLE_FILE_VALIDATION" "1"))
   (use-package org
     :config
     (setq org-adapt-indentation nil)
@@ -842,6 +844,7 @@ https://github.com/progfolio/elpaca
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((python . t)
+       (jupyter . t)
        (emacs-lisp . t)
        (C . t)
        (scheme . t)

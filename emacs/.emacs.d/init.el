@@ -714,6 +714,8 @@
 (use-package avy
   :bind (("C-:" . avy-goto-char)))
 
+(use-package jupyter
+  :init (setenv "PYDEVD_DISABLE_FILE_VALIDATION" "1"))
 (use-package org
   :config
   (setq org-adapt-indentation nil)
@@ -729,6 +731,7 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
+     (jupyter . t)
      (emacs-lisp . t)
      (C . t)
      (scheme . t)
