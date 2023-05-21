@@ -876,13 +876,11 @@ https://github.com/progfolio/elpaca
           org-roam-ui-open-on-start t))
 #+end_src
 ** Git Integration
-*** Git Gutter
+*** Diff Highlight
 #+begin_src emacs-lisp
-  (use-package git-gutter
+  (use-package diff-hl
     :config
-    (setq git-gutter:modified-sign "⏽")
-    (setq git-gutter:added-sign "⏽")
-    (setq git-gutter:deleted-sign "⏽"))
+    (global-diff-hl-mode))
 #+end_src
 *** Magit
 #+begin_src emacs-lisp

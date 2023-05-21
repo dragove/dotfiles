@@ -758,11 +758,9 @@
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
 
-(use-package git-gutter
+(use-package diff-hl
   :config
-  (setq git-gutter:modified-sign "⏽")
-  (setq git-gutter:added-sign "⏽")
-  (setq git-gutter:deleted-sign "⏽"))
+  (global-diff-hl-mode))
 
 (use-package magit
   :bind (("C-M-g" . magit-status-here)))
