@@ -41,24 +41,12 @@
 ;; Prevent flashing of unstyled modeline at startup
 (setq-default mode-line-format nil)
 
-(when (display-graphic-p)
-    ;; Set default font
-    (set-face-attribute 'default
-                        nil
-                        :font "FiraCode Nerd Font"
-                        :height 150)
-
-    ;; Fixed-pitch (monospaced) fonts 等宽字体
-    (set-face-attribute 'fixed-pitch
-                        nil
-                        :font "FiraCode Nerd Font"
-                        :height 150)
-
-    ;; CJK fonts
-    (set-fontset-font t 'han (font-spec :family "Noto Serif CJK SC" :weight 'semi-bold :slant 'normal))
-    (set-fontset-font t 'kana (font-spec :family "Noto Serif CJK JP" :weight 'semi-bold :slant 'normal))
-    ;; Emoji
-    (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
+;; Set default font
+(set-face-attribute 'default
+                    nil
+                    :font "FiraCode NF"
+                    :height 150)
+(set-fontset-font t 'han (font-spec :family "LXGW Neo XiHei"))
 
 (advice-add #'x-apply-session-resources :override #'ignore)
 
@@ -759,6 +747,13 @@
   :custom
   (org-roam-directory "~/Documents/roam")
   (org-roam-dailies-directory "daily/")
+  :bind
+  (("C-c n l" . org-roam-buffer-toggle)
+   ("C-c n f" . org-roam-node-find)
+   ("C-c n g" . org-roam-graph)
+   ("C-c n i" . org-roam-node-insert)
+   ("C-c n c" . org-roam-capture)
+   ("C-c n j" . org-roam-dailies-capture-today))
   :config
   (org-roam-db-autosync-mode))
 (use-package org-roam-ui
