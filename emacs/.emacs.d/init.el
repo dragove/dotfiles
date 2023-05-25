@@ -44,7 +44,7 @@
 ;; Set default font
 (set-face-attribute 'default
                     nil
-                    :font "FiraCode NF"
+                    :font "FiraCode Nerd Font"
                     :height 150)
 (set-fontset-font t 'han (font-spec :family "LXGW Neo XiHei"))
 
