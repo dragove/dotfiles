@@ -71,7 +71,7 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
   ;; Set default font
   (set-face-attribute 'default
                       nil
-                      :font "FiraCode NF"
+                      :font "FiraCode Nerd Font"
                       :height 150)
   (set-fontset-font t 'han (font-spec :family "LXGW Neo XiHei"))
 #+end_src
@@ -182,7 +182,6 @@ An elisp package manager
 
 https://github.com/progfolio/elpaca
 #+end_quote
-
 *** Installer
 #+begin_src emacs-lisp
   (defvar elpaca-installer-version 0.4)
@@ -227,7 +226,6 @@ https://github.com/progfolio/elpaca
     (setq elpaca-use-package-by-default t))
   (elpaca-wait)
 #+end_src
-
 ** Theme and UI stuff
 *** Ligature Support
 #+begin_src emacs-lisp
