@@ -314,7 +314,7 @@
    '("[" . meow-beginning-of-thing)
    '("]" . meow-end-of-thing)
    '("a" . meow-append)
-   '("A" . meow-open-below)
+   '("A" . (lambda () (interactive) (meow--cancel-selection) (move-end-of-line nil) (meow-insert)))
    '("b" . meow-back-word)
    '("B" . meow-back-symbol)
    '("c" . meow-change)
@@ -328,7 +328,7 @@
    '("h" . meow-left)
    '("H" . meow-left-expand)
    '("i" . meow-insert)
-   '("I" . meow-open-above)
+   '("I" . (lambda () (interactive) (meow--cancel-selection) (back-to-indentation) (meow-insert)))
    '("j" . meow-next)
    '("J" . meow-next-expand)
    '("k" . meow-prev)
@@ -337,8 +337,8 @@
    '("L" . meow-right-expand)
    '("m" . meow-join)
    '("n" . meow-search)
-   '("o" . meow-block)
-   '("O" . meow-to-block)
+   '("o" . meow-open-below)
+   '("O" . meow-open-above)
    '("p" . meow-yank)
    '("q" . meow-quit)
    '("Q" . meow-goto-line)
@@ -361,6 +361,20 @@
 
 (use-package meow
   :init (meow-global-mode)
+  :custom
+  (meow-esc-delay 0.01)
+  (meow-selection-command-fallback
+   '((meow-replace . meow-yank)
+     (meow-reverse . back-to-indentation)
+     (meow-change . meow-change-char)
+     (meow-pop-selection . meow-pop-grab)
+     (meow-beacon-change . meow-beacon-change-char)
+     (meow-cancel . keyboard-quit)
+     (meow-delete . meow-C-d)))
+  (meow-char-thing-table
+   '((?r . round) (?b . square) (?c . curly) (?s . string) (?e . symbol)
+     (?w . window) (?B . buffer) (?p . paragraph) (?< . line) (?> . line)
+     (?d . defun) (?i . indent) (?x . extend) (?. . sentence)))
   :config (meow-setup))
 
 (use-package elec-pair
@@ -729,6 +743,8 @@
   (setq org-log-into-drawer t)
   (setq org-image-actual-width nil)
   (setq org-display-remote-inline-images 'download)
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)"))))
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
