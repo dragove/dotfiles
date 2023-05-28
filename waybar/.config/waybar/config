@@ -52,7 +52,7 @@
     },
     "cpu": {
         "interval": 5,
-        "format": " {usage}%",
+        "format": "CPU {usage}%",
         "states": {
             "warning": 70,
             "critical": 90
@@ -60,7 +60,7 @@
     },
     "memory": {
         "interval": 5,
-        "format": " {}%",
+        "format": "MEM {}%",
         "states": {
             "warning": 70,
             "critical": 90

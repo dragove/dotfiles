@@ -256,6 +256,10 @@
 
 (use-package command-log-mode)
 
+(use-package which-key
+  :config
+  (which-key-mode))
+
 (use-package super-save
   :ensure t
   :config
@@ -273,8 +277,14 @@
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
 
+(use-package apheleia
+  :init
+  (apheleia-global-mode +1))
+
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+  (meow-define-keys
+      'insert '("C-o" . meow-open-below))
   (meow-motion-overwrite-define-key
    '("j" . meow-next)
    '("k" . meow-prev)

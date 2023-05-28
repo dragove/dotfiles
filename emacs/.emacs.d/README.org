@@ -38,11 +38,11 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
 
 *** Garbage Collection
 #+begin_src emacs-lisp
-(let ((normal-gc-cons-threshold (* 20 1024 1024))
-      (init-gc-cons-threshold (* 128 1024 1024)))
-  (setq gc-cons-threshold init-gc-cons-threshold)
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+  (let ((normal-gc-cons-threshold (* 20 1024 1024))
+        (init-gc-cons-threshold (* 128 1024 1024)))
+    (setq gc-cons-threshold init-gc-cons-threshold)
+    (add-hook 'emacs-startup-hook
+              (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 #+end_src
 
 *** Disable Default UI
@@ -78,13 +78,13 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
 
 *** Ignore X Resources
 #+begin_src emacs-lisp
-(advice-add #'x-apply-session-resources :override #'ignore)
+  (advice-add #'x-apply-session-resources :override #'ignore)
 #+end_src
 
 ** lexical binding
 The following line turns on lexical binding for performance reasons.
 #+begin_src emacs-lisp
-;; -*- lexical-binding: t; -*-
+  ;; -*- lexical-binding: t; -*-
 #+end_src
 
 ** Profiling
@@ -328,6 +328,12 @@ https://github.com/progfolio/elpaca
 #+begin_src emacs-lisp
   (use-package command-log-mode)
 #+end_src
+*** Which Key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :config
+    (which-key-mode))
+#+end_src
 ** Editing
 *** Auto Save
 #+begin_src emacs-lisp
@@ -352,10 +358,18 @@ https://github.com/progfolio/elpaca
     :defer t
     :hook (org-mode . org-auto-tangle-mode))
 #+end_src
+*** Auto Format
+#+begin_src emacs-lisp
+  (use-package apheleia
+    :init
+    (apheleia-global-mode +1))
+#+end_src
 *** Meow
 #+begin_src emacs-lisp
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+    (meow-define-keys
+        'insert '("C-o" . meow-open-below))
     (meow-motion-overwrite-define-key
      '("j" . meow-next)
      '("k" . meow-prev)
