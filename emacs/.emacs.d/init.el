@@ -195,7 +195,6 @@
   ;; per mode with `ligature-mode'.
   (global-ligature-mode t))
 
-;; theme config
 (use-package catppuccin-theme
   :config
   (setq catppuccin-flavor 'frappe)
@@ -255,10 +254,6 @@
   (pulsar-global-mode))
 
 (use-package command-log-mode)
-
-(use-package which-key
-  :config
-  (which-key-mode))
 
 (use-package super-save
   :ensure t

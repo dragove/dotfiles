@@ -227,7 +227,7 @@ https://github.com/progfolio/elpaca
   (elpaca-wait)
 #+end_src
 ** Theme and UI stuff
-*** Ligature Support
+*** Ligature
 #+begin_src emacs-lisp
   (use-package ligature
     :config
@@ -255,15 +255,15 @@ https://github.com/progfolio/elpaca
     (global-ligature-mode t))
 #+end_src
 
-*** Catppuccin Theme
+*** Theme
+Catppuccin Theme
 #+begin_src emacs-lisp
-  ;; theme config
   (use-package catppuccin-theme
     :config
     (setq catppuccin-flavor 'frappe)
     (load-theme 'catppuccin t))
 #+end_src
-*** Doom Modeline
+*** Modeline
 #+begin_src emacs-lisp
   (use-package doom-modeline
     :ensure t
@@ -327,12 +327,6 @@ https://github.com/progfolio/elpaca
 *** Command Log
 #+begin_src emacs-lisp
   (use-package command-log-mode)
-#+end_src
-*** Which Key
-#+begin_src emacs-lisp
-  (use-package which-key
-    :config
-    (which-key-mode))
 #+end_src
 ** Editing
 *** Auto Save
