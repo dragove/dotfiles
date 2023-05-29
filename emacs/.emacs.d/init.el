@@ -249,6 +249,9 @@
         (helpful--goto-char-widen pos)))
     (advice-add #'helpful--navigate :override #'my-helpful--navigate)))
 
+(use-package which-key
+  :init (which-key-mode))
+
 (use-package pulsar
   :config
   (pulsar-global-mode))

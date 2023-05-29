@@ -318,6 +318,11 @@ Catppuccin Theme
           (helpful--goto-char-widen pos)))
       (advice-add #'helpful--navigate :override #'my-helpful--navigate)))
 #+end_src
+*** Which Key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :init (which-key-mode))
+#+end_src
 *** Pulsar
 #+begin_src emacs-lisp
   (use-package pulsar
