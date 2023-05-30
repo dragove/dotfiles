@@ -710,19 +710,21 @@
   :bind (("C-:" . avy-goto-char)))
 
 (use-package org
-  :config
-  (setq org-adapt-indentation nil)
-  (setq org-hide-leading-stars t)
-  (setq org-startup-folded t)
-  (setq org-confirm-babel-evaluate nil)
-  (setq org-ellipsis " ▾")
-  (setq org-agenda-start-with-log-mode t)
-  (setq org-log-done 'time)
-  (setq org-log-into-drawer t)
-  (setq org-image-actual-width nil)
-  (setq org-display-remote-inline-images 'download)
-  (setq org-todo-keywords
+  :elpaca nil
+  :custom
+  (org-adapt-indentation nil)
+  (org-hide-leading-stars t)
+  (org-startup-folded t)
+  (org-confirm-babel-evaluate nil)
+  (org-ellipsis " ▾")
+  (org-agenda-start-with-log-mode t)
+  (org-log-done 'time)
+  (org-log-into-drawer t)
+  (org-image-actual-width nil)
+  (org-display-remote-inline-images 'download)
+  (org-todo-keywords
         (quote ((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)"))))
+  :config
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
@@ -731,7 +733,8 @@
      (scheme . t)
      (latex . t)
      (js . t)
-     (plantuml . t))))
+     (plantuml . t)))
+  (defalias 'org-babel-execute:python-ts 'org-babel-execute:python))
 
 (use-package org-modern
   :config (with-eval-after-load 'org (global-org-modern-mode)))
@@ -765,6 +768,14 @@
 
 (use-package magit
   :bind (("C-M-g" . magit-status-here)))
+
+(use-package treesit
+  :elpaca nil
+  :custom
+  (treesit-font-lock-level 4))
+(use-package treesit-auto
+  :config
+  (global-treesit-auto-mode))
 
 (use-package geiser-chez
   :after (geiser)
