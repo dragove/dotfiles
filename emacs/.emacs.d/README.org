@@ -843,7 +843,7 @@ Catppuccin Theme
     (org-image-actual-width nil)
     (org-display-remote-inline-images 'download)
     (org-todo-keywords
-          (quote ((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)"))))
+     (quote ((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)"))))
     :config
     (org-babel-do-load-languages
      'org-babel-load-languages
@@ -854,7 +854,7 @@ Catppuccin Theme
        (latex . t)
        (js . t)
        (plantuml . t)))
-    (defalias 'org-babel-execute:python-ts 'org-babel-execute:python))
+    (add-to-list 'org-src-lang-modes '("python" . python-ts)))
 #+end_src
 *** Org Modern
 #+begin_src emacs-lisp

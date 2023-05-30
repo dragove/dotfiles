@@ -723,7 +723,7 @@
   (org-image-actual-width nil)
   (org-display-remote-inline-images 'download)
   (org-todo-keywords
-        (quote ((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)"))))
+   (quote ((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)"))))
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -734,7 +734,7 @@
      (latex . t)
      (js . t)
      (plantuml . t)))
-  (defalias 'org-babel-execute:python-ts 'org-babel-execute:python))
+  (add-to-list 'org-src-lang-modes '("python" . python-ts)))
 
 (use-package org-modern
   :config (with-eval-after-load 'org (global-org-modern-mode)))
