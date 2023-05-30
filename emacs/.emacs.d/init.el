@@ -722,6 +722,7 @@
   (org-log-into-drawer t)
   (org-image-actual-width nil)
   (org-display-remote-inline-images 'download)
+  (org-edit-src-content-indentation 0)
   (org-todo-keywords
    (quote ((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)"))))
   :config
