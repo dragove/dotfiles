@@ -34,7 +34,7 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
 ;; Skipping a bunch of regular expression searching in the =file-name-handler-alist= should improve start time.
 (defvar default-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
-  #+end_src
+#+end_src
 
 *** Garbage Collection
 #+begin_src emacs-lisp
@@ -98,7 +98,7 @@ It's a rough way of knowing when/if I need to optimize my init file.
                              (float-time
                               (time-subtract (current-time) before-init-time)))
                      gcs-done)))
-                       #+end_src
+#+end_src
 
 ** Emacs
 *** Defaults
@@ -843,6 +843,7 @@ Catppuccin Theme
   (org-image-actual-width nil)
   (org-display-remote-inline-images 'download)
   (org-edit-src-content-indentation 0)
+  (org-plantuml-jar-path (expand-file-name "~/.local/share/emacs/plantuml.jar"))
   (org-todo-keywords
    (quote ((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)"))))
   :config
@@ -855,7 +856,8 @@ Catppuccin Theme
      (latex . t)
      (js . t)
      (plantuml . t)))
-  (add-to-list 'org-src-lang-modes '("python" . python-ts)))
+  (add-to-list 'org-src-lang-modes '("python" . python-ts))
+  )
 #+end_src
 *** Org Modern
 #+begin_src emacs-lisp
@@ -918,5 +920,11 @@ Catppuccin Theme
   (setq geiser-chez-binary "chez"
         geiser-default-implementation '(chez))
   (add-hook 'scheme-mode-hook 'geiser-mode))
+#+end_src
+*** PlantUML
+#+begin_src emacs-lisp
+(use-package plantuml-mode
+  :custom
+  (plantuml-jar-path (expand-file-name "~/.local/share/emacs/plantuml.jar")))
 #+end_src
 

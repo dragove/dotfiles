@@ -723,6 +723,7 @@
   (org-image-actual-width nil)
   (org-display-remote-inline-images 'download)
   (org-edit-src-content-indentation 0)
+  (org-plantuml-jar-path (expand-file-name "~/.local/share/emacs/plantuml.jar"))
   (org-todo-keywords
    (quote ((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)"))))
   :config
@@ -735,7 +736,8 @@
      (latex . t)
      (js . t)
      (plantuml . t)))
-  (add-to-list 'org-src-lang-modes '("python" . python-ts)))
+  (add-to-list 'org-src-lang-modes '("python" . python-ts))
+  )
 
 (use-package org-modern
   :config (with-eval-after-load 'org (global-org-modern-mode)))
@@ -784,3 +786,7 @@
   (setq geiser-chez-binary "chez"
         geiser-default-implementation '(chez))
   (add-hook 'scheme-mode-hook 'geiser-mode))
+
+(use-package plantuml-mode
+  :custom
+  (plantuml-jar-path (expand-file-name "~/.local/share/emacs/plantuml.jar")))
