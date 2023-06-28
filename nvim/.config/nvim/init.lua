@@ -1,1 +1,1 @@
-vim.o.relativenumber = true
+require("core.opts")
