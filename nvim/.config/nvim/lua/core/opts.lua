@@ -11,6 +11,7 @@ vim.o.writebackup  = false          -- Don't store backup
 vim.o.undofile     = true           -- Enable persistent undo
 vim.o.swapfile     = false
 vim.o.guifont      = 'FiraCode Nerd Font:h16'
+vim.o.cmdheight    = 0
 
 vim.cmd('filetype plugin indent on') -- Enable all filetype plugins
 
@@ -21,7 +22,7 @@ vim.o.laststatus     = 3        -- show statusline in last window
 vim.o.linebreak      = true     -- Wrap long lines at 'breakat' (if 'wrap' is set)
 vim.o.list           = true     -- Show helpful character indicators
 vim.o.relativenumber = true     -- Show relative line numbers
-vim.o.pumblend       = 20       -- Make builtin completion menus slightly transparent
+vim.o.pumblend       = 10       -- Make builtin completion menus slightly transparent
 vim.o.pumheight      = 10       -- Make popup menu smaller
 vim.o.ruler          = false    -- Don't show cursor position
 vim.o.shortmess      = 'aoOWFc' -- Disable certain messages from |ins-completion-menu|
@@ -30,7 +31,7 @@ vim.o.signcolumn     = 'yes'    -- Always show signcolumn or it would frequently
 vim.o.splitbelow     = true     -- Horizontal splits will be below
 vim.o.splitright     = true     -- Vertical splits will be to the right
 vim.o.termguicolors  = true     -- Enable gui colors
-vim.o.winblend       = 20       -- Make floating windows transparent
+vim.o.winblend       = 10       -- Make floating windows transparent
 vim.o.wrap           = false    -- Display long lines as just one line
 
 vim.o.fillchars = table.concat(
@@ -75,12 +76,6 @@ vim.o.completeopt = 'menuone,noinsert,noselect' -- Customize completions
 -- punctuation (. or `)`) followed by at least one space is a start of list
 -- item'
 vim.o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
-
--- Folds ======================================================================
-vim.o.foldmethod  = 'indent' -- Set 'indent' folding method
-vim.o.foldlevel   = 1        -- Display all folds except top ones
-vim.o.foldnestmax = 10       -- Create folds only for some number of nested levels
-
 
 -- disable some pluggins shipped with neovim ==================================
 vim.g.loaded_gzip            = 1

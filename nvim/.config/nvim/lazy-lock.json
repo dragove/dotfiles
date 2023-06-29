@@ -1,6 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "c7984d1cca3d8615e4daefc196597872a0b8d590" },
-  "catppuccin": { "branch": "main", "commit": "8d02781a638123394f9bc160aad47a9560a113f9" },
+  "catppuccin": { "branch": "main", "commit": "12894370fa3c9e2200f3724c4184354d6b79733a" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
@@ -11,7 +11,7 @@
   "lsp-progress.nvim": { "branch": "main", "commit": "478ea980b9ffcbeebbf94690a66b2f0e7bf4c48e" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "c993ca55e3991535bc74cd2d6ef273810d066c84" },
   "mason.nvim": { "branch": "main", "commit": "db58ec7bc9248fb1878172f90cadc825b77564a6" },
-  "neodev.nvim": { "branch": "main", "commit": "02bfa37e20a1fad076190ea1af8d40abe30f6df3" },
+  "neodev.nvim": { "branch": "main", "commit": "a2b1d8fb9fa4daa35d3fd9123bccccccbd4a3520" },
   "nvim-cmp": { "branch": "main", "commit": "e1f1b40790a8cb7e64091fb12cc5ffe350363aa0" },
   "nvim-lspconfig": { "branch": "master", "commit": "b6b34b9acf84949f0ac1c00747765e62b81fb38d" },
   "nvim-web-devicons": { "branch": "master", "commit": "9ab9b0b894b2388a9dbcdee5f00ce72e25d85bf9" }
