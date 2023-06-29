@@ -1,5 +1,5 @@
 --code is stolen from https://github.com/echasnovski/nvim/blob/master/lua/ec/settings.lua
---stylua: ignore start
+-- stylua: ignore start
 -- Leader key =================================================================
 vim.g.mapleader = ' '
 
@@ -9,28 +9,30 @@ vim.o.mouse        = 'a'            -- Enable mouse
 vim.o.switchbuf    = 'usetab'       -- Use already opened buffers when switching
 vim.o.writebackup  = false          -- Don't store backup
 vim.o.undofile     = true           -- Enable persistent undo
+vim.o.swapfile     = false
+vim.o.guifont      = 'FiraCode Nerd Font:h16'
 
 vim.cmd('filetype plugin indent on') -- Enable all filetype plugins
 
 -- UI =========================================================================
-vim.o.breakindent   = true     -- Indent wrapped lines to match line start
-vim.o.colorcolumn   = '+1'     -- Draw colored column one step to the right of desired maximum width
-vim.o.cursorline    = true     -- Enable highlighting of the current line
-vim.o.laststatus    = 2        -- Always show statusline
-vim.o.linebreak     = true     -- Wrap long lines at 'breakat' (if 'wrap' is set)
-vim.o.list          = true     -- Show helpful character indicators
-vim.o.number        = true     -- Show line numbers
-vim.o.pumblend      = 10       -- Make builtin completion menus slightly transparent
-vim.o.pumheight     = 10       -- Make popup menu smaller
-vim.o.ruler         = false    -- Don't show cursor position
-vim.o.shortmess     = 'aoOWFc' -- Disable certain messages from |ins-completion-menu|
-vim.o.showmode      = false    -- Don't show mode in command line
-vim.o.signcolumn    = 'yes'    -- Always show signcolumn or it would frequently shift
-vim.o.splitbelow    = true     -- Horizontal splits will be below
-vim.o.splitright    = true     -- Vertical splits will be to the right
-vim.o.termguicolors = true     -- Enable gui colors
-vim.o.winblend      = 100      -- Make floating windows transparent
-vim.o.wrap          = false    -- Display long lines as just one line
+vim.o.breakindent    = true     -- Indent wrapped lines to match line start
+vim.o.colorcolumn    = '+1'     -- Draw colored column one step to the right of desired maximum width
+vim.o.cursorline     = true     -- Enable highlighting of the current line
+vim.o.laststatus     = 3        -- show statusline in last window
+vim.o.linebreak      = true     -- Wrap long lines at 'breakat' (if 'wrap' is set)
+vim.o.list           = true     -- Show helpful character indicators
+vim.o.relativenumber = true     -- Show relative line numbers
+vim.o.pumblend       = 20       -- Make builtin completion menus slightly transparent
+vim.o.pumheight      = 10       -- Make popup menu smaller
+vim.o.ruler          = false    -- Don't show cursor position
+vim.o.shortmess      = 'aoOWFc' -- Disable certain messages from |ins-completion-menu|
+vim.o.showmode       = false    -- Don't show mode in command line
+vim.o.signcolumn     = 'yes'    -- Always show signcolumn or it would frequently shift
+vim.o.splitbelow     = true     -- Horizontal splits will be below
+vim.o.splitright     = true     -- Vertical splits will be to the right
+vim.o.termguicolors  = true     -- Enable gui colors
+vim.o.winblend       = 20       -- Make floating windows transparent
+vim.o.wrap           = false    -- Display long lines as just one line
 
 vim.o.fillchars = table.concat(
   { 'eob: ', 'fold:╌', 'horiz:═', 'horizdown:╦', 'horizup:╩', 'vert:║', 'verthoriz:╬', 'vertleft:╣', 'vertright:╠' },
@@ -80,12 +82,22 @@ vim.o.foldmethod  = 'indent' -- Set 'indent' folding method
 vim.o.foldlevel   = 1        -- Display all folds except top ones
 vim.o.foldnestmax = 10       -- Create folds only for some number of nested levels
 
--- Custom autocommands ========================================================
-vim.cmd([[augroup CustomSettings]])
-  vim.cmd([[autocmd!]])
 
-  -- Don't auto-wrap comments and don't insert comment leader after hitting 'o'
-  -- If don't do this on `FileType`, this keeps magically reappearing.
-  vim.cmd([[autocmd FileType * setlocal formatoptions-=c formatoptions-=o]])
-vim.cmd([[augroup END]])
+-- disable some pluggins shipped with neovim ==================================
+vim.g.loaded_gzip            = 1
+vim.g.loaded_tar             = 1
+vim.g.loaded_tarPlugin       = 1
+vim.g.loaded_zip             = 1
+vim.g.loaded_zipPlugin       = 1
+vim.g.loaded_getscript       = 1
+vim.g.loaded_getscriptPlugin = 1
+vim.g.loaded_vimball         = 1
+vim.g.loaded_vimballPlugin   = 1
+vim.g.loaded_matchit         = 1
+vim.g.loaded_2html_plugin    = 1
+vim.g.loaded_logiPat         = 1
+vim.g.loaded_rrhelper        = 1
+vim.g.loaded_netrw           = 1
+vim.g.loaded_netrwPlugin     = 1
+
 --stylua: ignore end

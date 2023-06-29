@@ -31,6 +31,10 @@ keymap('n', [[\h]], ':let v:hlsearch = 1 - v:hlsearch<CR>')
 vim.keymap.set({ 'n', 'x' }, '[p', '<Cmd>exe "put! " . v:register<CR>', { desc = 'Paste Above' })
 vim.keymap.set({ 'n', 'x' }, ']p', '<Cmd>exe "put "  . v:register<CR>', { desc = 'Paste Below' })
 
--- C-tab to alternate buffers
-vim.keymap.set({ 'n', 'x' }, '<C-TAB>', '<Cmd>b#<CR>', { desc = 'alternate tab' })
+-- navigate buffers
+vim.keymap.set({ 'n', 'x' }, 'H', '<Cmd>bp<CR>', { desc = 'previous buffer' })
+vim.keymap.set({ 'n', 'x' }, 'L', '<Cmd>bn<CR>', { desc = 'next buffer' })
+
+-- select all
+vim.keymap.set('x', 'af', ':<C-u>silent! keepjumps normal! ggVG<CR>', { silent = true })
 
