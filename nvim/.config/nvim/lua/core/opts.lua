@@ -25,12 +25,11 @@ vim.o.pumheight     = 10       -- Make popup menu smaller
 vim.o.ruler         = false    -- Don't show cursor position
 vim.o.shortmess     = 'aoOWFc' -- Disable certain messages from |ins-completion-menu|
 vim.o.showmode      = false    -- Don't show mode in command line
-vim.o.showtabline   = 2        -- Always show tabline
 vim.o.signcolumn    = 'yes'    -- Always show signcolumn or it would frequently shift
 vim.o.splitbelow    = true     -- Horizontal splits will be below
 vim.o.splitright    = true     -- Vertical splits will be to the right
 vim.o.termguicolors = true     -- Enable gui colors
-vim.o.winblend      = 10       -- Make floating windows slightly transparent
+vim.o.winblend      = 100      -- Make floating windows transparent
 vim.o.wrap          = false    -- Display long lines as just one line
 
 vim.o.fillchars = table.concat(
