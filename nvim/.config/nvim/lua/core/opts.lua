@@ -1,7 +1,7 @@
 --code is stolen from https://github.com/echasnovski/nvim/blob/master/lua/ec/settings.lua
 -- stylua: ignore start
 -- Leader key =================================================================
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 
 -- General ====================================================================
 vim.o.backup       = false          -- Don't store backup
@@ -12,6 +12,7 @@ vim.o.undofile     = true           -- Enable persistent undo
 vim.o.swapfile     = false
 vim.o.guifont      = 'FiraCode Nerd Font:h16'
 vim.o.cmdheight    = 0
+vim.o.foldenable   = false
 
 vim.cmd('filetype plugin indent on') -- Enable all filetype plugins
 
