@@ -4,15 +4,15 @@
 vim.g.mapleader = " "
 
 -- General ====================================================================
-vim.o.backup       = false          -- Don't store backup
-vim.o.mouse        = 'a'            -- Enable mouse
-vim.o.switchbuf    = 'usetab'       -- Use already opened buffers when switching
-vim.o.writebackup  = false          -- Don't store backup
-vim.o.undofile     = true           -- Enable persistent undo
-vim.o.swapfile     = false
-vim.o.guifont      = 'FiraCode Nerd Font:h16'
-vim.o.cmdheight    = 0
-vim.o.foldenable   = false
+vim.o.backup      = false          -- Don't store backup
+vim.o.mouse       = 'a'            -- Enable mouse
+vim.o.switchbuf   = 'usetab'       -- Use already opened buffers when switching
+vim.o.writebackup = false          -- Don't store backup
+vim.o.undofile    = true           -- Enable persistent undo
+vim.o.swapfile    = false
+vim.o.guifont     = 'FiraCode Nerd Font:h16'
+vim.o.cmdheight   = 0
+vim.o.foldenable  = false
 
 vim.cmd('filetype plugin indent on') -- Enable all filetype plugins
 
@@ -32,7 +32,7 @@ vim.o.signcolumn     = 'yes'    -- Always show signcolumn or it would frequently
 vim.o.splitbelow     = true     -- Horizontal splits will be below
 vim.o.splitright     = true     -- Vertical splits will be to the right
 vim.o.termguicolors  = true     -- Enable gui colors
-vim.o.winblend       = 10       -- Make floating windows transparent
+vim.o.winblend       = 0        -- Make floating windows transparent
 vim.o.wrap           = false    -- Display long lines as just one line
 
 vim.o.fillchars = table.concat(
