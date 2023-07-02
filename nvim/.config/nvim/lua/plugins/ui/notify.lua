@@ -17,6 +17,7 @@ return {
     max_width = function()
       return math.floor(vim.o.columns * 0.75)
     end,
+    background_colour = "#000000",
   },
   init = function()
     -- when noice is not enabled, install notify on VeryLazy
