@@ -31,9 +31,10 @@ compinit
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
-alias ls='ls --color=auto --human-readable --group-directories-first --classify'
-alias ll='ls --color=auto --human-readable --group-directories-first --classify -l'
-alias la='ls --color=auto --human-readable --group-directories-first --classify -la'
+alias tree='lsd --tree'
+alias ls='lsd'
+alias ll='lsd -hl'
+alias la='ls -ahl'
 alias vim=nvim
 alias vi=nvim
 alias lg=lazygit
