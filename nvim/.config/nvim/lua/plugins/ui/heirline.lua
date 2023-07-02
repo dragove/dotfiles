@@ -3,19 +3,19 @@ return {
     config = function()
         local utils = require("heirline.utils")
         local conditions = require("heirline.conditions")
+        local catppuccin = require('catppuccin.palettes').get_palette("frappe")
         local Align = { provider = "%=" }
         local Space = { provider = " " }
-        local palette = require('catppuccin.palettes').get_palette()
         local colors = {
-            bg = palette.base,
-            fg = palette.text,
-            red = palette.red,
-            green = palette.green,
-            yellow = palette.yellow,
-            blue = palette.blue,
-            magenta = palette.peach,
-            cyan = palette.teal,
-            dark = palette.mantle,
+            bg = catppuccin.base,
+            fg = catppuccin.text,
+            red = catppuccin.red,
+            green = catppuccin.green,
+            yellow = catppuccin.yellow,
+            blue = catppuccin.blue,
+            magenta = catppuccin.peach,
+            cyan = catppuccin.teal,
+            dark = catppuccin.mantle,
         }
         require('heirline').load_colors(colors)
 
