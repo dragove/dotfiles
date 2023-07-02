@@ -1,5 +1,6 @@
 return {
     "rebelot/heirline.nvim",
+    event = "VeryLazy",
     config = function()
         local utils = require("heirline.utils")
         local conditions = require("heirline.conditions")
