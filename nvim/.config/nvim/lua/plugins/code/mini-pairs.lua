@@ -1,5 +1,6 @@
 return {
-     'echasnovski/mini.pairs', version = '*',
-     event = "VeryLazy",
-     opts = {}
+    'echasnovski/mini.pairs',
+    version = '*',
+    event = "VeryLazy",
+    opts = {}
 }

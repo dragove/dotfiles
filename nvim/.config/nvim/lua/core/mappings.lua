@@ -1,16 +1,16 @@
 -- Helper function
 local default_opts = {
-  noremap = true,
-  silent = true,
-  expr = false,
-  nowait = false,
-  script = false,
-  unique = false,
+    noremap = true,
+    silent = true,
+    expr = false,
+    nowait = false,
+    script = false,
+    unique = false,
 }
 
 local keymap = function(mode, keys, cmd, opts)
-  local o = vim.tbl_deep_extend('force', default_opts, opts or {})
-  vim.keymap.set(mode, keys, cmd, o)
+    local o = vim.tbl_deep_extend('force', default_opts, opts or {})
+    vim.keymap.set(mode, keys, cmd, o)
 end
 
 -- NOTE: Most mappings come from 'mini.basics'
@@ -37,4 +37,3 @@ vim.keymap.set({ 'n', 'x' }, 'L', '<Cmd>bn<CR>', { desc = 'next buffer' })
 
 -- select all
 vim.keymap.set('x', 'af', ':<C-u>silent! keepjumps normal! ggVG<CR>', { silent = true })
-

@@ -1,20 +1,17 @@
---code is stolen from https://github.com/echasnovski/nvim/blob/master/lua/ec/settings.lua
+-- code is stolen from https://github.com/echasnovski/nvim/blob/master/lua/ec/settings.lua
 -- stylua: ignore start
 -- Leader key =================================================================
-vim.g.mapleader = " "
+vim.g.mapleader      = " "
 
 -- General ====================================================================
-vim.o.backup      = false          -- Don't store backup
-vim.o.mouse       = 'a'            -- Enable mouse
-vim.o.switchbuf   = 'usetab'       -- Use already opened buffers when switching
-vim.o.writebackup = false          -- Don't store backup
-vim.o.undofile    = true           -- Enable persistent undo
-vim.o.swapfile    = false
-vim.o.guifont     = 'FiraCode Nerd Font:h16'
-vim.o.cmdheight   = 0
-vim.o.foldenable  = false
-
-vim.cmd('filetype plugin indent on') -- Enable all filetype plugins
+vim.o.backup         = false    -- Don't store backup
+vim.o.mouse          = 'a'      -- Enable mouse
+vim.o.switchbuf      = 'usetab' -- Use already opened buffers when switching
+vim.o.writebackup    = false    -- Don't store backup
+vim.o.undofile       = true     -- Enable persistent undo
+vim.o.swapfile       = false
+vim.o.guifont        = 'FiraCode Nerd Font:h16'
+vim.o.cmdheight      = 0
 
 -- UI =========================================================================
 vim.o.breakindent    = true     -- Indent wrapped lines to match line start
@@ -35,48 +32,42 @@ vim.o.termguicolors  = true     -- Enable gui colors
 vim.o.winblend       = 0        -- Make floating windows transparent
 vim.o.wrap           = false    -- Display long lines as just one line
 
-vim.o.fillchars = table.concat(
-  { 'eob: ', 'fold:╌', 'horiz:═', 'horizdown:╦', 'horizup:╩', 'vert:║', 'verthoriz:╬', 'vertleft:╣', 'vertright:╠' },
-  ','
+vim.o.fillchars      = table.concat(
+    { 'eob: ', 'fold:╌', 'horiz:═', 'horizdown:╦', 'horizup:╩', 'vert:║', 'verthoriz:╬', 'vertleft:╣',
+        'vertright:╠' },
+    ','
 )
-vim.o.listchars =table.concat(
-  { 'extends:…', 'nbsp:␣', 'precedes:…', 'tab:> ' },
-  ','
+vim.o.listchars      = table.concat(
+    { 'extends:…', 'nbsp:␣', 'precedes:…', 'tab:> ' },
+    ','
 )
 
-vim.opt.shortmess:append('C') -- Don't show "Scanning..." messages
-vim.o.splitkeep = 'screen'    -- Reduce scroll during window split
-
--- Colors =====================================================================
--- Enable syntax highlighing if it wasn't already (as it is time consuming)
--- Don't use defer it because it affects start screen appearance
-if vim.fn.exists("syntax_on") ~= 1 then
-  vim.cmd([[syntax enable]])
-end
+vim.opt.shortmess:append('C')  -- Don't show "Scanning..." messages
+vim.o.splitkeep     = 'screen' -- Reduce scroll during window split
 
 -- Editing ====================================================================
-vim.o.autoindent    = true     -- Use auto indent
-vim.o.expandtab     = true     -- Convert tabs to spaces
-vim.o.formatoptions = 'rqnl1j' -- Improve comment editing
-vim.o.ignorecase    = true     -- Ignore case when searching (use `\C` to force not doing that)
-vim.o.incsearch     = true     -- Show search results while typing
-vim.o.infercase     = true     -- Infer letter cases for a richer built-in keyword completion
-vim.o.shiftwidth    = 4        -- Use this number of spaces for indentation
-vim.o.smartcase     = true     -- Don't ignore case when searching if pattern has upper case
-vim.o.smartindent   = true     -- Make indenting smart
-vim.o.tabstop       = 4        -- Insert 4 spaces for a tab
-vim.o.virtualedit   = 'block'  -- Allow going past the end of line in visual block mode
+vim.o.autoindent    = true                                 -- Use auto indent
+vim.o.expandtab     = true                                 -- Convert tabs to spaces
+vim.o.formatoptions = 'rqnl1j'                             -- Improve comment editing
+vim.o.ignorecase    = true                                 -- Ignore case when searching (use `\C` to force not doing that)
+vim.o.incsearch     = true                                 -- Show search results while typing
+vim.o.infercase     = true                                 -- Infer letter cases for a richer built-in keyword completion
+vim.o.shiftwidth    = 4                                    -- Use this number of spaces for indentation
+vim.o.smartcase     = true                                 -- Don't ignore case when searching if pattern has upper case
+vim.o.smartindent   = true                                 -- Make indenting smart
+vim.o.tabstop       = 4                                    -- Insert 4 spaces for a tab
+vim.o.virtualedit   = 'block'                              -- Allow going past the end of line in visual block mode
 
-vim.opt.iskeyword:append('-')  -- Treat dash separated words as a word text object
+vim.opt.iskeyword:append('-')                              -- Treat dash separated words as a word text object
 
-vim.o.completeopt = 'menuone,noinsert,noselect' -- Customize completions
+vim.o.completeopt            = 'menuone,noinsert,noselect' -- Customize completions
 
 -- Define pattern for a start of 'numbered' list. This is responsible for
 -- correct formatting of lists when using `gw`. This basically reads as 'at
 -- least one special character (digit, -, +, *) possibly followed some
 -- punctuation (. or `)`) followed by at least one space is a start of list
 -- item'
-vim.o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
+vim.o.formatlistpat          = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 
 -- disable some pluggins shipped with neovim ==================================
 vim.g.loaded_gzip            = 1

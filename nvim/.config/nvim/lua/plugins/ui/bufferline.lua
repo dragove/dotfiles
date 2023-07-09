@@ -16,7 +16,7 @@ return {
                 style = "none"
             },
             show_buffer_close_icons = false,
-            separator_style = {"", "" }
+            separator_style = { "", "" }
         },
     },
     dependencies = {

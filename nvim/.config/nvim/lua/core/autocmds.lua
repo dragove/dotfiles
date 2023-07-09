@@ -124,33 +124,33 @@ local autocmds = {
                         not vim.wo.diff
                         and (winhl['CursorLine'] or winhl['CursorColumn'])
                         and vim.fn.match(vim.fn.mode(), '[iRsS\x13].*') == -1
-                        then
-                            vim.opt_local.winhl:remove({
-                                'CursorLine',
-                                'CursorColumn',
+                    then
+                        vim.opt_local.winhl:remove({
+                            'CursorLine',
+                            'CursorColumn',
+                        })
+                    end
+                    -- Conceal cursor line and cursor column in the previous window
+                    -- if current window is a normal window
+                    local current_win = vim.api.nvim_get_current_win()
+                    local prev_win = vim.fn.win_getid(vim.fn.winnr('#'))
+                    if
+                        prev_win ~= 0
+                        and prev_win ~= current_win
+                        and vim.api.nvim_win_is_valid(prev_win)
+                        and vim.fn.win_gettype(current_win) == ''
+                    then
+                        vim.api.nvim_win_call(prev_win, function()
+                            vim.opt_local.winhl:append({
+                                CursorLine = '',
+                                CursorColumn = '',
                             })
-                        end
-                        -- Conceal cursor line and cursor column in the previous window
-                        -- if current window is a normal window
-                        local current_win = vim.api.nvim_get_current_win()
-                        local prev_win = vim.fn.win_getid(vim.fn.winnr('#'))
-                        if
-                            prev_win ~= 0
-                            and prev_win ~= current_win
-                            and vim.api.nvim_win_is_valid(prev_win)
-                            and vim.fn.win_gettype(current_win) == ''
-                            then
-                                vim.api.nvim_win_call(prev_win, function()
-                                    vim.opt_local.winhl:append({
-                                        CursorLine = '',
-                                        CursorColumn = '',
-                                    })
-                                end)
-                            end
-                        end, 10)
-                    end,
-                },
-            },
+                        end)
+                    end
+                end, 10)
+            end,
+        },
+    },
     {
         { 'InsertEnter' },
         {
