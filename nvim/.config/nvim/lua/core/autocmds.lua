@@ -164,20 +164,6 @@ local autocmds = {
         },
     },
 
-    -- Update folds on BufEnter
-    {
-        { 'BufWinEnter', 'BufEnter' },
-        {
-            group = 'UpdateFolds',
-            callback = function(info)
-                if not vim.b[info.buf].foldupdated then
-                    vim.b[info.buf].foldupdated = true
-                    vim.cmd.normal('zx')
-                end
-            end,
-        },
-    },
-
     -- Disable winbar in diff mode
     {
         { 'OptionSet' },

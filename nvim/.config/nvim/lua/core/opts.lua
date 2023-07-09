@@ -12,6 +12,7 @@ vim.o.undofile       = true     -- Enable persistent undo
 vim.o.swapfile       = false
 vim.o.guifont        = 'FiraCode Nerd Font:h16'
 vim.o.cmdheight      = 0
+vim.o.foldenable     = false
 
 -- UI =========================================================================
 vim.o.breakindent    = true     -- Indent wrapped lines to match line start
