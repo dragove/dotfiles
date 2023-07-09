@@ -3,16 +3,7 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-        {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            init = function()
-                -- disable rtp plugin, as we only need its queries for mini.ai
-                -- In case other textobject modules are enabled, we will load them
-                -- once nvim-treesitter is loaded
-                require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-                load_textobjects = true
-            end,
-        },
+        { "nvim-treesitter/nvim-treesitter-textobjects" },
     },
     cmd = { "TSUpdateSync" },
     keys = {
@@ -21,7 +12,15 @@ return {
     },
     config = function()
         require("nvim-treesitter.configs").setup({
-            ensure_installed = "all",
+            ensure_installed = {
+                "bash", "c", "c_sharp", "clojure", "cmake", "comment", "commonlisp", "cpp", "css", "cuda", "d", "dart",
+                "diff", "dockerfile", "dot", "elixir", "elm", "erlang", "fennel", "fish", "git_config", "git_rebase",
+                "gitattributes", "gitcommit", "gitignore", "go", "gomod", "gosum", "gowork", "graphql", "groovy", "hare",
+                "haskell_persistent", "html", "http", "ini", "java", "javascript", "jq", "jsdoc", "json", "json5",
+                "jsonc", "julia", "kotlin", "latex", "llvm", "lua", "luadoc", "luap", "luau", "make", "markdown",
+                "meson", "ninja", "nix", "norg", "ocaml", "ocamllex", "odin", "perl", "php", "phpdoc", "python", "query",
+                "r", "regex", "ruby", "rust", "scala", "scss", "sql", "tsx", "typescript", "vue", "yaml", "yuck", "zig"
+            },
             highlight = {
                 enable = true,
                 disable = function(_, buf)
@@ -33,10 +32,11 @@ return {
                 end,
                 additional_vim_regex_highlighting = false
             },
-            vim.cmd [[
+        })
+        vim.cmd [[
             set foldmethod=expr
             set foldexpr=nvim_treesitter#foldexpr()
-            ]]
-        })
+            set nofoldenable
+        ]]
     end
 }

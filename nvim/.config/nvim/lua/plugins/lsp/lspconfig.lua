@@ -36,7 +36,7 @@ return {
             -- add any global capabilities here
             capabilities = {},
             -- Automatically format on save
-            autoformat = true,
+            autoformat = false,
             -- Enable this to show formatters used in a notification
             -- Useful for debugging formatter issues
             format_notify = false,
