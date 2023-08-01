@@ -100,6 +100,24 @@
                 pdf-view-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+;; Smooth Scrolling
+(pixel-scroll-precision-mode t)
+(setq pixel-scroll-precision-interpolate-page t)
+(defun +pixel-scroll-interpolate-down (&optional lines)
+  (interactive)
+  (if lines
+      (pixel-scroll-precision-interpolate (* -1 lines (pixel-line-height)))
+    (pixel-scroll-interpolate-down)))
+
+(defun +pixel-scroll-interpolate-up (&optional lines)
+  (interactive)
+  (if lines
+      (pixel-scroll-precision-interpolate (* lines (pixel-line-height))))
+  (pixel-scroll-interpolate-up))
+
+(defalias 'scroll-up-command '+pixel-scroll-interpolate-down)
+(defalias 'scroll-down-command '+pixel-scroll-interpolate-up)
+
 ;; Delete the current file
 
 (defun delete-this-file ()
