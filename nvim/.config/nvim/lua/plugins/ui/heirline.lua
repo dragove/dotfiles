@@ -26,15 +26,15 @@ return {
             end,
             static = {
                 mode_names = { -- change the strings if you like it vvvvverbose!
-                    n = " N",
-                    no = " N?",
-                    nov = " N?",
-                    noV = " N?",
-                    ["no\22"] = " N?",
-                    niI = " Ni",
-                    niR = " Nr",
-                    niV = " Nv",
-                    nt = " Nt",
+                    n = "󰭩 N",
+                    no = "󰭩 N?",
+                    nov = "󰭩 N?",
+                    noV = "󰭩 N?",
+                    ["no\22"] = "󰭩 N?",
+                    niI = "󰭩 Ni",
+                    niR = "󰭩 Nr",
+                    niV = "󰭩 Nv",
+                    nt = "󰭩 Nt",
                     v = "󰉸 V",
                     vs = "󰉸 Vs",
                     V = "󰉸 V_",
@@ -119,13 +119,8 @@ return {
 
         local FileName = {
             provider = function(self)
-                -- first, trim the pattern relative to the current directory. For other
-                -- options, see :h filename-modifers
                 local filename = vim.fn.fnamemodify(self.filename, ":.")
                 if filename == "" then return "[No Name]" end
-                -- now, if the filename would occupy more than 1/4th of the available
-                -- space, we trim the file path to its initials
-                -- See Flexible Components section below for dynamic truncation
                 if not conditions.width_percent_below(#filename, 0.25) then
                     filename = vim.fn.pathshorten(filename)
                 end
@@ -151,65 +146,44 @@ return {
             },
         }
 
-        -- Now, let's say that we want the filename color to change if the buffer is
-        -- modified. Of course, we could do that directly using the FileName.hl field,
-        -- but we'll see how easy it is to alter existing components using a "modifier"
-        -- component
-
-        local FileNameModifer = {
-            hl = function()
-                if vim.bo.modified then
-                    -- use `force` because we need to override the child's hl foreground
-                    return { fg = "cyan", bold = true, force = true }
-                end
-            end,
-        }
-
-        -- let's add the children to our FileNameBlock component
         FileNameBlock = utils.insert(FileNameBlock,
             FileIcon,
-            utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
+            utils.insert(FileName),
             FileFlags,
-            { provider = '%<' }                      -- this means that the statusline is cut here when there's not enough space
+            { provider = '%<' }
         )
 
         local LSPActive = {
             condition = conditions.lsp_attached,
             update    = { 'LspAttach', 'LspDetach' },
-
-            -- You can keep it simple,
-            -- provider = " [LSP]",
-
-            -- Or complicate things a bit and get the servers names
             provider  = function()
                 local names = {}
-                for i, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+                for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
                     table.insert(names, server.name)
                 end
-                return " [" .. table.concat(names, " ") .. "]"
+                return "󰙴 " .. table.concat(names, " ")
             end,
             hl        = { fg = "green", bold = true },
         }
 
+        local Ruler = {
+            provider = "%7(%l/%3L%):%2c %P",
+        }
+
         local Git = {
             condition = conditions.is_git_repo,
-
             init = function(self)
                 self.status_dict = vim.b.gitsigns_status_dict
                 self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or
                     self.status_dict.changed ~= 0
             end,
-
             hl = { fg = "magenta" },
-
-
-            { -- git branch name
+            {
                 provider = function(self)
                     return " " .. self.status_dict.head
                 end,
                 hl = { bold = true }
             },
-            -- You could handle delimiters, icons and counts similar to Diagnostics
             {
                 condition = function(self)
                     return self.has_changes
@@ -247,7 +221,7 @@ return {
 
         require("heirline").setup({
             statusline = {
-                viMode, Space, FileNameBlock, Space, Align, LSPActive, Align, Git
+                viMode, Space, FileNameBlock, Space, Align, LSPActive, Align, Ruler, Space, Git
             }
         })
     end,
