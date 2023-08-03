@@ -4,4 +4,5 @@ return {
     { import = "plugins.code" },
     { import = "plugins.editor" },
     { import = "plugins.lsp.lspconfig" },
+    { import = "plugins.lang" },
 }

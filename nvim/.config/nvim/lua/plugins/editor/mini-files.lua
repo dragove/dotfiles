@@ -1,7 +1,7 @@
 return {
     "echasnovski/mini.files",
     version = false,
-    config = function()
-        vim.keymap.set("n", "<Leader>e", require("mini.files").open)
-    end
+    keys = {
+        { "<leader>e", function() require("mini.files").open() end, desc = "Open mini files" },
+    }
 }
