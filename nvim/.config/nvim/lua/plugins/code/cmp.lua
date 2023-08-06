@@ -12,6 +12,8 @@ return {
     opts = function()
         local lspkind = require('lspkind')
         local luasnip = require("luasnip")
+        local catppuccin = require('catppuccin.palettes').get_palette("frappe")
+        vim.api.nvim_set_hl(0, "CmpDocNormal", { bg = catppuccin.base })
 
         local cmp = require("cmp")
         local defaults = require("cmp.config.default")()
@@ -53,6 +55,11 @@ return {
                 })
             },
             sorting = defaults.sorting,
+            window = {
+                documentation = {
+                    winhighlight = "Normal:CmpDocNormal"
+                }
+            },
         }
     end,
 }
