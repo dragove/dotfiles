@@ -3,18 +3,14 @@ return {
         "neovim/nvim-lspconfig",
         opts = {
             servers = {
-                pyright = {},
-                ruff_lsp = {},
+                pylsp = {
+                    plugins = {
+                        black = { enabled = true },
+                        ruff = { enabled = true },
+                        isort = { enabled = true },
+                    }
+                },
             },
-        },
-        setup = {
-            ruff_lsp = function()
-                require("core.functions").on_attach(function(client, _)
-                    if client.name == "ruff_lsp" then
-                        client.server_capabilities.hoverProvider = false
-                    end
-                end)
-            end,
         },
     },
     {
