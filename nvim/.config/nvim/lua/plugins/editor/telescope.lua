@@ -54,12 +54,6 @@ return {
             selection_caret = " ",
             mappings = {
                 i = {
-                    ["<c-t>"] = function(...)
-                        return require("trouble.providers.telescope").open_with_trouble(...)
-                    end,
-                    ["<a-t>"] = function(...)
-                        return require("trouble.providers.telescope").open_selected_with_trouble(...)
-                    end,
                     ["<C-Down>"] = function(...)
                         return require("telescope.actions").cycle_history_next(...)
                     end,
@@ -80,6 +74,14 @@ return {
                 },
             },
         },
+        pickers = {
+            find_files = {
+                theme = "dropdown",
+            },
+            live_grep = {
+                theme = "ivy"
+            }
+        }
     },
     dependencies = {
         { "nvim-lua/plenary.nvim", lazy = true }
