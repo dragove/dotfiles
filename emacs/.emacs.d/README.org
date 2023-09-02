@@ -983,4 +983,8 @@ Catppuccin Theme
   :custom
   (plantuml-jar-path (expand-file-name "~/.local/share/emacs/plantuml.jar")))
 #+end_src
+*** Typescript
+#+begin_src emacs-lisp
+
+#+end_src
 

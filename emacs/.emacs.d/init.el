@@ -801,3 +801,5 @@
 (use-package plantuml-mode
   :custom
   (plantuml-jar-path (expand-file-name "~/.local/share/emacs/plantuml.jar")))
+
+
