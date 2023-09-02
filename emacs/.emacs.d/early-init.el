@@ -17,27 +17,11 @@
 (defvar default-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 1)
-
-(defun +gc-after-focus-change ()
-  "Run GC when frame loses focus."
-  (run-with-idle-timer
-   5 nil
-   (lambda () (unless (frame-focus-state) (garbage-collect)))))
-
-(defun +reset-init-values ()
-  (run-with-idle-timer
-   1 nil
-   (lambda ()
-     (setq file-name-handler-alist default-file-name-handler-alist
-           gc-cons-percentage 0.1
-           gc-cons-threshold 100000000)
-     (message "gc-cons-threshold & file-name-handler-alist restored")
-     (when (boundp 'after-focus-change-function)
-       (add-function :after after-focus-change-function #'+gc-after-focus-change)))))
-(with-eval-after-load 'elpaca
-  (add-hook 'elpaca-after-init-hook '+reset-init-values))
+(let ((normal-gc-cons-threshold (* 20 1024 1024))
+      (init-gc-cons-threshold (* 128 1024 1024)))
+  (setq gc-cons-threshold init-gc-cons-threshold)
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
 ;; Inhibit resizing frame
 (setq frame-inhibit-implied-resize t)
@@ -57,6 +41,11 @@
 ;; Prevent flashing of unstyled modeline at startup
 (setq-default mode-line-format nil)
 
-(set-face-attribute 'default nil :family "FiraCode Nerd Font" :height 160)
+;; Set default font
+(set-face-attribute 'default
+                    nil
+                    :font "FiraCode Nerd Font"
+                    :height 150)
+(set-fontset-font t 'han (font-spec :family "LXGW Neo XiHei"))
 
 (advice-add #'x-apply-session-resources :override #'ignore)

@@ -8,9 +8,7 @@
 This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfolio's .emacs.d]]
 #+end_quote
 
-* Bootstraping
-** Early Init
-
+* Early Init
 :PROPERTIES:
 :header-args: :results silent :tangle ~/.emacs.d/early-init.el
 :END:
@@ -81,13 +79,13 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
 (advice-add #'x-apply-session-resources :override #'ignore)
 #+end_src
 
-** lexical binding
+* lexical binding
 The following line turns on lexical binding for performance reasons.
 #+begin_src emacs-lisp
 ;; -*- lexical-binding: t; -*-
 #+end_src
 
-** Profiling
+* Profiling
 This function displays how long Emacs took to start.
 It's a rough way of knowing when/if I need to optimize my init file.
 #+begin_src emacs-lisp
@@ -100,7 +98,7 @@ It's a rough way of knowing when/if I need to optimize my init file.
                      gcs-done)))
 #+end_src
 
-** Emacs
+* Emacs
 *** Defaults
 #+begin_src emacs-lisp
 ;; Better defaults
@@ -194,7 +192,7 @@ It's a rough way of knowing when/if I need to optimize my init file.
       (rename-buffer new-name))))
 #+end_src
 
-** Elpaca
+* Elpaca
 #+begin_quote
 An elisp package manager
 
@@ -244,7 +242,7 @@ https://github.com/progfolio/elpaca
   (setq elpaca-use-package-by-default t))
 (elpaca-wait)
 #+end_src
-** Theme and UI stuff
+* Theme and UI stuff
 *** Ligature
 #+begin_src emacs-lisp
 (use-package ligature
@@ -358,7 +356,7 @@ Catppuccin Theme
 #+begin_src emacs-lisp
 (use-package command-log-mode)
 #+end_src
-** Editing
+* Editing
 *** Auto Save
 #+begin_src emacs-lisp
 (use-package super-save
@@ -897,7 +895,7 @@ Catppuccin Theme
 (use-package avy
   :bind (("C-:" . avy-goto-char)))
 #+end_src
-** Org Mode
+* Org Mode
 *** Defaults
 #+begin_src emacs-lisp
 (use-package org
@@ -960,7 +958,7 @@ Catppuccin Theme
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
 #+end_src
-** Git Integration
+* Git Integration
 *** Diff Highlight
 #+begin_src emacs-lisp
 (use-package diff-hl
@@ -972,7 +970,7 @@ Catppuccin Theme
 (use-package magit
   :bind (("C-M-g" . magit-status-here)))
 #+end_src
-** Programming Languages
+* Programming Languages
 *** Tree-Sitter
 #+begin_src emacs-lisp
 (use-package treesit
