@@ -52,6 +52,7 @@ return {
         defaults = {
             prompt_prefix = " ",
             selection_caret = " ",
+            file_ignore_patterns = { "node%_modules/.*" },
             mappings = {
                 i = {
                     ["<C-Down>"] = function(...)

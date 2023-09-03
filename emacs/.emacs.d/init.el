@@ -351,9 +351,21 @@
      (meow-cancel . keyboard-quit)
      (meow-delete . meow-C-d)))
   (meow-char-thing-table
-   '((?r . round) (?b . square) (?c . curly) (?s . string) (?e . symbol)
-     (?w . window) (?B . buffer) (?p . paragraph) (?< . line) (?> . line)
-     (?d . defun) (?i . indent) (?x . extend) (?. . sentence)))
+   '((?\( . round)
+     (?\) . round)
+     (?\" .  string)
+     (?\[ . square)
+     (?\] . square)
+     (?<  . angle)
+     (?>  . angle)
+     (?{  . curly)
+     (?}  . curly)
+     (?s  . symbol)
+     (?f  . defun)
+     (?w  . window)
+     (?l  . line)
+     (?b  . buffer)
+     (?p  . paragraph)))
   :config (meow-setup))
 
 ;; Enable vertico
@@ -783,6 +795,16 @@
 (use-package magit
   :bind (("C-M-g" . magit-status-here)))
 
+(use-package eat
+  :elpaca
+  (:host "codeberg.org"
+         :repo "akib/emacs-eat"
+         :files ("*.el" ("term" "term/*.el") "*.texi"
+                 "*.ti" ("terminfo/e" "terminfo/e/*")
+                 ("terminfo/65" "terminfo/65/*")
+                 ("integration" "integration/*")
+                 (:exclude ".dir-locals.el" "*-tests.el"))))
+
 (use-package treesit
   :elpaca nil
   :custom
@@ -802,4 +824,46 @@
   :custom
   (plantuml-jar-path (expand-file-name "~/.local/share/emacs/plantuml.jar")))
 
+(use-package emmet-mode
+  :config
+  (add-hook 'sgml-mode-hook 'emmet-mode)  ;; Auto-start on any markup modes
+  (add-hook 'css-mode-hook  'emmet-mode)) ;; enable Emmet's css abbreviation.
 
+(use-package web-mode
+  :mode "\\.phtml\\'"
+  :mode "\\.volt\\'"
+  :mode "\\.html\\'"
+  :mode "\\.svelte\\'"
+  :custom
+  ((web-mode-markup-indent-offset 2)
+   (web-mode-code-indent-offset 2)
+   (web-mode-css-indent-offset 2)))
+(use-package rainbow-mode
+  :config
+  (add-hook 'css-mode-hook 'rainbow-mode))
+
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :config
+  (add-hook 'js2-mode-hook 'electric-operator-mode)
+  (add-hook 'js2-mode-hook 'flycheck-mode))
+(use-package js2-refactor
+  :diminish js2-refactor-mode
+  :defer t
+  :config
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  (js2r-add-keybindings-with-prefix "C-c C-m"))
+(use-package js-doc)
+(use-package rjsx-mode)
+(use-package npm-mode
+  :defer t
+  :hook
+  (js2-mode-hook  . npm-mode)
+  (rjsx-mode-hook . npm-mode))
+
+(use-package tide
+  :ensure t
+  :hook ((typescript-ts-mode . tide-setup)
+         (tsx-ts-mode . tide-setup)
+         (typescript-ts-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))

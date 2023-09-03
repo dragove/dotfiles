@@ -4,6 +4,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
         { "nvim-treesitter/nvim-treesitter-textobjects" },
+        { "windwp/nvim-ts-autotag" }
     },
     cmd = { "TSUpdateSync" },
     keys = {
@@ -19,7 +20,8 @@ return {
                 "haskell_persistent", "html", "http", "ini", "java", "javascript", "jq", "jsdoc", "json", "json5",
                 "jsonc", "julia", "kotlin", "latex", "llvm", "lua", "luadoc", "luap", "luau", "make", "markdown",
                 "meson", "ninja", "nix", "norg", "ocaml", "ocamllex", "odin", "perl", "php", "phpdoc", "python", "query",
-                "r", "regex", "ruby", "rust", "scala", "scss", "sql", "tsx", "typescript", "vue", "yaml", "yuck", "zig"
+                "r", "regex", "ruby", "rust", "scala", "scss", "sql", "tsx", "typescript", "vue", "yaml", "yuck", "zig",
+                "svelte"
             },
             highlight = {
                 enable = true,
@@ -31,6 +33,9 @@ return {
                     end
                 end,
                 additional_vim_regex_highlighting = false
+            },
+            autotag = {
+                enable = true,
             },
         })
         vim.cmd [[
