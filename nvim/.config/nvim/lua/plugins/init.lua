@@ -1,8 +1,8 @@
 return {
-    { "nvim-lua/plenary.nvim",         lazy = true },
-    { import = "plugins.ui" },
-    { import = "plugins.code" },
-    { import = "plugins.editor" },
-    { import = "plugins.lsp.lspconfig" },
-    { import = "plugins.lang" },
+	{ import = "lazyvim.plugins.extras.test.core" },
+	{ import = "plugins.disabled" },
+	{ import = "plugins.ui" },
+	{ import = "plugins.code" },
+	{ import = "plugins.editor" },
+	{ import = "plugins.lang" },
 }
