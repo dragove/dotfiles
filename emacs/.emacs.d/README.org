@@ -233,6 +233,7 @@ https://github.com/progfolio/elpaca
 (elpaca elpaca-use-package
   (elpaca-use-package-mode)
   (setq elpaca-use-package-by-default t))
+(setq elpaca-queue-limit 16)
 (elpaca-wait)
 #+end_src
 * Theme and UI stuff
