@@ -1,7 +1,8 @@
 -- code is stolen from https://github.com/echasnovski/nvim/blob/master/lua/ec/settings.lua
 -- stylua: ignore start
 -- Leader key =================================================================
-vim.g.mapleader      = " "
+vim.g.mapleader    = " "
+vim.g.autoformat   = false
 local opt = vim.opt
 
 -- General ====================================================================
