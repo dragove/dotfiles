@@ -9,3 +9,4 @@ lazy-lock.json
 /cargo/.cargo/registry
 /cargo/.cargo/git
 /cargo/.cargo/.package-cache
+*.bak
