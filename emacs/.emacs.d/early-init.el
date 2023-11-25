@@ -51,7 +51,7 @@
 (set-face-attribute 'default
                     nil
                     :font "FiraCode Nerd Font"
-                    :height 150)
+                    :height 180)
 (set-fontset-font t 'han (font-spec :family "LXGW Neo XiHei"))
 
 (advice-add #'x-apply-session-resources :override #'ignore)
