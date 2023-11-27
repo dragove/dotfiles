@@ -170,6 +170,27 @@
   (set-face-background 'mode-line-inactive "base")
   (doom-modeline-mode 1))
 
+(use-package tab-bar
+  :elpaca nil
+  :custom
+  (tab-bar-new-tab-to 'rightmost)
+  (tab-bar-show 1) ;; hide bar if <= 1 tabs open
+  (tab-bar-close-button-show nil) ;; hide tab close / X button
+  (tab-bar-tab-hints t) ;; show tab numbers
+  (tab-bar-separator "")
+  (tab-bar-new-tab-choice "*scratch*")
+  (tab-bar-tab-name-truncated-max 20)
+  (tab-bar-format '(tab-bar-format-menu-bar tab-bar-format-tabs tab-bar-separator))
+  (tab-bar-tab-name-format-function
+   (lambda (tab i)
+     (let ((face (funcall tab-bar-tab-face-function tab)))
+       (concat
+        (propertize " " 'face face)
+        (propertize (number-to-string i) 'face `(:inherit ,face :weight ultra-bold :underline t))
+        (propertize (concat " " (alist-get 'name tab) " ") 'face face)))))
+  ;; don't use :custom-face
+  :hook (window-setup . tab-bar-mode))
+
 (use-package ace-window
   :bind (("M-o" . ace-window)))
 
@@ -308,7 +329,7 @@
    '("h" . meow-left)
    '("H" . meow-left-expand)
    '("i" . meow-insert)
-   '("I" . (meow-open-above))
+   '("I" . meow-open-above)
    '("j" . meow-next)
    '("J" . meow-next-expand)
    '("k" . meow-prev)
