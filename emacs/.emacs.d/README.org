@@ -73,9 +73,8 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
 *** Font Config
 #+begin_src emacs-lisp
 ;; Set default font
-(set-face-attribute 'default
-                    nil
-                    :font "FiraCode Nerd Font"
+(set-face-attribute 'default nil
+                    :family "FiraCode Nerd Font"
                     :height 180)
 (set-fontset-font t 'han (font-spec :family "LXGW Neo XiHei"))
 #+end_src

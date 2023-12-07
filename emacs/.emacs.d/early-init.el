@@ -48,9 +48,8 @@
 (setq-default mode-line-format nil)
 
 ;; Set default font
-(set-face-attribute 'default
-                    nil
-                    :font "FiraCode Nerd Font"
+(set-face-attribute 'default nil
+                    :family "FiraCode Nerd Font"
                     :height 180)
 (set-fontset-font t 'han (font-spec :family "LXGW Neo XiHei"))
 
