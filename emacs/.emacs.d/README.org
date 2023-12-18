@@ -94,6 +94,10 @@ The following line turns on lexical binding for performance reasons.
 #+end_src
 
 * Emacs
+*** Debug
+This code block is a place holder for debugging emacs when needed
+#+begin_src emacs-lisp
+#+end_src
 *** Defaults
 #+begin_src emacs-lisp
 ;; Better defaults
@@ -195,6 +199,7 @@ https://github.com/progfolio/elpaca
 #+end_quote
 *** Installer
 #+begin_src emacs-lisp
+
 (defvar elpaca-installer-version 0.6)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
@@ -238,6 +243,13 @@ https://github.com/progfolio/elpaca
 (setq elpaca-queue-limit 16)
 (elpaca-wait)
 #+end_src
+#+begin_src emacs-lisp
+(use-package benchmark-init
+  :ensure t
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+#+end_src
 * Theme and UI stuff
 *** Ligature
 #+begin_src emacs-lisp
@@ -273,7 +285,7 @@ Catppuccin Theme
 (use-package catppuccin-theme
   :custom
   (catppuccin-flavor 'frappe)
-  :config
+  :init
   (load-theme 'catppuccin t))
 #+end_src
 *** Modeline
@@ -295,7 +307,7 @@ Catppuccin Theme
   :elpaca nil
   :custom
   (tab-bar-new-tab-to 'rightmost)
-  (tab-bar-show 1) ;; hide bar if <= 1 tabs open
+  (tab-bar-show 1)
   (tab-bar-close-button-show nil) ;; hide tab close / X button
   (tab-bar-tab-hints t) ;; show tab numbers
   (tab-bar-separator "")
@@ -308,9 +320,7 @@ Catppuccin Theme
        (concat
         (propertize " " 'face face)
         (propertize (number-to-string i) 'face `(:inherit ,face :weight ultra-bold :underline t))
-        (propertize (concat " " (alist-get 'name tab) " ") 'face face)))))
-  ;; don't use :custom-face
-  :hook (window-setup . tab-bar-mode))
+        (propertize (concat " " (alist-get 'name tab) " ") 'face face))))))
 #+end_src
 *** Ace Window
 #+begin_src emacs-lisp
@@ -901,14 +911,13 @@ Catppuccin Theme
 *** Yasnippet
 #+begin_src emacs-lisp
 (use-package yasnippet
-  :ensure t
-  :config
-  (yas-global-mode 1))
+  :diminish yas-minor-mode
+  :hook (after-init . yas-global-mode))
 
-(use-package yasnippet-snippets
-  :ensure t
-  :after yasnippet)
+(use-package yasnippet-snippets)
 
+(use-package yasnippet-capf
+  :init (add-to-list 'completion-at-point-functions #'yasnippet-capf))
 #+end_src
 
 *** Vundo
@@ -928,6 +937,7 @@ Catppuccin Theme
 #+begin_src emacs-lisp
 (use-package org
   :elpaca nil
+  :defer t
   :custom
   (org-adapt-indentation nil)
   (org-hide-leading-stars t)
@@ -953,13 +963,18 @@ Catppuccin Theme
      (latex . t)
      (js . t)
      (plantuml . t)))
-  (add-to-list 'org-src-lang-modes '("python" . python-ts))
-  )
+  (add-to-list 'org-src-lang-modes '("python" . python-ts)))
 #+end_src
 *** Org Modern
 #+begin_src emacs-lisp
 (use-package org-modern
-  :config (with-eval-after-load 'org (global-org-modern-mode)))
+  :hook ((org-mode . org-modern-mode)
+         (org-agenda-finalize . org-modern-agenda)
+         (org-modern-mode . (lambda ()
+                              "Adapt `org-modern-mode'."
+                              ;; Disable Prettify Symbols mode
+                              (setq prettify-symbols-alist nil)
+                              (prettify-symbols-mode -1)))))
 #+end_src
 *** Org Roam
 #+begin_src emacs-lisp
@@ -980,11 +995,11 @@ Catppuccin Theme
   :elpaca (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
   :after org-roam
   :hook (after-init . org-roam-ui-mode)
-  :config
-  (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow t
-        org-roam-ui-update-on-save t
-        org-roam-ui-open-on-start t))
+  :custom
+  ((org-roam-ui-sync-theme t)
+   (org-roam-ui-follow t)
+   (org-roam-ui-update-on-save t)
+   (org-roam-ui-open-on-start t)))
 #+end_src
 * Utilities
 *** Diff Highlight
@@ -1008,7 +1023,8 @@ Catppuccin Theme
                  "*.ti" ("terminfo/e" "terminfo/e/*")
                  ("terminfo/65" "terminfo/65/*")
                  ("integration" "integration/*")
-                 (:exclude ".dir-locals.el" "*-tests.el"))))
+                 (:exclude ".dir-locals.el" "*-tests.el")))
+  :defer t)
 #+end_src
 * Programming Languages
 *** Tree-Sitter
@@ -1047,32 +1063,6 @@ Catppuccin Theme
   ((web-mode-markup-indent-offset 2)
    (web-mode-code-indent-offset 2)
    (web-mode-css-indent-offset 2)))
-(use-package rainbow-mode
-  :config
-  (add-hook 'css-mode-hook 'rainbow-mode))
-#+end_src
-**** JavaScript
-#+begin_src emacs-lisp
-(use-package js2-mode
-  :mode "\\.js\\'"
-  :config
-  (add-hook 'js2-mode-hook 'electric-operator-mode)
-  (add-hook 'js2-mode-hook 'flycheck-mode))
-(use-package js2-refactor
-  :diminish js2-refactor-mode
-  :defer t
-  :config
-  (add-hook 'js2-mode-hook #'js2-refactor-mode)
-  (js2r-add-keybindings-with-prefix "C-c C-m"))
-(use-package jsdoc
-  :elpaca
-  (:host github :repo "isamert/jsdoc.el"))
-(use-package rjsx-mode)
-(use-package npm-mode
-  :defer t
-  :hook
-  (js2-mode-hook  . npm-mode)
-  (rjsx-mode-hook . npm-mode))
 #+end_src
 **** Typescript
 #+begin_src emacs-lisp
@@ -1083,4 +1073,5 @@ Catppuccin Theme
          (typescript-ts-mode . tide-hl-identifier-mode)
          (before-save . tide-format-before-save)))
 #+end_src
-
+dd
+ 

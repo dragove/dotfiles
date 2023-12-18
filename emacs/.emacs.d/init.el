@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
+
+
 ;; Better defaults
 (setq inhibit-splash-screen t)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
@@ -129,6 +131,12 @@
 (setq elpaca-queue-limit 16)
 (elpaca-wait)
 
+(use-package benchmark-init
+  :ensure t
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
 (use-package ligature
   :config
   ;; Enable the "www" ligature in every possible major mode
@@ -157,7 +165,7 @@
 (use-package catppuccin-theme
   :custom
   (catppuccin-flavor 'frappe)
-  :config
+  :init
   (load-theme 'catppuccin t))
 
 (use-package nerd-icons)
@@ -175,7 +183,7 @@
   :elpaca nil
   :custom
   (tab-bar-new-tab-to 'rightmost)
-  (tab-bar-show 1) ;; hide bar if <= 1 tabs open
+  (tab-bar-show 1)
   (tab-bar-close-button-show nil) ;; hide tab close / X button
   (tab-bar-tab-hints t) ;; show tab numbers
   (tab-bar-separator "")
@@ -188,9 +196,7 @@
        (concat
         (propertize " " 'face face)
         (propertize (number-to-string i) 'face `(:inherit ,face :weight ultra-bold :underline t))
-        (propertize (concat " " (alist-get 'name tab) " ") 'face face)))))
-  ;; don't use :custom-face
-  :hook (window-setup . tab-bar-mode))
+        (propertize (concat " " (alist-get 'name tab) " ") 'face face))))))
 
 (use-package ace-window
   :bind (("M-o" . ace-window)))
@@ -738,13 +744,13 @@
   )
 
 (use-package yasnippet
-  :ensure t
-  :config
-  (yas-global-mode 1))
+  :diminish yas-minor-mode
+  :hook (after-init . yas-global-mode))
 
-(use-package yasnippet-snippets
-  :ensure t
-  :after yasnippet)
+(use-package yasnippet-snippets)
+
+(use-package yasnippet-capf
+  :init (add-to-list 'completion-at-point-functions #'yasnippet-capf))
 
 (use-package vundo
   :bind ("C-x u" . vundo)
@@ -755,6 +761,7 @@
 
 (use-package org
   :elpaca nil
+  :defer t
   :custom
   (org-adapt-indentation nil)
   (org-hide-leading-stars t)
@@ -780,11 +787,16 @@
      (latex . t)
      (js . t)
      (plantuml . t)))
-  (add-to-list 'org-src-lang-modes '("python" . python-ts))
-  )
+  (add-to-list 'org-src-lang-modes '("python" . python-ts)))
 
 (use-package org-modern
-  :config (with-eval-after-load 'org (global-org-modern-mode)))
+  :hook ((org-mode . org-modern-mode)
+         (org-agenda-finalize . org-modern-agenda)
+         (org-modern-mode . (lambda ()
+                              "Adapt `org-modern-mode'."
+                              ;; Disable Prettify Symbols mode
+                              (setq prettify-symbols-alist nil)
+                              (prettify-symbols-mode -1)))))
 
 (use-package org-roam
   :custom
@@ -803,11 +815,11 @@
   :elpaca (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
   :after org-roam
   :hook (after-init . org-roam-ui-mode)
-  :config
-  (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow t
-        org-roam-ui-update-on-save t
-        org-roam-ui-open-on-start t))
+  :custom
+  ((org-roam-ui-sync-theme t)
+   (org-roam-ui-follow t)
+   (org-roam-ui-update-on-save t)
+   (org-roam-ui-open-on-start t)))
 
 (use-package diff-hl
   :config
@@ -824,7 +836,8 @@
                  "*.ti" ("terminfo/e" "terminfo/e/*")
                  ("terminfo/65" "terminfo/65/*")
                  ("integration" "integration/*")
-                 (:exclude ".dir-locals.el" "*-tests.el"))))
+                 (:exclude ".dir-locals.el" "*-tests.el")))
+  :defer t)
 
 (use-package treesit
   :elpaca nil
@@ -853,30 +866,6 @@
   ((web-mode-markup-indent-offset 2)
    (web-mode-code-indent-offset 2)
    (web-mode-css-indent-offset 2)))
-(use-package rainbow-mode
-  :config
-  (add-hook 'css-mode-hook 'rainbow-mode))
-
-(use-package js2-mode
-  :mode "\\.js\\'"
-  :config
-  (add-hook 'js2-mode-hook 'electric-operator-mode)
-  (add-hook 'js2-mode-hook 'flycheck-mode))
-(use-package js2-refactor
-  :diminish js2-refactor-mode
-  :defer t
-  :config
-  (add-hook 'js2-mode-hook #'js2-refactor-mode)
-  (js2r-add-keybindings-with-prefix "C-c C-m"))
-(use-package jsdoc
-  :elpaca
-  (:host github :repo "isamert/jsdoc.el"))
-(use-package rjsx-mode)
-(use-package npm-mode
-  :defer t
-  :hook
-  (js2-mode-hook  . npm-mode)
-  (rjsx-mode-hook . npm-mode))
 
 (use-package tide
   :ensure t
