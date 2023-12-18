@@ -838,8 +838,7 @@
 (use-package geiser-chez
   :after (geiser)
   :config
-  (setq geiser-chez-binary "chez"
-        geiser-default-implementation '(chez))
+  (setq geiser-chez-binary "chez")
   (add-hook 'scheme-mode-hook 'geiser-mode))
 
 (use-package plantuml-mode
