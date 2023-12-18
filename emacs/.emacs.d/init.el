@@ -155,9 +155,10 @@
   (global-ligature-mode t))
 
 (use-package catppuccin-theme
+  :custom
+  (catppuccin-flavor 'frappe)
   :config
-  (setq catppuccin-flavor 'frappe)
-  (load-theme 'catppuccin :no-confirm))
+  (load-theme 'catppuccin t))
 
 (use-package nerd-icons)
 (use-package doom-modeline
@@ -166,9 +167,9 @@
   :custom
   (nerd-icons-color-icons nil)
   :init
-  (set-face-background 'mode-line "base")
-  (set-face-background 'mode-line-inactive "base")
-  (doom-modeline-mode 1))
+  (doom-modeline-mode 1)
+  (set-face-background 'mode-line nil)
+  (set-face-background 'mode-line-inactive nil))
 
 (use-package tab-bar
   :elpaca nil
