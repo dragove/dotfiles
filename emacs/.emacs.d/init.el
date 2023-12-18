@@ -244,8 +244,6 @@
   :config
   (pulsar-global-mode))
 
-(use-package command-log-mode)
-
 (use-package super-save
   :ensure t
   :config
@@ -846,11 +844,6 @@
   :custom
   (plantuml-jar-path (expand-file-name "~/.local/share/emacs/plantuml.jar")))
 
-(use-package emmet-mode
-  :config
-  (add-hook 'sgml-mode-hook 'emmet-mode)  ;; Auto-start on any markup modes
-  (add-hook 'css-mode-hook  'emmet-mode)) ;; enable Emmet's css abbreviation.
-
 (use-package web-mode
   :mode "\\.phtml\\'"
   :mode "\\.volt\\'"
@@ -875,7 +868,9 @@
   :config
   (add-hook 'js2-mode-hook #'js2-refactor-mode)
   (js2r-add-keybindings-with-prefix "C-c C-m"))
-(use-package js-doc)
+(use-package jsdoc
+  :elpaca
+  (:host github :repo "isamert/jsdoc.el"))
 (use-package rjsx-mode)
 (use-package npm-mode
   :defer t

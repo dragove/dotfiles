@@ -1,6 +1,8 @@
 ;;; early-init.el --- Early initialization. -*- lexical-binding: t -*-
 (setq package-enable-at-startup nil)
 (setq inhibit-default-init nil)
+;; Disable startup message
+(fset 'display-startup-echo-area-message 'ignore)
 
 ;; disable native comp warnings
 (setq native-comp-async-report-warnings-errors nil)
