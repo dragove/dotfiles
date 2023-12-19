@@ -171,13 +171,12 @@
 (use-package nerd-icons)
 (use-package doom-modeline
   :ensure t
-  :after catppuccin-theme
   :custom
   (nerd-icons-color-icons nil)
   :init
-  (doom-modeline-mode 1)
   (set-face-background 'mode-line nil)
-  (set-face-background 'mode-line-inactive nil))
+  (set-face-background 'mode-line-inactive nil)
+  (doom-modeline-mode 1))
 
 (use-package tab-bar
   :elpaca nil
@@ -264,7 +263,6 @@
   (editorconfig-mode 1))
 
 (use-package org-auto-tangle
-  :defer t
   :hook (org-mode . org-auto-tangle-mode))
 
 (use-package apheleia
@@ -660,52 +658,10 @@
   ;; Enable indentation+completion using the TAB key.
   ;; `completion-at-point' is often bound to M-TAB.
   (setq tab-always-indent 'complete))
-(use-package kind-icon
-  :ensure t
+
+(use-package nerd-icons-corfu
   :after corfu
-  :custom
-  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-  (kind-icon-use-icons nil)
-  (kind-icon-mapping
-   `(
-     (array ,(nerd-icons-codicon "nf-cod-symbol_array") :face font-lock-type-face)
-     (boolean ,(nerd-icons-codicon "nf-cod-symbol_boolean") :face font-lock-builtin-face)
-     (class ,(nerd-icons-codicon "nf-cod-symbol_class") :face font-lock-type-face)
-     (color ,(nerd-icons-codicon "nf-cod-symbol_color") :face success)
-     (command ,(nerd-icons-codicon "nf-cod-terminal") :face default)
-     (constant ,(nerd-icons-codicon "nf-cod-symbol_constant") :face font-lock-constant-face)
-     (constructor ,(nerd-icons-codicon "nf-cod-triangle_right") :face font-lock-function-name-face)
-     (enummember ,(nerd-icons-codicon "nf-cod-symbol_enum_member") :face font-lock-builtin-face)
-     (enum-member ,(nerd-icons-codicon "nf-cod-symbol_enum_member") :face font-lock-builtin-face)
-     (enum ,(nerd-icons-codicon "nf-cod-symbol_enum") :face font-lock-builtin-face)
-     (event ,(nerd-icons-codicon "nf-cod-symbol_event") :face font-lock-warning-face)
-     (field ,(nerd-icons-codicon "nf-cod-symbol_field") :face font-lock-variable-name-face)
-     (file ,(nerd-icons-codicon "nf-cod-symbol_file") :face font-lock-string-face)
-     (folder ,(nerd-icons-codicon "nf-cod-folder") :face font-lock-doc-face)
-     (interface ,(nerd-icons-codicon "nf-cod-symbol_interface") :face font-lock-type-face)
-     (keyword ,(nerd-icons-codicon "nf-cod-symbol_keyword") :face font-lock-keyword-face)
-     (macro ,(nerd-icons-codicon "nf-cod-symbol_misc") :face font-lock-keyword-face)
-     (magic ,(nerd-icons-codicon "nf-cod-wand") :face font-lock-builtin-face)
-     (method ,(nerd-icons-codicon "nf-cod-symbol_method") :face font-lock-function-name-face)
-     (function ,(nerd-icons-codicon "nf-cod-symbol_method") :face font-lock-function-name-face)
-     (module ,(nerd-icons-codicon "nf-cod-file_submodule") :face font-lock-preprocessor-face)
-     (numeric ,(nerd-icons-codicon "nf-cod-symbol_numeric") :face font-lock-builtin-face)
-     (operator ,(nerd-icons-codicon "nf-cod-symbol_operator") :face font-lock-comment-delimiter-face)
-     (param ,(nerd-icons-codicon "nf-cod-symbol_parameter") :face default)
-     (property ,(nerd-icons-codicon "nf-cod-symbol_property") :face font-lock-variable-name-face)
-     (reference ,(nerd-icons-codicon "nf-cod-references") :face font-lock-variable-name-face)
-     (snippet ,(nerd-icons-codicon "nf-cod-symbol_snippet") :face font-lock-string-face)
-     (string ,(nerd-icons-codicon "nf-cod-symbol_string") :face font-lock-string-face)
-     (struct ,(nerd-icons-codicon "nf-cod-symbol_structure") :face font-lock-variable-name-face)
-     (text ,(nerd-icons-codicon "nf-cod-text_size") :face font-lock-doc-face)
-     (typeparameter ,(nerd-icons-codicon "nf-cod-list_unordered") :face font-lock-type-face)
-     (type-parameter ,(nerd-icons-codicon "nf-cod-list_unordered") :face font-lock-type-face)
-     (unit ,(nerd-icons-codicon "nf-cod-symbol_ruler") :face font-lock-constant-face)
-     (value ,(nerd-icons-codicon "nf-cod-symbol_field") :face font-lock-builtin-face)
-     (variable ,(nerd-icons-codicon "nf-cod-symbol_variable") :face font-lock-variable-name-face)
-     (t ,(nerd-icons-codicon "nf-cod-code") :face font-lock-warning-face)))
-  :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+  :init (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 ;; Add extensions
 (use-package cape
@@ -744,12 +700,13 @@
   )
 
 (use-package yasnippet
-  :diminish yas-minor-mode
-  :hook (after-init . yas-global-mode))
+  :hook (prog-mode . yas-minor-mode))
 
-(use-package yasnippet-snippets)
+(use-package yasnippet-snippets
+  :after (yasnippet))
 
 (use-package yasnippet-capf
+  :after (cape yasnippet)
   :init (add-to-list 'completion-at-point-functions #'yasnippet-capf))
 
 (use-package vundo
@@ -761,7 +718,6 @@
 
 (use-package org
   :elpaca nil
-  :defer t
   :custom
   (org-adapt-indentation nil)
   (org-hide-leading-stars t)
@@ -822,8 +778,44 @@
    (org-roam-ui-open-on-start t)))
 
 (use-package diff-hl
+  :custom (diff-hl-draw-borders nil)
+  :custom-face
+  (diff-hl-change ((t (:inherit custom-changed :foreground unspecified :background unspecified))))
+  (diff-hl-insert ((t (:inherit diff-added :background unspecified))))
+  (diff-hl-delete ((t (:inherit diff-removed :background unspecified))))
+  :bind (:map diff-hl-command-map
+         ("SPC" . diff-hl-mark-hunk))
+  :hook ((after-init . global-diff-hl-mode)
+         (after-init . global-diff-hl-show-hunk-mouse-mode)
+         (dired-mode . diff-hl-dired-mode))
   :config
-  (global-diff-hl-mode))
+  ;; Highlight on-the-fly
+  (diff-hl-flydiff-mode 1)
+
+  ;; Set fringe style
+  (setq-default fringes-outside-margins t)
+
+  (with-no-warnings
+    (defun my-diff-hl-fringe-bmp-function (_type _pos)
+      "Fringe bitmap function for use as `diff-hl-fringe-bmp-function'."
+      (define-fringe-bitmap 'my-diff-hl-bmp
+        (vector (if sys/linuxp #b11111100 #b11100000))
+        1 8
+        '(center t)))
+    (setq diff-hl-fringe-bmp-function #'my-diff-hl-fringe-bmp-function)
+
+    (unless (display-graphic-p)
+      ;; Fall back to the display margin since the fringe is unavailable in tty
+      (diff-hl-margin-mode 1)
+      ;; Avoid restoring `diff-hl-margin-mode'
+      (with-eval-after-load 'desktop
+        (add-to-list 'desktop-minor-mode-table
+                     '(diff-hl-margin-mode nil))))
+
+    ;; Integration with magit
+    (with-eval-after-load 'magit
+      (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
+      (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))))
 
 (use-package magit
   :bind (("C-M-g" . magit-status-here)))
@@ -837,7 +829,7 @@
                  ("terminfo/65" "terminfo/65/*")
                  ("integration" "integration/*")
                  (:exclude ".dir-locals.el" "*-tests.el")))
-  :defer t)
+  :commands (eat))
 
 (use-package treesit
   :elpaca nil
