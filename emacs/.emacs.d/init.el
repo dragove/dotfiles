@@ -60,6 +60,13 @@
 (defalias 'scroll-up-command '+pixel-scroll-interpolate-down)
 (defalias 'scroll-down-command '+pixel-scroll-interpolate-up)
 
+;; Set default font
+(set-face-attribute 'default nil
+                    :family "FiraCode Nerd Font"
+                    :height 180)
+
+(set-fontset-font t 'han (font-spec :family "LXGW WenKai"))
+
 ;; Delete the current file
 
 (defun delete-this-file ()

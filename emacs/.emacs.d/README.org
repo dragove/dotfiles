@@ -34,7 +34,6 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
 ;; Skipping a bunch of regular expression searching in the =file-name-handler-alist= should improve start time.
 (defvar default-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
-
 #+end_src
 
 *** Garbage Collection
@@ -71,15 +70,6 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
 
 ;; Prevent flashing of unstyled modeline at startup
 (setq-default mode-line-format nil)
-#+end_src
-
-*** Font Config
-#+begin_src emacs-lisp
-;; Set default font
-(set-face-attribute 'default nil
-                    :family "FiraCode Nerd Font"
-                    :height 180)
-(set-fontset-font t 'han (font-spec :family "LXGW WenKai"))
 #+end_src
 
 *** Ignore X Resources
@@ -157,6 +147,16 @@ This code block is a place holder for debugging emacs when needed
 
 (defalias 'scroll-up-command '+pixel-scroll-interpolate-down)
 (defalias 'scroll-down-command '+pixel-scroll-interpolate-up)
+#+end_src
+
+*** Font Config
+#+begin_src emacs-lisp
+;; Set default font
+(set-face-attribute 'default nil
+                    :family "FiraCode Nerd Font"
+                    :height 180)
+
+(set-fontset-font t 'han (font-spec :family "LXGW WenKai"))
 #+end_src
 
 *** Useful Functions
