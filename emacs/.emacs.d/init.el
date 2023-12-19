@@ -65,7 +65,7 @@
                     :family "FiraCode Nerd Font"
                     :height 180)
 
-(set-fontset-font t 'han (font-spec :family "LXGW WenKai"))
+(set-fontset-font t 'han (font-spec :family "LXGW WenKai" :size 21))
 
 ;; Delete the current file
 
