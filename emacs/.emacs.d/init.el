@@ -761,29 +761,6 @@
                               (setq prettify-symbols-alist nil)
                               (prettify-symbols-mode -1)))))
 
-(use-package org-roam
-  :custom
-  (org-roam-directory "~/Documents/roam")
-  (org-roam-dailies-directory "daily/")
-  :bind
-  (("C-c n l" . org-roam-buffer-toggle)
-   ("C-c n f" . org-roam-node-find)
-   ("C-c n g" . org-roam-graph)
-   ("C-c n i" . org-roam-node-insert)
-   ("C-c n c" . org-roam-capture)
-   ("C-c n j" . org-roam-dailies-capture-today))
-  :config
-  (org-roam-db-autosync-mode))
-(use-package org-roam-ui
-  :elpaca (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
-  :after org-roam
-  :hook (after-init . org-roam-ui-mode)
-  :custom
-  ((org-roam-ui-sync-theme t)
-   (org-roam-ui-follow t)
-   (org-roam-ui-update-on-save t)
-   (org-roam-ui-open-on-start t)))
-
 (use-package diff-hl
   :custom (diff-hl-draw-borders nil)
   :custom-face
