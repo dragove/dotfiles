@@ -69,7 +69,7 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Prevent flashing of unstyled modeline at startup
-(setq-default mode-line-format nil)
+;; (setq-default mode-line-format nil)
 #+end_src
 
 *** Ignore X Resources
@@ -280,13 +280,13 @@ https://github.com/progfolio/elpaca
 #+end_src
 
 *** Theme
-Catppuccin Theme
+Modus Theme
 #+begin_src emacs-lisp
 (use-package catppuccin-theme
   :custom
   (catppuccin-flavor 'frappe)
   :init
-  (load-theme 'catppuccin t))
+  (load-theme 'catppuccin :no-confirm))
 #+end_src
 *** Modeline
 #+begin_src emacs-lisp

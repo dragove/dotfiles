@@ -47,6 +47,6 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Prevent flashing of unstyled modeline at startup
-(setq-default mode-line-format nil)
+;; (setq-default mode-line-format nil)
 
 (advice-add #'x-apply-session-resources :override #'ignore)

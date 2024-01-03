@@ -173,7 +173,7 @@
   :custom
   (catppuccin-flavor 'frappe)
   :init
-  (load-theme 'catppuccin t))
+  (load-theme 'catppuccin :no-confirm))
 
 (use-package nerd-icons)
 (use-package doom-modeline
