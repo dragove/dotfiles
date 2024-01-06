@@ -280,7 +280,7 @@ https://github.com/progfolio/elpaca
 #+end_src
 
 *** Theme
-Modus Theme
+Catppuccin Theme
 #+begin_src emacs-lisp
 (use-package catppuccin-theme
   :custom
