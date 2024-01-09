@@ -801,6 +801,14 @@
       (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
       (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))))
 
+(defun +elpaca-unload-seq (e) "Unload seq before continuing the elpaca build, then continue to build the recipe E."
+       (and (featurep 'seq) (unload-feature 'seq t))
+       (elpaca--continue-build e))
+(defun +elpaca-seq-build-steps ()
+  (append (butlast (if (file-exists-p (expand-file-name "seq" elpaca-builds-directory))
+                       elpaca--pre-built-steps elpaca-build-steps))
+          (list '+elpaca-unload-seq 'elpaca--activate-package)))
+(use-package seq :elpaca `(seq :build ,(+elpaca-seq-build-steps)))
 (use-package magit
   :bind (("C-M-g" . magit-status-here)))
 
