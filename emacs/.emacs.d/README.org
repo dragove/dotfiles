@@ -428,6 +428,10 @@ Catppuccin Theme
    '("j" . meow-next)
    '("k" . meow-prev)
    '("<escape>" . ignore))
+  (meow-thing-register 'tags
+    '(regexp "<.+>" "</.+>")
+    '(regexp "<.+>" "</.+>"))
+  (add-to-list 'meow-char-thing-table '(?t . tags))
   (meow-leader-define-key
    ;; SPC j/k will run the original command in MOTION state.
    '("j" . "H-j")
@@ -1019,6 +1023,21 @@ Catppuccin Theme
   (markdown-enable-hilighting-syntax t))
 #+end_src
 * Programming Languages
+*** Eglot LSP
+#+begin_src emacs-lisp
+(use-package eglot
+  :elpaca nil
+  :commands eglot eglot-ensure
+  :hook ((web-mode . eglot-ensure))
+  :config (add-to-list 'eglot-server-programs
+                       '(astro-mode . ("astro-ls" "--stdio"
+                                       :initializationOptions
+                                       (:typescript (:tsdk "./node_modules/typescript/lib"))))))
+(use-package eglot-booster
+  :elpaca (:host github :repo "jdtsmith/eglot-booster")
+  :after eglot
+  :config (eglot-booster-mode))
+#+end_src
 *** Tree-Sitter
 #+begin_src emacs-lisp
 (use-package treesit
@@ -1047,14 +1066,18 @@ Catppuccin Theme
 **** Web Mode
 #+begin_src emacs-lisp
 (use-package web-mode
-  :mode "\\.phtml\\'"
-  :mode "\\.volt\\'"
   :mode "\\.html\\'"
-  :mode "\\.svelte\\'"
   :custom
   ((web-mode-markup-indent-offset 2)
    (web-mode-code-indent-offset 2)
    (web-mode-css-indent-offset 2)))
+#+end_src
+**** Astro
+#+begin_src emacs-lisp
+(define-derived-mode astro-mode web-mode "astro")
+(setq auto-mode-alist
+      (append '((".*\\.astro\\'" . astro-mode))
+              auto-mode-alist))
 #+end_src
 **** Typescript
 #+begin_src emacs-lisp
@@ -1065,5 +1088,4 @@ Catppuccin Theme
          (typescript-ts-mode . tide-hl-identifier-mode)
          (before-save . tide-format-before-save)))
 #+end_src
-dd
- 
+

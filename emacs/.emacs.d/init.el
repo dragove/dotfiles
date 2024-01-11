@@ -290,6 +290,10 @@
    '("j" . meow-next)
    '("k" . meow-prev)
    '("<escape>" . ignore))
+  (meow-thing-register 'tags
+    '(regexp "<.+>" "</.+>")
+    '(regexp "<.+>" "</.+>"))
+  (add-to-list 'meow-char-thing-table '(?t . tags))
   (meow-leader-define-key
    ;; SPC j/k will run the original command in MOTION state.
    '("j" . "H-j")
@@ -838,6 +842,19 @@
   (markdown-fontify-code-blocks-natively t)
   (markdown-enable-hilighting-syntax t))
 
+(use-package eglot
+  :elpaca nil
+  :commands eglot eglot-ensure
+  :hook ((web-mode . eglot-ensure))
+  :config (add-to-list 'eglot-server-programs
+                       '(astro-mode . ("astro-ls" "--stdio"
+                                       :initializationOptions
+                                       (:typescript (:tsdk "./node_modules/typescript/lib"))))))
+(use-package eglot-booster
+  :elpaca (:host github :repo "jdtsmith/eglot-booster")
+  :after eglot
+  :config (eglot-booster-mode))
+
 (use-package treesit
   :elpaca nil
   :custom
@@ -857,14 +874,16 @@
   (plantuml-jar-path (expand-file-name "~/.local/share/emacs/plantuml.jar")))
 
 (use-package web-mode
-  :mode "\\.phtml\\'"
-  :mode "\\.volt\\'"
   :mode "\\.html\\'"
-  :mode "\\.svelte\\'"
   :custom
   ((web-mode-markup-indent-offset 2)
    (web-mode-code-indent-offset 2)
    (web-mode-css-indent-offset 2)))
+
+(define-derived-mode astro-mode web-mode "astro")
+(setq auto-mode-alist
+      (append '((".*\\.astro\\'" . astro-mode))
+              auto-mode-alist))
 
 (use-package tide
   :ensure t
