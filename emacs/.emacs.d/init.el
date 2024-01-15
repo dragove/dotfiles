@@ -13,6 +13,7 @@
 (setq set-mark-command-repeat-pop t)       ; Repeating C-SPC after popping mark pops it again
 
 (setq-default major-mode 'text-mode)
+(set-default 'truncate-lines t)
 
 (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 (setq sentence-end-double-space nil)
