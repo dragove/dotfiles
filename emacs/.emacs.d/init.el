@@ -61,6 +61,12 @@
 (defalias 'scroll-up-command '+pixel-scroll-interpolate-down)
 (defalias 'scroll-down-command '+pixel-scroll-interpolate-up)
 
+;; make ansi-color on compilation
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (ansi-color-apply-on-region compilation-filter-start (point)))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
 ;; Set default font
 (set-face-attribute 'default nil
                     :family "FiraCode Nerd Font"
@@ -888,6 +894,9 @@
       (append '((".*\\.astro\\'" . astro-mode))
               auto-mode-alist))
 
+(setq auto-mode-alist
+      (append '((".*\\.ts\\'" . typescript-ts-mode))
+              auto-mode-alist))
 (use-package tide
   :ensure t
   :hook ((typescript-ts-mode . tide-setup)
