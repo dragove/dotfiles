@@ -852,7 +852,8 @@
 (use-package eglot
   :elpaca nil
   :commands eglot eglot-ensure
-  :hook ((web-mode . eglot-ensure))
+  :hook ((web-mode . eglot-ensure)
+         (typescript-ts-mode . eglot-ensure))
   :custom ((eglot-events-buffer-size 0))
   :config (add-to-list 'eglot-server-programs
                        '(astro-mode . ("astro-ls" "--stdio"
@@ -897,9 +898,3 @@
 (setq auto-mode-alist
       (append '((".*\\.ts\\'" . typescript-ts-mode))
               auto-mode-alist))
-(use-package tide
-  :ensure t
-  :hook ((typescript-ts-mode . tide-setup)
-         (tsx-ts-mode . tide-setup)
-         (typescript-ts-mode . tide-hl-identifier-mode)
-         (before-save . tide-format-before-save)))
