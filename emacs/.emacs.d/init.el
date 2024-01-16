@@ -847,10 +847,12 @@
   :elpaca nil
   :commands eglot eglot-ensure
   :hook ((web-mode . eglot-ensure))
+  :custom ((eglot-events-buffer-size 0))
   :config (add-to-list 'eglot-server-programs
                        '(astro-mode . ("astro-ls" "--stdio"
                                        :initializationOptions
                                        (:typescript (:tsdk "./node_modules/typescript/lib"))))))
+
 (use-package eglot-booster
   :elpaca (:host github :repo "jdtsmith/eglot-booster")
   :after eglot
