@@ -849,8 +849,10 @@
   (markdown-fontify-code-blocks-natively t)
   (markdown-enable-hilighting-syntax t))
 
+(use-package flymake
+  :custom
+  (flymake-show-diagnostics-at-end-of-line 'short))
 (use-package eglot
-  :elpaca nil
   :commands eglot eglot-ensure
   :hook ((web-mode . eglot-ensure)
          (typescript-ts-mode . eglot-ensure))

@@ -1032,6 +1032,10 @@ Catppuccin Theme
 * Programming Languages
 *** Eglot
 #+begin_src emacs-lisp
+(use-package flymake
+  :elpaca nil
+  :custom
+  (flymake-show-diagnostics-at-end-of-line 'short))
 (use-package eglot
   :elpaca nil
   :commands eglot eglot-ensure
