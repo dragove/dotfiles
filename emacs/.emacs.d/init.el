@@ -141,7 +141,7 @@
 
 (elpaca elpaca-use-package
   (elpaca-use-package-mode)
-  (setq elpaca-use-package-by-default t))
+  (setq use-package-always-ensure t))
 (setq elpaca-queue-limit 16)
 (elpaca-wait)
 
@@ -193,7 +193,7 @@
   (doom-modeline-mode 1))
 
 (use-package tab-bar
-  :elpaca nil
+  :ensure nil
   :custom
   (tab-bar-new-tab-to 'rightmost)
   (tab-bar-show 1)
@@ -284,7 +284,7 @@
   (apheleia-global-mode +1))
 
 (use-package elec-pair
-  :elpaca nil
+  :ensure nil
   :ensure nil
   :hook (after-init . electric-pair-mode)
   :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
@@ -431,13 +431,13 @@
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :elpaca nil
+  :ensure nil
   :init
   (savehist-mode))
 
 ;; A few more useful configurations...
 (use-package emacs
-  :elpaca nil
+  :ensure nil
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
@@ -663,7 +663,7 @@
 
 ;; A few more useful configurations...
 (use-package emacs
-  :elpaca nil
+  :ensure nil
   :init
   ;; TAB cycle if there are only few candidates
   (setq completion-cycle-threshold 3)
@@ -735,7 +735,7 @@
   :bind (("C-:" . avy-goto-char)))
 
 (use-package org
-  :elpaca nil
+  :ensure nil
   :custom
   (org-adapt-indentation nil)
   (org-hide-leading-stars t)
@@ -819,12 +819,12 @@
   (append (butlast (if (file-exists-p (expand-file-name "seq" elpaca-builds-directory))
                        elpaca--pre-built-steps elpaca-build-steps))
           (list '+elpaca-unload-seq 'elpaca--activate-package)))
-(use-package seq :elpaca `(seq :build ,(+elpaca-seq-build-steps)))
+(use-package seq :ensure `(seq :build ,(+elpaca-seq-build-steps)))
 (use-package magit
   :bind (("C-M-g" . magit-status-here)))
 
 (use-package eat
-  :elpaca
+  :ensure
   (:host "codeberg.org"
          :repo "akib/emacs-eat"
          :files ("*.el" ("term" "term/*.el") "*.texi"
@@ -850,9 +850,11 @@
   (markdown-enable-hilighting-syntax t))
 
 (use-package flymake
+  :ensure nil
   :custom
   (flymake-show-diagnostics-at-end-of-line 'short))
 (use-package eglot
+  :ensure nil
   :commands eglot eglot-ensure
   :hook ((web-mode . eglot-ensure)
          (typescript-ts-mode . eglot-ensure))
@@ -863,12 +865,12 @@
                                        (:typescript (:tsdk "./node_modules/typescript/lib"))))))
 
 (use-package eglot-booster
-  :elpaca (:host github :repo "jdtsmith/eglot-booster")
+  :ensure (:host github :repo "jdtsmith/eglot-booster")
   :after eglot
   :config (eglot-booster-mode))
 
 (use-package treesit
-  :elpaca nil
+  :ensure nil
   :custom
   (treesit-font-lock-level 4))
 (use-package treesit-auto

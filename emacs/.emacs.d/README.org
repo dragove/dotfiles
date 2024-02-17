@@ -246,7 +246,7 @@ https://github.com/progfolio/elpaca
 
 (elpaca elpaca-use-package
   (elpaca-use-package-mode)
-  (setq elpaca-use-package-by-default t))
+  (setq use-package-always-ensure t))
 (setq elpaca-queue-limit 16)
 (elpaca-wait)
 #+end_src
@@ -310,7 +310,7 @@ Catppuccin Theme
 *** Tab Bar
 #+begin_src emacs-lisp
 (use-package tab-bar
-  :elpaca nil
+  :ensure nil
   :custom
   (tab-bar-new-tab-to 'rightmost)
   (tab-bar-show 1)
@@ -420,7 +420,7 @@ Catppuccin Theme
 *** Auto Pair
 #+begin_src emacs-lisp
 (use-package elec-pair
-  :elpaca nil
+  :ensure nil
   :ensure nil
   :hook (after-init . electric-pair-mode)
   :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
@@ -571,13 +571,13 @@ Catppuccin Theme
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :elpaca nil
+  :ensure nil
   :init
   (savehist-mode))
 
 ;; A few more useful configurations...
 (use-package emacs
-  :elpaca nil
+  :ensure nil
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
@@ -818,7 +818,7 @@ Catppuccin Theme
 
 ;; A few more useful configurations...
 (use-package emacs
-  :elpaca nil
+  :ensure nil
   :init
   ;; TAB cycle if there are only few candidates
   (setq completion-cycle-threshold 3)
@@ -904,7 +904,7 @@ Catppuccin Theme
 *** Defaults
 #+begin_src emacs-lisp
 (use-package org
-  :elpaca nil
+  :ensure nil
   :custom
   (org-adapt-indentation nil)
   (org-hide-leading-stars t)
@@ -995,14 +995,14 @@ Catppuccin Theme
   (append (butlast (if (file-exists-p (expand-file-name "seq" elpaca-builds-directory))
                        elpaca--pre-built-steps elpaca-build-steps))
           (list '+elpaca-unload-seq 'elpaca--activate-package)))
-(use-package seq :elpaca `(seq :build ,(+elpaca-seq-build-steps)))
+(use-package seq :ensure `(seq :build ,(+elpaca-seq-build-steps)))
 (use-package magit
   :bind (("C-M-g" . magit-status-here)))
 #+end_src
 *** Eat
 #+begin_src emacs-lisp
 (use-package eat
-  :elpaca
+  :ensure
   (:host "codeberg.org"
          :repo "akib/emacs-eat"
          :files ("*.el" ("term" "term/*.el") "*.texi"
@@ -1033,11 +1033,11 @@ Catppuccin Theme
 *** Eglot
 #+begin_src emacs-lisp
 (use-package flymake
-  :elpaca nil
+  :ensure nil
   :custom
   (flymake-show-diagnostics-at-end-of-line 'short))
 (use-package eglot
-  :elpaca nil
+  :ensure nil
   :commands eglot eglot-ensure
   :hook ((web-mode . eglot-ensure)
          (typescript-ts-mode . eglot-ensure))
@@ -1048,14 +1048,14 @@ Catppuccin Theme
                                        (:typescript (:tsdk "./node_modules/typescript/lib"))))))
 
 (use-package eglot-booster
-  :elpaca (:host github :repo "jdtsmith/eglot-booster")
+  :ensure (:host github :repo "jdtsmith/eglot-booster")
   :after eglot
   :config (eglot-booster-mode))
 #+end_src
 *** Tree-Sitter
 #+begin_src emacs-lisp
 (use-package treesit
-  :elpaca nil
+  :ensure nil
   :custom
   (treesit-font-lock-level 4))
 (use-package treesit-auto
