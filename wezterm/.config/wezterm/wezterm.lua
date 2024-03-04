@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 return {
+    front_end = "WebGpu",
     -- color_scheme = "OneHalfDark",
     font = wezterm.font("FiraCode Nerd Font"),
     font_size = 20,
