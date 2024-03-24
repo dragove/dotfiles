@@ -3,6 +3,7 @@
 -- Leader key =================================================================
 vim.g.mapleader    = " "
 vim.g.autoformat   = false
+vim.g.lazyvim_python_lsp = "basedpyright"
 local opt = vim.opt
 
 -- General ====================================================================
