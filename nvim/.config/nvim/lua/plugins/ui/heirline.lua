@@ -163,7 +163,7 @@ return {
 		}
 
 		local Ruler = {
-			provider = "%7(%l/%3L%):%2c %P",
+			provider = "%7(%l/%L%):%2c %P",
 		}
 
 		local Git = {
