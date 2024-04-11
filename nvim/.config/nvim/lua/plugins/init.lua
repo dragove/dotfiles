@@ -6,6 +6,7 @@ return {
 	{ import = "lazyvim.plugins.extras.lang.clangd" },
 	{ import = "lazyvim.plugins.extras.lang.cmake" },
 	{ import = "lazyvim.plugins.extras.lang.java" },
+	{ import = "lazyvim.plugins.extras.lang.scala" },
 	{ import = "plugins.disabled" },
 	{ import = "plugins.ui" },
 	{ import = "plugins.code" },
