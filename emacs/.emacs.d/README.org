@@ -1091,4 +1091,7 @@ Catppuccin Theme
       (append '((".*\\.ts\\'" . typescript-ts-mode))
               auto-mode-alist))
 #+end_src
-
+*** Scala
+#+begin_src emacs-lisp
+(use-package scala-ts-mode)
+#+end_src

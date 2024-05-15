@@ -894,3 +894,5 @@
 (setq auto-mode-alist
       (append '((".*\\.ts\\'" . typescript-ts-mode))
               auto-mode-alist))
+
+(use-package scala-ts-mode)
