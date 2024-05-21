@@ -55,6 +55,9 @@ return {
 		autotag = {
 			enable = true,
 		},
+		matchup = {
+			enable = true,
+		},
 	},
 	init = function()
 		vim.cmd([[
