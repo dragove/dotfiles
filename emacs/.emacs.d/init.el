@@ -813,6 +813,7 @@
       (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))))
 
 (use-package magit
+  :ensure (:tag "v3.3.0" :pin t)
   :bind (("C-M-g" . magit-status-here)))
 
 (use-package eat

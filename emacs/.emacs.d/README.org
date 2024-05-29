@@ -989,6 +989,7 @@ Catppuccin Theme
 *** Magit
 #+begin_src emacs-lisp
 (use-package magit
+  :ensure (:tag "v3.3.0" :pin t)
   :bind (("C-M-g" . magit-status-here)))
 #+end_src
 *** Eat
