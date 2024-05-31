@@ -11,7 +11,7 @@ local autocmds = {
 
 	-- Autosave on focus change
 	{
-		{ "BufLeave", "WinLeave", "FocusLost" },
+		{ "BufLeave", "WinLeave", "FocusLost", "InsertLeave" },
 		{
 			pattern = "*",
 			group = "Autosave",
