@@ -8,11 +8,6 @@ return {
 	},
 	{
 		"nvim-java/nvim-java",
-		ft = "java",
-		config = function()
-			require("java").setup()
-			require("lspconfig").jdtls.setup({})
-		end,
 		dependencies = {
 			"nvim-java/lua-async-await",
 			"nvim-java/nvim-java-refactor",
@@ -28,6 +23,16 @@ return {
 					registries = {
 						"github:nvim-java/mason-registry",
 						"github:mason-org/mason-registry",
+					},
+				},
+			},
+			{
+				"williamboman/mason-lspconfig.nvim",
+				opts = {
+					handlers = {
+						["jdtls"] = function()
+							require("java").setup()
+						end,
 					},
 				},
 			},
