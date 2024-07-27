@@ -27,6 +27,7 @@ require("lazy").setup({
 		lazy = false,
 		version = false,
 	},
+	news = { lazyvim = false, neovim = false },
 	install = { colorscheme = { "catppuccin" } },
 	checker = { enabled = false },
 })

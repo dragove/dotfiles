@@ -8,4 +8,5 @@ return {
 	{ import = "lazyvim.plugins.extras.lang.cmake" },
 	{ import = "lazyvim.plugins.extras.lang.scala" },
 	{ import = "lazyvim.plugins.extras.lang.vue" },
+	{ import = "lazyvim.plugins.extras.lang.go" },
 }
