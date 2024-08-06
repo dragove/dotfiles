@@ -1,77 +1,49 @@
--- code is stolen from https://github.com/echasnovski/nvim/blob/master/lua/ec/settings.lua
--- stylua: ignore start
--- Leader key =================================================================
-vim.g.mapleader    = " "
-vim.g.autoformat   = false
-vim.g.lazyvim_python_lsp = "basedpyright"
-local opt = vim.opt
+local api, opt, g = vim.api, vim.opt, vim.g
 
--- General ====================================================================
-opt.backup         = false    -- Don't store backup
-opt.mouse          = 'a'      -- Enable mouse
-opt.switchbuf      = 'usetab' -- Use already opened buffers when switching
-opt.writebackup    = false    -- Don't store backup
-opt.undofile       = true     -- Enable persistent undo
+g.mapleader = ' '
+
+g.loaded_gzip = 1
+g.loaded_tar = 1
+g.loaded_tarPlugin = 1
+g.loaded_zip = 1
+g.loaded_zipPlugin = 1
+g.loaded_getscript = 1
+g.loaded_getscriptPlugin = 1
+g.loaded_vimball = 1
+g.loaded_vimballPlugin = 1
+g.loaded_matchit = 1
+g.loaded_matchparen = 1
+g.loaded_2html_plugin = 1
+g.loaded_logiPat = 1
+g.loaded_rrhelper = 1
+g.loaded_netrwPlugin = 1
+
+opt.undofile       = true
+opt.writebackup    = false
 opt.swapfile       = false
-opt.guifont        = 'FiraCode Nerd Font:h16'
 opt.cmdheight      = 0
-opt.foldenable     = false
-opt.clipboard      = ""
+opt.cursorline     = true
+opt.laststatus     = 3
+opt.relativenumber = true
+opt.ruler          = false
+opt.showmode       = false
+opt.signcolumn     = 'no'
+opt.splitbelow     = true
+opt.splitright     = true
+opt.termguicolors  = true
+opt.winblend       = 0
+opt.wrap           = false
+opt.list           = true
+opt.listchars = 'tab:» ,nbsp:+,trail:·,extends:→,precedes:←,'
 
--- UI =========================================================================
-opt.breakindent    = true     -- Indent wrapped lines to match line start
-opt.cursorline     = true     -- Enable highlighting of the current line
-opt.laststatus     = 3        -- show statusline in last window
-opt.linebreak      = true     -- Wrap long lines at 'breakat' (if 'wrap' is set)
-opt.list           = true     -- Show helpful character indicators
-opt.relativenumber = true     -- Show relative line numbers
-opt.pumblend       = 0        -- Make builtin completion menus slightly transparent
-opt.pumheight      = 10       -- Make popup menu smaller
-opt.ruler          = false    -- Don't show cursor position
-opt.shortmess      = 'aoOWFc' -- Disable certain messages from |ins-completion-menu|
-opt.showmode       = false    -- Don't show mode in command line
-opt.signcolumn     = 'yes'    -- Always show signcolumn or it would frequently shift
-opt.splitbelow     = true     -- Horizontal splits will be below
-opt.splitright     = true     -- Vertical splits will be to the right
-opt.termguicolors  = true     -- Enable gui colors
-opt.winblend       = 0        -- Make floating windows transparent
-opt.wrap           = false    -- Display long lines as just one line
+opt.autoindent    = true
+opt.expandtab     = true
+opt.incsearch     = true
+opt.infercase     = true
+opt.shiftwidth    = 4
+opt.smartcase     = true
+opt.smartindent   = true
+opt.tabstop       = 4
+opt.virtualedit   = 'block'
 
-vim.o.fillchars    = table.concat(
-    { 'eob: ', 'fold:╌', 'horiz:═', 'horizdown:╦', 'horizup:╩', 'vert:║', 'verthoriz:╬', 'vertleft:╣',
-        'vertright:╠' },
-    ','
-)
-vim.o.listchars    = table.concat(
-    { 'extends:…', 'nbsp:␣', 'precedes:…', 'tab:> ' },
-    ','
-)
-
-opt.shortmess:append('C')  -- Don't show "Scanning..." messages
-opt.splitkeep     = 'screen' -- Reduce scroll during window split
-
--- Editing ====================================================================
-opt.autoindent    = true                                 -- Use auto indent
-opt.expandtab     = true                                 -- Convert tabs to spaces
-opt.formatoptions = 'rqnl1j'                             -- Improve comment editing
-opt.ignorecase    = true                                 -- Ignore case when searching (use `\C` to force not doing that)
-opt.incsearch     = true                                 -- Show search results while typing
-opt.infercase     = true                                 -- Infer letter cases for a richer built-in keyword completion
-opt.shiftwidth    = 4                                    -- Use this number of spaces for indentation
-opt.smartcase     = true                                 -- Don't ignore case when searching if pattern has upper case
-opt.smartindent   = true                                 -- Make indenting smart
-opt.tabstop       = 4                                    -- Insert 4 spaces for a tab
-opt.virtualedit   = 'block'                              -- Allow going past the end of line in visual block mode
-
-opt.iskeyword:append('-')                              -- Treat dash separated words as a word text object
-
-opt.completeopt            = 'menuone,noinsert,noselect' -- Customize completions
-
--- Define pattern for a start of 'numbered' list. This is responsible for
--- correct formatting of lists when using `gw`. This basically reads as 'at
--- least one special character (digit, -, +, *) possibly followed some
--- punctuation (. or `)`) followed by at least one space is a start of list
--- item'
-opt.formatlistpat          = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
-
---stylua: ignore end
+opt.completeopt = 'menu,menuone,noinsert,noselect,popup'

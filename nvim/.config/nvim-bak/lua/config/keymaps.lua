@@ -12,3 +12,5 @@ map({ "i" }, "<C-e>", "<End>")
 map({ "i" }, "<C-v>", "<PageDown>")
 map({ "i" }, "<M-v>", "<PageUp>")
 
+-- lsp
+map("n", "gr", "<cmd>Telescope lsp_references include_declaration=false<cr>")
