@@ -7,9 +7,6 @@ lazy-lock.json
 /konsole/.local/share/konsole/bookmarks.xml
 /konsole/.local/share/konsole/bookmarks.xml.tbcache
 /konsole/.local/share/konsole/konsolestaterc
-/cargo/.cargo/registry
-/cargo/.cargo/git
-/cargo/.cargo/.package-cache
-/cargo/.cargo/.global-cache
-/cargo/.cargo/.package-cache-mutate
+/cargo
+!/cargo/.cargo/config.toml
 *.bak
