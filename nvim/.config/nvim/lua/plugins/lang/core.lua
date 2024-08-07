@@ -11,7 +11,7 @@ return {
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'nvimdev/lspsaga.nvim',
-      'deathbeam/autocomplete.nvim'
+      'deathbeam/autocomplete.nvim',
     },
     config = function()
       local lspsaga = require('lspsaga')
@@ -65,7 +65,7 @@ return {
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-            end, '[T]oggle Inlay [H]ints')
+            end, 'Toggle Inlay Hints')
           end
         end,
       })
@@ -92,13 +92,13 @@ return {
         'stylua'
       })
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
-
+      local lspconfig = require('lspconfig')
       require('mason-lspconfig').setup({
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            lspconfig[server_name].setup(server)
           end,
         },
       })

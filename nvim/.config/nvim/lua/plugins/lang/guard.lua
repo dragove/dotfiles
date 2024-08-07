@@ -14,6 +14,7 @@ return {
     local ft = require('guard.filetype')
     -- Assuming you have guard-collection
     ft('lua'):fmt('stylua')
+    ft('scala'):fmt('lsp')
     ft('json'):fmt(biome)
     ft('javascript'):fmt(biome)
     ft('javascriptreact'):fmt(biome)
