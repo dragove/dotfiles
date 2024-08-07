@@ -30,6 +30,7 @@ return {
           map('gi', '<CMD>Lspsaga finder imp<CR>', 'goto implementation')
           map('[d', '<CMD>Lspsaga diagnostic_jump_prev<CR>', 'jump to previous diagnostics')
           map(']d', '<CMD>Lspsaga diagnostic_jump_next<CR>', 'jump to next diagnostics')
+          map('K', '<CMD>Lspsaga hover_doc<CR>', 'show doc')
           map('<leader>o', '<CMD>Lspsaga outline<CR>', 'open outline')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)

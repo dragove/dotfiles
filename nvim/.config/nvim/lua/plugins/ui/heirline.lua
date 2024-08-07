@@ -149,6 +149,25 @@ return {
 
     FileNameBlock =
       utils.insert(FileNameBlock, FileIcon, utils.insert(FileName), FileFlags, { provider = '%<' })
+
+    local MacroRec = {
+      condition = function()
+        return vim.fn.reg_recording() ~= '' and vim.o.cmdheight == 0
+      end,
+      provider = ' ',
+      hl = { fg = 'orange', bold = true },
+      utils.surround({ '[', ']' }, nil, {
+        provider = function()
+          return vim.fn.reg_recording()
+        end,
+        hl = { fg = 'green', bold = true },
+      }),
+      update = {
+        'RecordingEnter',
+        'RecordingLeave',
+      },
+    }
+
     local lspProgress = require('lsp-progress')
     local api = require('lsp-progress.api')
     lspProgress.setup({
@@ -246,6 +265,8 @@ return {
         viMode,
         Space,
         FileNameBlock,
+        Space,
+        MacroRec,
         Space,
         Align,
         LSPActive,
