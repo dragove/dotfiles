@@ -6,8 +6,8 @@ return {
   },
   config = function()
     local biome = {
-      cmd = 'pnpm',
-      args = { 'biome', 'format', '--write' },
+      cmd = 'biome',
+      args = { 'format', '--write' },
       fname = true,
       stdin = false,
     }
@@ -20,6 +20,7 @@ return {
     ft('javascriptreact'):fmt(biome)
     ft('typescript'):fmt(biome)
     ft('typescriptreact'):fmt(biome)
+    ft('python'):fmt('ruff'):lint('ruff')
     require('guard').setup({
       fmt_on_save = false,
       lsp_as_default_formatter = false,
