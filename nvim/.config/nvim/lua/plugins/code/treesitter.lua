@@ -16,6 +16,8 @@ return {
         'cpp',
         'java',
         'scala',
+        'kotlin',
+        'groovy',
         'python',
         'javascript',
         'typescript',
