@@ -11,6 +11,7 @@ return {
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'nvimdev/lspsaga.nvim',
+      'deathbeam/autocomplete.nvim'
     },
     config = function()
       local lspsaga = require('lspsaga')
@@ -69,12 +70,19 @@ return {
         end,
       })
 
+      local capabilities = vim.tbl_deep_extend(
+        'force',
+        vim.lsp.protocol.make_client_capabilities(),
+        require('autocomplete.capabilities')
+      )
       local servers = {
         lua_ls = {
           settings = {
             Lua = {},
           },
         },
+        clangd = {},
+        basedpyright = {},
       }
 
       require('mason').setup()
@@ -89,6 +97,7 @@ return {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
         },
