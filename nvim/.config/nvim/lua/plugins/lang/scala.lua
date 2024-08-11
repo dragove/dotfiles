@@ -1,10 +1,9 @@
 return {
   'scalameta/nvim-metals',
-  name = 'metals',
   ft = { 'scala', 'sbt', 'java' },
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'deathbeam/autocomplete.nvim',
+    'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
     local metals_config = require('metals').bare_config()
@@ -15,7 +14,9 @@ return {
       superMethodLensesEnabled = true,
     }
     metals_config.init_options.statusBarProvider = 'on'
-    metals_config.capabilities = require('autocomplete.capabilities')
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+    metals_config.capabilities = capabilities
 
     local nvim_metals_group = vim.api.nvim_create_augroup('nvim-metals', { clear = true })
     vim.api.nvim_create_autocmd('FileType', {

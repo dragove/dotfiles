@@ -11,7 +11,7 @@ return {
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'nvimdev/lspsaga.nvim',
-      'deathbeam/autocomplete.nvim',
+      'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
       local lspsaga = require('lspsaga')
@@ -70,11 +70,8 @@ return {
         end,
       })
 
-      local capabilities = vim.tbl_deep_extend(
-        'force',
-        vim.lsp.protocol.make_client_capabilities(),
-        require('autocomplete.capabilities')
-      )
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       local servers = {
         lua_ls = {
           settings = {
@@ -90,7 +87,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua',
-        'ruff'
+        'ruff',
       })
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
       local lspconfig = require('lspconfig')
@@ -98,7 +95,8 @@ return {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            server.capabilities =
+              vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             lspconfig[server_name].setup(server)
           end,
         },
