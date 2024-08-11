@@ -5,9 +5,9 @@ return {
       return vim.fn.pumvisible() ~= 0 and '<C-y>' or '<cr>'
     end, { expr = true, replace_keycodes = true })
     require('autocomplete.signature').setup({
-      border = nil,
+      border = 'single',
       width = 80,
-      height = 25,
+      height = 3,
       debounce_delay = 100,
     })
 

@@ -1,4 +1,4 @@
-local api, opt, g = vim.api, vim.opt, vim.g
+local opt, g = vim.opt, vim.g
 
 g.mapleader = ' '
 
@@ -47,4 +47,4 @@ opt.smartindent = true
 opt.tabstop = 4
 opt.virtualedit = 'block'
 
-opt.completeopt = 'menu,menuone,noinsert,noselect,popup'
+opt.completeopt = 'menuone,noselect,noinsert,popup'
