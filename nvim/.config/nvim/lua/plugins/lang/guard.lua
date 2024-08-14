@@ -1,5 +1,8 @@
 return {
   'nvimdev/guard.nvim',
+  keys = {
+    { '<leader>cf', '<CMD>GuardFmt<CR>', { 'n', 'v' }, { desc = 'format code' } },
+  },
   dependencies = {
     'nvimdev/guard-collection',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -25,6 +28,5 @@ return {
       fmt_on_save = false,
       lsp_as_default_formatter = false,
     })
-    vim.keymap.set({ 'n', 'v' }, '<leader>cf', '<CMD>GuardFmt<CR>', { desc = 'format code' })
   end,
 }
