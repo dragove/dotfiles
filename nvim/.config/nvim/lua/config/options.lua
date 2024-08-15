@@ -46,5 +46,8 @@ opt.smartcase = true
 opt.smartindent = true
 opt.tabstop = 4
 opt.virtualedit = 'block'
+opt.foldmethod = 'expr'
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+opt.foldlevelstart = 5
 
 opt.completeopt = 'menuone,noselect,noinsert,popup'
