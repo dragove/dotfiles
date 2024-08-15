@@ -1,10 +1,5 @@
 return {
   {
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {},
-  },
-  {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
