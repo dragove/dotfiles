@@ -1,11 +1,12 @@
 local map = vim.keymap.set
+local utils = require('config.utils')
 
 -- disable space on n/v mode
 map({ 'n', 'v' }, '<space>', '<nop>')
 
 -- keymaps for save and leave buffer
 map({ 'n' }, 'S', '<CMD>confirm w<CR>')
-map({ 'n' }, 'Q', '<CMD>confirm bd<CR>')
+map({ 'n' }, 'Q', utils.close_buf)
 map({ 'n' }, '<leader>bd', '<CMD>confirm bd<CR>')
 
 -- jump window
