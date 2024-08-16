@@ -168,6 +168,29 @@ return {
       },
     }
 
+    local SearchCount = {
+      condition = function()
+        return vim.v.hlsearch ~= 0 and vim.o.cmdheight == 0
+      end,
+      init = function(self)
+        local ok, search = pcall(vim.fn.searchcount)
+        if ok and search.total then
+          self.search = search
+        end
+      end,
+      provider = function(self)
+        local search = self.search
+        return string.format('[%d/%d]', search.current, math.min(search.total, search.maxcount))
+      end,
+    }
+
+    local ShowCmd = {
+      condition = function()
+        return vim.o.cmdheight == 0
+      end,
+      provider = '%2(%S%)',
+    }
+
     local lspProgress = require('lsp-progress')
     local api = require('lsp-progress.api')
     lspProgress.setup({
@@ -262,12 +285,12 @@ return {
 
     require('heirline').setup({
       statusline = {
+        MacroRec,
         viMode,
         Space,
         FileNameBlock,
-        Space,
-        MacroRec,
-        Space,
+        SearchCount,
+        ShowCmd,
         Align,
         LSPActive,
         Align,

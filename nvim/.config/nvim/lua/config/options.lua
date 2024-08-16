@@ -50,4 +50,7 @@ opt.foldmethod = 'expr'
 opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 opt.foldlevelstart = 5
 
+opt.showcmdloc = 'statusline'
 opt.completeopt = 'menuone,noselect,noinsert,popup'
+
+-- require("config.messages").init()
