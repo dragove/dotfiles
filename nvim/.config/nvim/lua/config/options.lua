@@ -41,10 +41,12 @@ opt.autoindent = true
 opt.expandtab = true
 opt.incsearch = true
 opt.infercase = true
-opt.shiftwidth = 4
 opt.smartcase = true
 opt.smartindent = true
-opt.tabstop = 4
+opt.tabstop = 2
+-- always use tabstop
+opt.shiftwidth = 0
+opt.softtabstop = -1
 opt.virtualedit = 'block'
 opt.foldmethod = 'expr'
 opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
