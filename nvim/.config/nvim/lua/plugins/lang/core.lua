@@ -25,6 +25,7 @@ return {
       local lspsaga = require('lspsaga')
       lspsaga.setup({
         lightbulb = { enable = false },
+        code_action = { show_preview = false },
       })
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
