@@ -12,10 +12,13 @@ return {
       showImplicitConversionsAndClasses = true,
       showInferredType = true,
       superMethodLensesEnabled = true,
+      autoImportBuild = 'initial',
+      serverProperties = { '-Dmetals.enable-best-effort=true' },
     }
     metals_config.init_options.statusBarProvider = 'on'
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+    capabilities =
+      vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
     metals_config.capabilities = capabilities
 
     local nvim_metals_group = vim.api.nvim_create_augroup('nvim-metals', { clear = true })
