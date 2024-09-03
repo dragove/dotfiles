@@ -1,0 +1,11 @@
+[connection]
+type = "ADB"
+adb_path = "adb"
+device = "192.168.240.112:5555"
+# config = "CompatPOSIXShell"
+
+[instance_options]
+touch_mode = "MAATouch"
+deployment_with_pause = false
+adb_lite_enabled = false
+kill_adb_on_exit = false

@@ -1,0 +1,4 @@
+[[tasks]]
+type = "Fight"
+[tasks.params]
+stage = "1-7"

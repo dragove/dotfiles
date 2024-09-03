@@ -1,0 +1,7 @@
+[[tasks]]
+type = "Roguelike"
+
+[tasks.params]
+theme = "Sarkaz"
+core_char = "维什戴尔"
+mode = 0
