@@ -1,12 +1,18 @@
 return {
   'nvimdev/guard.nvim',
   keys = {
-    { '<leader>cf', '<CMD>GuardFmt<CR>', { 'n', 'v' }, { desc = 'format code' } },
+    { '<leader>cf', '<CMD>Guard fmt<CR>', { 'n', 'v' }, { desc = 'format code' } },
   },
   dependencies = {
     'nvimdev/guard-collection',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
+  init = function()
+    vim.g.guard_config = {
+      fmt_on_save = false,
+      lsp_as_default_formatter = false,
+    }
+  end,
   config = function()
     local biome = {
       cmd = 'biome',
@@ -24,9 +30,5 @@ return {
     ft('typescript'):fmt(biome)
     ft('typescriptreact'):fmt(biome)
     ft('python'):fmt('ruff'):lint('ruff')
-    require('guard').setup({
-      fmt_on_save = false,
-      lsp_as_default_formatter = false,
-    })
   end,
 }
