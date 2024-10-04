@@ -9,7 +9,7 @@ return {
   init = function()
     vim.g.guard_config = {
       fmt_on_save = false,
-      lsp_as_default_formatter = false,
+      lsp_as_default_formatter = true,
     }
   end,
   config = function()
