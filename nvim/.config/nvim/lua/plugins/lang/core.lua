@@ -1,23 +1,8 @@
 return {
   {
-    'folke/lazydev.nvim',
-    ft = 'lua', -- only load on lua files
-    opts = {
-      library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
-      },
-    },
-  },
-  { 'Bilal2453/luvit-meta', lazy = true }, -- optional `vim.uv` typings
-  {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      { 'williamboman/mason.nvim', cmd = 'Mason' },
-      'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
       'nvimdev/lspsaga.nvim',
       'hrsh7th/cmp-nvim-lsp',
     },
@@ -77,39 +62,6 @@ return {
             end, 'Toggle Inlay Hints')
           end
         end,
-      })
-
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities =
-        vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-      local servers = {
-        lua_ls = {
-          settings = {
-            Lua = {},
-          },
-        },
-        clangd = {},
-        basedpyright = {},
-      }
-
-      require('mason').setup()
-
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua',
-        'ruff',
-      })
-      require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
-      local lspconfig = require('lspconfig')
-      require('mason-lspconfig').setup({
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities =
-              vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            lspconfig[server_name].setup(server)
-          end,
-        },
       })
     end,
   },

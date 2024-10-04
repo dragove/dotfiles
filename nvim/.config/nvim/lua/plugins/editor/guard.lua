@@ -4,8 +4,7 @@ return {
     { '<leader>cf', '<CMD>Guard fmt<CR>', { 'n', 'v' }, { desc = 'format code' } },
   },
   dependencies = {
-    'nvimdev/guard-collection',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    'nvimdev/guard-collection'
   },
   init = function()
     vim.g.guard_config = {

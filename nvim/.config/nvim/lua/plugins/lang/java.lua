@@ -1,19 +1,11 @@
 return {
-  'nvim-java/nvim-java',
+  'mfussenegger/nvim-jdtls',
   ft = { 'java' },
-  dependencies = {
-    'nvim-java/lua-async-await',
-    'nvim-java/nvim-java-refactor',
-    'nvim-java/nvim-java-core',
-    'nvim-java/nvim-java-test',
-    'nvim-java/nvim-java-dap',
-    'MunifTanjim/nui.nvim',
-    'neovim/nvim-lspconfig',
-    'mfussenegger/nvim-dap',
-    'williamboman/mason.nvim',
-  },
   config = function()
-    require('java').setup({})
-    require('lspconfig').jdtls.setup({})
+    local config = {
+      cmd = { '/path/to/jdt-language-server/bin/jdtls' },
+      root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+    }
+    require('jdtls').start_or_attach(config)
   end,
 }
