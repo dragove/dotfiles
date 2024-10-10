@@ -1,5 +1,6 @@
 return { -- Autocompletion
-  'hrsh7th/nvim-cmp',
+  'iguanacucumber/magazine.nvim',
+  name = 'nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
