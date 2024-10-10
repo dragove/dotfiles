@@ -1,10 +1,10 @@
 return {
   'nvimdev/guard.nvim',
   keys = {
-    { '<leader>cf', '<CMD>Guard fmt<CR>', { 'n', 'v' }, { desc = 'format code' } },
+    { '<leader>cf', '<CMD>Guard fmt<CR>', { desc = 'format code' } },
   },
   dependencies = {
-    'nvimdev/guard-collection'
+    'nvimdev/guard-collection',
   },
   init = function()
     vim.g.guard_config = {
@@ -13,21 +13,14 @@ return {
     }
   end,
   config = function()
-    local biome = {
-      cmd = 'biome',
-      args = { 'format', '--write' },
-      fname = true,
-      stdin = false,
-    }
     local ft = require('guard.filetype')
     -- Assuming you have guard-collection
     ft('lua'):fmt('stylua')
-    ft('scala'):fmt('lsp')
-    ft('json'):fmt(biome)
-    ft('javascript'):fmt(biome)
-    ft('javascriptreact'):fmt(biome)
-    ft('typescript'):fmt(biome)
-    ft('typescriptreact'):fmt(biome)
+    ft('json'):fmt('biome')
+    ft('javascript'):fmt('biome')
+    ft('typescript'):fmt('biome')
+    ft('javascriptreact'):fmt('biome')
+    ft('typescriptreact'):fmt('biome')
     ft('python'):fmt('ruff'):lint('ruff')
   end,
 }
