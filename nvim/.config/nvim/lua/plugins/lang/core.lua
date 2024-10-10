@@ -7,7 +7,7 @@ return {
   config = function()
     local lspsaga = require('lspsaga')
     lspsaga.setup({
-      lightbulb = { enable = false }
+      lightbulb = { enable = false },
     })
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -85,6 +85,14 @@ return {
         Lua = {},
       },
     })
-    require('lspconfig').basedpyright.setup({})
+    require('lspconfig').basedpyright.setup({
+      cmd = {
+        'uvx',
+        '--from',
+        'basedpyright',
+        'basedpyright-langserver',
+        '--stdio',
+      },
+    })
   end,
 }
