@@ -17,5 +17,6 @@ return {
     ft('javascriptreact'):fmt('biome')
     ft('typescriptreact'):fmt('biome')
     ft('python'):fmt('ruff'):lint('ruff')
+    vim.keymap.set({ 'n', 'v' }, '<leader>cf', '<cmd>Guard fmt<cr>', { desc = 'format' })
   end,
 }
