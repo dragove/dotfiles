@@ -4,6 +4,8 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'hrsh7th/cmp-nvim-lsp',
+    'neovim/nvim-lspconfig',
+    'nvimdev/guard.nvim',
   },
   config = function()
     local metals_config = require('metals').bare_config()
