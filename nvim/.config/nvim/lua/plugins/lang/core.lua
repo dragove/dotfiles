@@ -94,5 +94,6 @@ return {
         '--stdio',
       },
     })
+    require('lspconfig').clangd.setup({})
   end,
 }
