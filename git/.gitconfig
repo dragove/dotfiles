@@ -3,6 +3,8 @@
 	email = dragove@qq.com
 [pull]
 	rebase = true
+[push]
+	autoSetupRemote = true
 [init]
 	defaultBranch = master
 [color]

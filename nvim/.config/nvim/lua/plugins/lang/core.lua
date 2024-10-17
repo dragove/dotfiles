@@ -85,15 +85,7 @@ return {
         Lua = {},
       },
     })
-    require('lspconfig').basedpyright.setup({
-      cmd = {
-        'uvx',
-        '--from',
-        'basedpyright',
-        'basedpyright-langserver',
-        '--stdio',
-      },
-    })
+    require('lspconfig').basedpyright.setup({})
     require('lspconfig').clangd.setup({})
   end,
 }
