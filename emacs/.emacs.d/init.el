@@ -857,11 +857,6 @@
                                        :initializationOptions
                                        (:typescript (:tsdk "./node_modules/typescript/lib"))))))
 
-(use-package eglot-booster
-  :ensure (:host github :repo "jdtsmith/eglot-booster")
-  :after eglot
-  :config (eglot-booster-mode))
-
 (use-package treesit
   :ensure nil
   :custom

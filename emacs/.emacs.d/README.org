@@ -1039,11 +1039,6 @@ Catppuccin Theme
                        '(astro-mode . ("astro-ls" "--stdio"
                                        :initializationOptions
                                        (:typescript (:tsdk "./node_modules/typescript/lib"))))))
-
-(use-package eglot-booster
-  :ensure (:host github :repo "jdtsmith/eglot-booster")
-  :after eglot
-  :config (eglot-booster-mode))
 #+end_src
 *** Tree-Sitter
 #+begin_src emacs-lisp
