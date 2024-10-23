@@ -3,6 +3,9 @@ if status is-interactive
     abbr vim nvim
     abbr gs git status
     abbr ga git add
+    abbr gf git fetch
+    abbr gF git pull
+    abbr gp git push
     abbr gco git checkout
     abbr gc git commit -m
     abbr tree lsd --tree
