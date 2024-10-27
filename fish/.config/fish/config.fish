@@ -36,3 +36,7 @@ set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; se
 # >>> coursier install directory >>>
 set -gx PATH "$PATH:/home/dove/.local/share/coursier/bin"
 # <<< coursier install directory <<<
+
+# >>> scala-cli completions >>>
+complete scala -a '(scala complete fish-v1 (math 1 + (count (__fish_print_cmd_args))) (__fish_print_cmd_args))'
+# <<< scala-cli completions <<<
