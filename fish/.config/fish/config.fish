@@ -25,12 +25,6 @@ if not string match -q -- $PNPM_HOME $PATH
 end
 # pnpm end
 
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-set --export PIXI_INSTALL "$HOME/.pixi"
-set --export PATH $PIXI_INSTALL/bin $PATH
-
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/dove/.ghcup/bin $PATH # ghcup-env
 
 # >>> coursier install directory >>>
