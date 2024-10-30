@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/dove/.zsh/completions:"* ]]; then export FPATH="/home/dove/.zsh/completions:$FPATH"; fi
 # zsh config
 HISTFILE=~/.cache/zsh_history
 HISTSIZE=5000
@@ -52,3 +54,4 @@ source /usr/share/fzf/completion.zsh
 
 
 . "$HOME/.cargo/env"
+. "/home/dove/.deno/env"
