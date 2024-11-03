@@ -10,3 +10,5 @@ lazy-lock.json
 /cargo
 !/cargo/.cargo/config.toml
 *.bak
+/musicfox
+!/musicfox/.config/go-musicfox/go-musicfox.ini
