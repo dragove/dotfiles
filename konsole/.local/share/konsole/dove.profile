@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=Catppuccin-Frappe
+ColorScheme=catppuccin-frappe
 Font=Maple Mono NF CN,16,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [General]
