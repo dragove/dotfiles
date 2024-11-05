@@ -1,0 +1,86 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-/": ["editor::ToggleComments", { "advance_downwards": true }],
+      "shift-alt-up": "editor::MoveLineUp",
+      "shift-alt-down": "editor::MoveLineDown",
+      "ctrl-alt-l": "editor::Format",
+      "shift-f6": "editor::Rename",
+      "ctrl-alt-left": "pane::GoBack",
+      "ctrl-alt-right": "pane::GoForward",
+      "alt-o": "workspace::ActivateNextPane"
+    }
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      "alt-enter": "editor::ToggleCodeActions"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-n": "file_finder::Toggle",
+      "ctrl-shift-a": "command_palette::Toggle",
+      "shift shift": "project_symbols::Toggle",
+      "alt-x": "command_palette::Toggle"
+    }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "ctrl-alt-left": "pane::GoBack",
+      "ctrl-alt-right": "pane::GoForward"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "enter": "project_panel::Open",
+      "delete": ["project_panel::Trash", { "skip_prompt": false }],
+      "shift-delete": ["project_panel::Delete", { "skip_prompt": false }],
+      "shift-f6": "project_panel::Rename"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "enter": "editor::SelectLargerSyntaxNode",
+      "Q": "pane::CloseActiveItem",
+      "space o": "outline::Toggle",
+      "space c f": "editor::Format",
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      "space b p": "pane::TogglePinTab",
+      "space b d": "pane::CloseActiveItem",
+      "space b D": "pane::CloseInactiveItems",
+      "space f f": "file_finder::Toggle",
+      "space f s": "project_symbols::Toggle",
+      "space s r": "workspace::NewSearch",
+      "[ d": "editor::GoToPrevDiagnostic",
+      "] d": "editor::GoToDiagnostic",
+      "[ c": "editor::GoToPrevHunk",
+      "] c": "editor::GoToHunk"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "enter": "editor::SelectLargerSyntaxNode",
+      "backspace": "editor::SelectSmallerSyntaxNode",
+      "space c f": "editor::FormatSelections"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "ctrl-a": "editor::MoveToBeginningOfLine",
+      "ctrl-e": "editor::MoveToEndOfLine",
+      "ctrl-f": "editor::MoveRight",
+      "ctrl-b": "editor::MoveLeft",
+      "ctrl-k": "editor::DeleteToEndOfLine",
+      "ctrl-w": "editor::DeleteToPreviousWordStart"
+    }
+  }
+]

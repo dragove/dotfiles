@@ -15,7 +15,7 @@
   "assistant": {
     "enabled": false,
     "button": false,
-    "version": "1"
+    "version": "2"
   },
   "terminal": {
     "env": {
