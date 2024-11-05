@@ -1,0 +1,27 @@
+{
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "cursor_blink": false,
+  "format_on_save": "off",
+  "autosave": "on_focus_change",
+  "buffer_font_size": 20,
+  "ensure_final_newline_on_save": false,
+  "buffer_font_family": "Maple Mono NF CN",
+  "features": {
+    "inline_completion_provider": "supermaven"
+  },
+  "languages": {
+    "Java": {
+      "enable_language_server": false
+    }
+  },
+  "vim": {
+    "toggle_relative_line_numbers": true,
+    "use_system_clipboard": "never"
+  },
+  "theme": {
+    "mode": "system",
+    "light": "Catppuccin Mocha",
+    "dark": "Catppuccin Frappé"
+  }
+}
