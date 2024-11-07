@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 return {
 	front_end = "WebGpu",
-	font = wezterm.font("FiraCode Nerd Font"),
+	font = wezterm.font("Maple Mono NF CN"),
 	font_size = 16,
 	hide_tab_bar_if_only_one_tab = true,
 	window_decorations = "INTEGRATED_BUTTONS|RESIZE",
@@ -19,18 +19,18 @@ return {
 	colors = {
 		tab_bar = {
 			-- The color of the inactive tab bar edge/divider
-            background = "#303446",
+			background = "#303446",
 			active_tab = {
-                bg_color = "#303446",
-                fg_color = "#f0f0f0"
-            },
-            inactive_tab = {
-                bg_color = "#303446",
-                fg_color = "#999999"
-            }
+				bg_color = "#303446",
+				fg_color = "#f0f0f0",
+			},
+			inactive_tab = {
+				bg_color = "#303446",
+				fg_color = "#999999",
+			},
 		},
 	},
-    show_new_tab_button_in_tab_bar = false,
+	show_new_tab_button_in_tab_bar = false,
 	color_scheme = "Catppuccin Frappe",
 	-- for windows
 	-- default_prog = { "nu.exe" },
