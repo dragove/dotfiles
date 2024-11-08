@@ -1,15 +1,15 @@
 return { -- Autocompletion
-  'iguanacucumber/magazine.nvim',
-  name = 'nvim-cmp',
-  event = 'InsertEnter',
+  "iguanacucumber/magazine.nvim",
+  name = "nvim-cmp",
+  event = "InsertEnter",
   dependencies = {
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-path',
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-path",
     {
-      'garymjr/nvim-snippets',
+      "garymjr/nvim-snippets",
       keys = {
         {
-          '<Tab>',
+          "<Tab>",
           function()
             if vim.snippet.active({ direction = 1 }) then
               vim.schedule(function()
@@ -17,14 +17,14 @@ return { -- Autocompletion
               end)
               return
             end
-            return '<Tab>'
+            return "<Tab>"
           end,
           expr = true,
           silent = true,
-          mode = 'i',
+          mode = "i",
         },
         {
-          '<Tab>',
+          "<Tab>",
           function()
             vim.schedule(function()
               vim.snippet.jump(1)
@@ -32,10 +32,10 @@ return { -- Autocompletion
           end,
           expr = true,
           silent = true,
-          mode = 's',
+          mode = "s",
         },
         {
-          '<S-Tab>',
+          "<S-Tab>",
           function()
             if vim.snippet.active({ direction = -1 }) then
               vim.schedule(function()
@@ -43,17 +43,17 @@ return { -- Autocompletion
               end)
               return
             end
-            return '<S-Tab>'
+            return "<S-Tab>"
           end,
           expr = true,
           silent = true,
-          mode = { 'i', 's' },
+          mode = { "i", "s" },
         },
       },
     },
   },
   config = function()
-    local cmp = require('cmp')
+    local cmp = require("cmp")
 
     cmp.setup({
       snippet = {
@@ -63,18 +63,18 @@ return { -- Autocompletion
       },
 
       mapping = cmp.mapping.preset.insert({
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-Space>'] = cmp.mapping.complete({}),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-Space>"] = cmp.mapping.complete({}),
       }),
       sources = {
-        { name = 'snippets' },
-        { name = 'nvim_lsp' },
-        { name = 'path' },
-        { name = 'lazydev', group_index = 0 },
+        { name = "snippets" },
+        { name = "nvim_lsp" },
+        { name = "path" },
+        { name = "lazydev", group_index = 0 },
       },
     })
   end,

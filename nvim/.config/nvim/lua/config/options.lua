@@ -1,6 +1,6 @@
 local opt, g = vim.opt, vim.g
 
-g.mapleader = ' '
+g.mapleader = " "
 
 g.loaded_gzip = 1
 g.loaded_tar = 1
@@ -27,14 +27,14 @@ opt.laststatus = 3
 opt.relativenumber = true
 opt.ruler = false
 opt.showmode = false
-opt.signcolumn = 'yes'
+opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
 opt.winblend = 0
 opt.wrap = false
 opt.list = true
-opt.listchars = 'tab:» ,nbsp:+,trail:·,extends:→,precedes:←,'
+opt.listchars = "tab:» ,nbsp:+,trail:·,extends:→,precedes:←,"
 
 opt.scrolloff = 3
 opt.autoindent = true
@@ -47,12 +47,12 @@ opt.tabstop = 2
 -- always use tabstop
 opt.shiftwidth = 0
 opt.softtabstop = -1
-opt.virtualedit = 'block'
-opt.foldmethod = 'expr'
-opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+opt.virtualedit = "block"
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldlevelstart = 5
 
-opt.showcmdloc = 'statusline'
-opt.completeopt = 'menuone,noselect,noinsert,popup'
+opt.showcmdloc = "statusline"
+opt.completeopt = "menuone,noselect,noinsert,popup"
 
 -- require("config.messages").init()

@@ -17,10 +17,10 @@ end
 
 function M.close_buf()
   -- is last buffer and the buffer is empty
-  if buf_count() == 1 and api.nvim_buf_get_name(0) == '' then
-    cmd('confirm q')
+  if buf_count() == 1 and api.nvim_buf_get_name(0) == "" then
+    cmd("confirm q")
   else
-    cmd('confirm bdelete')
+    cmd("confirm bdelete")
   end
 end
 
