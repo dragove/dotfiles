@@ -1,10 +1,15 @@
 local wezterm = require("wezterm")
 return {
   front_end = "WebGpu",
+  max_fps = 120,
+  animation_fps = 1,
+  use_dead_keys = false,
+  check_for_updates = false,
+  audible_bell = 'Disabled',
   font = wezterm.font("Maple Mono NF CN"),
   font_size = 16,
   hide_tab_bar_if_only_one_tab = true,
-  window_decorations = "INTEGRATED_BUTTONS|RESIZE",
+  window_decorations = "NONE",
   window_padding = {
     left = 4,
     right = 4,
