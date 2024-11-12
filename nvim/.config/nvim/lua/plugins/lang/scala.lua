@@ -10,14 +10,14 @@ return {
   config = function()
     local metals_config = require("metals").bare_config()
     metals_config.settings = {
-      showImplicitArguments = true,
-      showImplicitConversionsAndClasses = true,
+      showImplicitArguments = false,
+      showImplicitConversionsAndClasses = false,
       showInferredType = true,
-      superMethodLensesEnabled = true,
+      superMethodLensesEnabled = false,
       autoImportBuild = "initial",
       serverProperties = { "-Dmetals.enable-best-effort=true" },
     }
-    metals_config.init_options.statusBarProvider = "on"
+    metals_config.init_options.statusBarProvider = "off"
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
     metals_config.capabilities = capabilities
