@@ -34,3 +34,7 @@ set -gx PATH "$PATH:/home/dove/.local/share/coursier/bin"
 # >>> scala-cli completions >>>
 complete scala -a '(scala complete fish-v1 (math 1 + (count (__fish_print_cmd_args))) (__fish_print_cmd_args))'
 # <<< scala-cli completions <<<
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
