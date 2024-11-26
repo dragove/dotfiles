@@ -6,8 +6,13 @@ return {
     require("catppuccin").setup({
       transparent_background = true,
       integrations = {
-        cmp = false,
+        lsp_saga = true,
         blink_cmp = true,
+        indent_blankline = {
+          enabled = true,
+          scope_color = "lavender",
+          colored_indent_levels = false,
+        },
       },
     })
     vim.cmd.colorscheme("catppuccin-frappe")

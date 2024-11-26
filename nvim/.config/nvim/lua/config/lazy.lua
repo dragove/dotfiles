@@ -17,6 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
+  concurrency = 5,
   spec = {
     { import = "plugins" },
   },
