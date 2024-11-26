@@ -4,11 +4,22 @@ return {
   lazy = false,
   opts = {
     keymap = { preset = "enter" },
-    nerd_font_variant = "mono",
     sources = {
       completion = {
         enabled_providers = { "lsp", "path", "snippets", "buffer" },
       },
+    },
+    trigger = {
+      completion = {
+        keyword_range = "full",
+        blocked_trigger_characters = { " ", "\n", "\t", "(", ")", '"', "'", "{", "}", "[", "]", "," },
+      },
+      signature_help = {
+        enabled = true,
+      },
+    },
+    fuzzy = {
+      use_typo_resistance = false,
     },
   },
 }
