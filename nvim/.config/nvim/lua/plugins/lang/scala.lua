@@ -3,8 +3,7 @@ return {
   ft = { "scala", "sbt", "java" },
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "hrsh7th/cmp-nvim-lsp",
-    "neovim/nvim-lspconfig",
+    "saghen/blink.cmp",
     "nvimdev/guard.nvim",
   },
   config = function()
@@ -33,8 +32,7 @@ return {
     }
     metals_config.init_options.statusBarProvider = "off"
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-    metals_config.capabilities = capabilities
+    metals_config.capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
     local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
     vim.api.nvim_create_autocmd("FileType", {

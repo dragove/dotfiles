@@ -3,6 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "nvimdev/lspsaga.nvim",
+    "saghen/blink.cmp",
   },
   config = function()
     local lspsaga = require("lspsaga")
@@ -83,8 +84,13 @@ return {
       settings = {
         Lua = {},
       },
+      capabilities = require("blink.cmp").get_lsp_capabilities(),
     })
-    require("lspconfig").basedpyright.setup({})
-    require("lspconfig").clangd.setup({})
+    require("lspconfig").basedpyright.setup({
+      capabilities = require("blink.cmp").get_lsp_capabilities(),
+    })
+    require("lspconfig").clangd.setup({
+      capabilities = require("blink.cmp").get_lsp_capabilities(),
+    })
   end,
 }

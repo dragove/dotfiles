@@ -5,6 +5,10 @@ return {
   config = function()
     require("catppuccin").setup({
       transparent_background = true,
+      integrations = {
+        cmp = false,
+        blink_cmp = true,
+      },
     })
     vim.cmd.colorscheme("catppuccin-frappe")
   end,

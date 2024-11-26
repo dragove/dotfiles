@@ -50,7 +50,7 @@ opt.softtabstop = -1
 opt.virtualedit = "block"
 opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-opt.foldlevelstart = 5
+opt.foldlevelstart = 6
 
 opt.showcmdloc = "statusline"
 opt.completeopt = "menuone,noselect,noinsert,popup"
