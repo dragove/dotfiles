@@ -52,6 +52,9 @@ opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldlevelstart = 6
 
+-- conceal to make content more readable
+opt.conceallevel = 1
+
 opt.showcmdloc = "statusline"
 opt.completeopt = "menuone,noselect,noinsert,popup"
 
