@@ -12,7 +12,7 @@ return {
     trigger = {
       completion = {
         keyword_range = "full",
-        blocked_trigger_characters = { " ", "\n", "\t", "(", ")", '"', "'", "{", "}", "[", "]", "," },
+        blocked_trigger_characters = { " ", "\n", "\t", "(", ")", '"', "'", "{", "}", "[", "]", ",", "<", ">" },
       },
       signature_help = {
         enabled = true,
