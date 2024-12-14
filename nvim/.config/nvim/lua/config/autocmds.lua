@@ -6,7 +6,7 @@ autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
-autocmd({ "TextChanged", "InsertLeave" }, {
+autocmd({ "InsertLeave", "FocusLost", "BufLeave" }, {
   desc = "Autosave on some actions",
   command = "silent! wall",
   nested = true,
