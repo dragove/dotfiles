@@ -17,6 +17,13 @@ autocmd("BufRead", {
     vim.bo.modifiable = not vim.bo.readonly
   end,
 })
+autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "build.mill",
+  desc = "Make mill file to be recognized as scala file",
+  callback = function()
+    vim.bo.filetype = "scala"
+  end,
+})
 local max_filesize = 1024 * 1024 -- 1 MB
 local function big_file(buf)
   local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
