@@ -1,25 +1,20 @@
 return {
   "saghen/blink.cmp",
-  version = "v0.*",
-  lazy = false,
+  version = "*",
   opts = {
     keymap = { preset = "enter" },
-    sources = {
-      completion = {
-        enabled_providers = { "lsp", "path", "snippets", "buffer" },
-      },
+    appearance = { use_nvim_cmp_as_default = false },
+    completion = {
+      keyword = { range = "full" },
     },
-    trigger = {
-      completion = {
-        keyword_range = "full",
-        blocked_trigger_characters = { " ", "\n", "\t", "(", ")", '"', "'", "{", "}", "[", "]", ",", "<", ">" },
-      },
-      signature_help = {
-        enabled = true,
-      },
+    signature = {
+      enabled = true,
     },
     fuzzy = {
       use_typo_resistance = false,
+    },
+    sources = {
+      cmdline = {},
     },
   },
 }
