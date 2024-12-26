@@ -46,7 +46,6 @@
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
-      "enter": "editor::SelectLargerSyntaxNode",
       "Q": "pane::CloseActiveItem",
       "space o": "outline::Toggle",
       "space c f": "editor::Format",
@@ -67,7 +66,6 @@
   {
     "context": "Editor && vim_mode == visual",
     "bindings": {
-      "enter": "editor::SelectLargerSyntaxNode",
       "backspace": "editor::SelectSmallerSyntaxNode",
       "space c f": "editor::FormatSelections"
     }
