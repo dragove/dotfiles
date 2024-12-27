@@ -1,6 +1,12 @@
 theme = catppuccin-frappe
-window-decoration = false
 font-family = Maple Mono NF CN
 font-size = 16
 confirm-close-surface = false
 shell-integration-features = no-cursor
+
+window-theme = ghostty
+window-decoration = false
+window-padding-balance = true
+gtk-single-instance = true
+gtk-tabs-location = bottom
+gtk-wide-tabs = false
