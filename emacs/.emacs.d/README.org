@@ -161,7 +161,7 @@ This code block is a place holder for debugging emacs when needed
 ;; Set default font
 (set-face-attribute 'default nil
                     :family "FiraCode Nerd Font"
-                    :height 180)
+                    :height 160)
 
 (set-fontset-font t 'han (font-spec :family "LXGW WenKai" :size 21))
 #+end_src
@@ -1090,4 +1090,13 @@ Catppuccin Theme
 *** Scala
 #+begin_src emacs-lisp
 (use-package scala-ts-mode)
+#+end_src
+*** Kotlin
+#+begin_src emacs-lisp
+(require 'treesit)
+(add-to-list 'treesit-language-source-alist '(kotlin . ("https://github.com/fwcd/tree-sitter-kotlin")))
+(use-package kotlin-ts-mode
+  :ensure (:host gitlab :repo "bricka/emacs-kotlin-ts-mode")
+  :mode "\\.kt\\'" ; if you want this mode to be auto-enabled
+  )
 #+end_src

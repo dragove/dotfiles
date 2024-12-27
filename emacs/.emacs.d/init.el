@@ -70,7 +70,7 @@
 ;; Set default font
 (set-face-attribute 'default nil
                     :family "FiraCode Nerd Font"
-                    :height 180)
+                    :height 160)
 
 (set-fontset-font t 'han (font-spec :family "LXGW WenKai" :size 21))
 
@@ -892,3 +892,10 @@
               auto-mode-alist))
 
 (use-package scala-ts-mode)
+
+(require 'treesit)
+(add-to-list 'treesit-language-source-alist '(kotlin . ("https://github.com/fwcd/tree-sitter-kotlin")))
+(use-package kotlin-ts-mode
+  :ensure (:host gitlab :repo "bricka/emacs-kotlin-ts-mode")
+  :mode "\\.kt\\'" ; if you want this mode to be auto-enabled
+  )
