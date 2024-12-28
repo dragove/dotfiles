@@ -48,8 +48,7 @@ opt.tabstop = 2
 opt.shiftwidth = 0
 opt.softtabstop = -1
 opt.virtualedit = "block"
-opt.foldmethod = "expr"
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldmethod = "indent"
 opt.foldlevelstart = 6
 
 -- conceal to make content more readable
