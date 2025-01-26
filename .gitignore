@@ -12,5 +12,4 @@ lazy-lock.json
 *.bak
 /musicfox
 !/musicfox/.config/go-musicfox/go-musicfox.ini
-/nu/.config/nushell/history.sqlite3
-/nu/.config/nushell/history.txt
+/nu/.config/nushell/history*

@@ -12,7 +12,7 @@ return {
       enabled = true,
     },
     fuzzy = {
-      use_typo_resistance = false,
+      max_typos = nil,
     },
     sources = {
       cmdline = {},
