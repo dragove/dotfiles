@@ -1,32 +1,28 @@
 confirm-before-quit = false
+padding-x = 6
 
 [cursor]
 shape = 'block'
 
 [window]
-width = 1024
-height = 768
-mode = "windowed"
-opacity = 1.0
-blur = false
-decorations = "disabled"
+mode = "Maximized"
+decorations = "Disabled"
 
 [fonts]
-  family = "Maple Mono NF CN"
-  size = 21
+family = "Maple Mono NF CN"
+size = 21
 [fonts.regular]
 family = "Maple Mono NF CN"
 style = "Normal"
-weight = 460
+weight = 480
 
 [navigation]
-mode = "plain"
+mode = "Bookmark"
 clickable = false
 hide-if-single = true
 use-current-path = true
 
 [colors]
-
 # Normal
 foreground       = '#c6d0f5'
 background       = '#303446'
