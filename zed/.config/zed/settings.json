@@ -26,7 +26,8 @@
     "button": false
   },
   "chat_panel": {
-    "button": false
+    "dock": null,
+    "button": "never"
   },
   "notification_panel": {
     "button": false
