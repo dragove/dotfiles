@@ -1,7 +1,7 @@
 return {
   "lewis6991/satellite.nvim",
   opts = {
-    winblend = 0,
+    winblend = 100,
     gitsigns = { enable = true },
   },
 }

@@ -5,8 +5,8 @@ return {
     local utils = require("heirline.utils")
     local conditions = require("heirline.conditions")
     local catppuccin = require("catppuccin.palettes").get_palette("frappe")
-    local Align = { provider = "%=" }
-    local Space = { provider = " " }
+    local Align = { provider = "%=", hl = { fg = "NONE" } }
+    local Space = { provider = " ", hl = { fg = "NONE" } }
     local colors = {
       bg = catppuccin.base,
       fg = catppuccin.text,
@@ -94,12 +94,10 @@ return {
     }
 
     local FileNameBlock = {
-      -- let's first set up some attributes needed by this component and it's children
       init = function(self)
         self.filename = vim.api.nvim_buf_get_name(0)
       end,
     }
-    -- We can now define some children separately and add them later
 
     local FileIcon = {
       init = function(self)
@@ -185,6 +183,7 @@ return {
           return ""
         end
       end,
+      hl = { fg = "cyan" },
     }
 
     local ShowCmd = {
@@ -192,6 +191,7 @@ return {
         return vim.o.cmdheight == 0
       end,
       provider = "%2(%S%)",
+      hl = { fg = "white" },
     }
 
     local lspProgress = require("lsp-progress")
@@ -233,6 +233,7 @@ return {
 
     local Ruler = {
       provider = "%7(%l/%L%):%2c",
+      hl = { fg = "blue" },
     }
 
     local Git = {

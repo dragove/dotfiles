@@ -31,7 +31,6 @@ opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
-opt.winblend = 0
 opt.wrap = false
 opt.list = true
 opt.listchars = "tab:» ,nbsp:+,trail:·,extends:→,precedes:←,"

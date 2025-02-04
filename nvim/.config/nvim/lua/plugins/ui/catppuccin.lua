@@ -4,7 +4,7 @@ return {
   priority = 1000,
   config = function()
     require("catppuccin").setup({
-      transparent_background = true,
+      transparent_background = false,
       integrations = {
         lsp_saga = true,
         blink_cmp = true,
@@ -14,6 +14,11 @@ return {
           colored_indent_levels = false,
         },
       },
+      custom_highlights = function(color)
+        return {
+          NormalFloat = { fg = color.text, bg = color.none },
+        }
+      end,
     })
     vim.cmd.colorscheme("catppuccin-frappe")
   end,
