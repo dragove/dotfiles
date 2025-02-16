@@ -14,8 +14,8 @@ return {
     fuzzy = {
       max_typos = nil,
     },
-    sources = {
-      cmdline = {},
+    cmdline = {
+      sources = {},
     },
   },
 }
