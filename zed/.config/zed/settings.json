@@ -68,5 +68,31 @@
     "show_background": false,
     "edit_debounce_ms": 700,
     "scroll_debounce_ms": 50
+  },
+  "lsp": {
+    "metals": {
+      "settings": {
+        "useGlobalExecutable": true,
+        "showImplicitArguments": false,
+        "showImplicitConversionsAndClasses": false,
+        "showInferredType": true,
+        "superMethodLensesEnabled": false,
+        "autoImportBuild": "initial",
+        "serverProperties": [
+          "-Xmx2G",
+          "-Dmetals.enable-best-effort=true",
+          "-XX:+UseZGC",
+          "-XX:ZUncommitDelay=30",
+          "-XX:ZCollectionInterval=5"
+        ],
+        "inlayHints": {
+          "hintsInPatternMatch": { "enable": true },
+          "implicitArguments": { "enable": false },
+          "implicitConversions": { "enable": false },
+          "inferredTypes": { "enable": true },
+          "typeParameters": { "enable": false }
+        }
+      }
+    }
   }
 }
