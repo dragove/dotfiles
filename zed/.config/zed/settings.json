@@ -10,11 +10,15 @@
   "buffer_font_family": "Maple Mono NF CN",
   "projects_online_by_default": false,
   "features": {
-    "inline_completion_provider": "supermaven"
+    "edit_prediction_provider": "supermaven"
   },
   "assistant": {
-    "enabled": false,
-    "button": false,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+    },
+    "enabled": true,
+    "button": true,
     "version": "2"
   },
   "terminal": {
