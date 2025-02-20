@@ -102,7 +102,7 @@
       (set-visited-file-name new-name)
       (rename-buffer new-name))))
 
-(defvar elpaca-installer-version 0.8)
+(defvar elpaca-installer-version 0.9)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
@@ -812,8 +812,8 @@
       (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
       (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))))
 
+(use-package transient)
 (use-package magit
-  :ensure (:tag "v3.3.0" :pin t)
   :bind (("C-M-g" . magit-status-here)))
 
 (use-package eat
