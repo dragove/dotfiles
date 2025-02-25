@@ -15,7 +15,7 @@ return {
       max_typos = nil,
     },
     cmdline = {
-      sources = {},
+      enabled = false
     },
   },
 }
