@@ -1,9 +1,9 @@
 return {
   "scalameta/nvim-metals",
-  ft = { "scala", "sbt" },
+  ft = { "scala", "sbt", "java" },
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "saghen/blink.cmp"
+    "saghen/blink.cmp",
   },
   config = function()
     local metals_config = require("metals").bare_config()
@@ -30,16 +30,13 @@ return {
       },
     }
     metals_config.init_options.statusBarProvider = "off"
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    metals_config.capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+    metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
 
-    local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "scala", "sbt", "java" },
       callback = function()
         require("metals").initialize_or_attach(metals_config)
       end,
-      group = nvim_metals_group,
     })
   end,
 }
