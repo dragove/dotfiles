@@ -2,14 +2,10 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "nvimdev/lspsaga.nvim",
+    "folke/snacks.nvim",
     "saghen/blink.cmp",
   },
   config = function()
-    local lspsaga = require("lspsaga")
-    lspsaga.setup({
-      lightbulb = { enable = false },
-    })
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
@@ -18,14 +14,22 @@ return {
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
-        map("<leader>cr", "<CMD>Lspsaga rename<CR>", "rename")
-        map("<leader>ca", "<CMD>Lspsaga code_action<CR>", "code action", { "n", "x" })
-        map("gd", "<CMD>Lspsaga goto_definition<CR>", "goto definition")
-        map("gi", "<CMD>Lspsaga finder imp<CR>", "goto implementation")
-        map("[d", "<CMD>Lspsaga diagnostic_jump_prev<CR>", "jump to previous diagnostics")
-        map("]d", "<CMD>Lspsaga diagnostic_jump_next<CR>", "jump to next diagnostics")
-        map("K", "<CMD>Lspsaga hover_doc<CR>", "show doc")
-        map("<leader>o", "<CMD>Lspsaga outline<CR>", "open outline")
+        map("<leader>cr", vim.lsp.buf.rename, "rename")
+        map("<leader>ca", vim.lsp.buf.code_action, "code action", { "n", "x" })
+        map("gd", function()
+          Snacks.picker.lsp_definitions()
+        end, "Goto Definition")
+        map("gD", function()
+          Snacks.picker.lsp_declarations()
+        end, "Goto Definition")
+        map("gi", function()
+          Snacks.picker.lsp_implementations()
+        end, "goto implementation")
+        map("[d", vim.diagnostic.goto_prev, "jump to previous diagnostics")
+        map("]d", vim.diagnostic.goto_next, "jump to next diagnostics")
+        map("<leader>o", function()
+          Snacks.picker.lsp_symbols()
+        end, "open outline")
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then

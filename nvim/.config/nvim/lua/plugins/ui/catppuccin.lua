@@ -8,10 +8,9 @@ return {
       integrations = {
         lsp_saga = true,
         blink_cmp = true,
-        indent_blankline = {
-          enabled = true,
-          scope_color = "lavender",
-          colored_indent_levels = false,
+        snacks = {
+          enabled = false,
+          indent_scope_color = "lavender",
         },
       },
       custom_highlights = function(color)

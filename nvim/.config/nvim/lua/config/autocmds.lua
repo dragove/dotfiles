@@ -24,22 +24,7 @@ autocmd({ "BufNewFile", "BufRead" }, {
     vim.bo.filetype = "scala"
   end,
 })
-local max_filesize = 1024 * 1024 -- 1 MB
-local function big_file(buf)
-  local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-  if ok and stats and stats.size > max_filesize then
-    return true
-  end
-end
-vim.filetype.add({
-  pattern = {
-    [".*"] = {
-      function(path, buf)
-        return path and big_file(buf) and "bigfile" or nil
-      end,
-    },
-  },
-})
+
 -- auto fill background color on margins
 local modified = false
 autocmd({ "UIEnter", "ColorScheme" }, {

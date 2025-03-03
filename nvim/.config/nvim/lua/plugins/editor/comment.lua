@@ -1,7 +1,5 @@
 return {
-  "JoosepAlviste/nvim-ts-context-commentstring",
-  event = { "BufReadPost", "BufNewFile" },
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-  }
+  "folke/ts-comments.nvim",
+  opts = {},
+  event = "VeryLazy",
 }
