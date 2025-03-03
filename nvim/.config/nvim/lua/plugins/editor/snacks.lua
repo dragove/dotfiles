@@ -51,6 +51,13 @@ return {
       desc = "Grep",
     },
     {
+      "<leader>sn",
+      function ()
+        Snacks.picker.notifications()
+      end,
+      desc = "notifications"
+    },
+    {
       "<C-`>",
       function()
         Snacks.terminal()

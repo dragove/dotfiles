@@ -2,7 +2,7 @@
 # VERSION: 3.0
 SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dcolor\x3dbg\x2b\x3a\x23414559\x2cbg\x3a\x23303446\x2cspinner\x3a\x23f2d5cf\x2chl\x3a\x23e78284\x20\x2d\x2dcolor\x3dfg\x3a\x23c6d0f5\x2cheader\x3a\x23e78284\x2cinfo\x3a\x23ca9ee6\x2cpointer\x3a\x23f2d5cf\x20\x2d\x2dcolor\x3dmarker\x3a\x23f2d5cf\x2cfg\x2b\x3a\x23c6d0f5\x2cprompt\x3a\x23ca9ee6\x2chl\x2b\x3a\x23e78284
 SETUVAR MY_ABBR_SET:true
-SETUVAR __fish_initialized:3400
+SETUVAR __fish_initialized:3800
 SETUVAR _fisher_catppuccin_2F_fish_files:\x7e/\x2econfig/fish/themes/Catppuccin\x20Frappe\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Latte\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Macchiato\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Mocha\x2etheme
 SETUVAR _fisher_plugins:catppuccin/fish
 SETUVAR _fisher_upgraded_to_4_4:\x1d

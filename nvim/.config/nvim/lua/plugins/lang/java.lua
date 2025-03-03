@@ -2,8 +2,7 @@ return {
   "mfussenegger/nvim-jdtls",
   ft = { "java" },
   dependencies = {
-    "neovim/nvim-lspconfig",
-    "nvimdev/guard.nvim",
+    "neovim/nvim-lspconfig"
   },
   config = function()
     local config = {

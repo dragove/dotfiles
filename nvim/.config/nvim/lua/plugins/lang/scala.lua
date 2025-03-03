@@ -3,8 +3,7 @@ return {
   ft = { "scala", "sbt", "java" },
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "saghen/blink.cmp",
-    "nvimdev/guard.nvim",
+    "saghen/blink.cmp"
   },
   config = function()
     local metals_config = require("metals").bare_config()
