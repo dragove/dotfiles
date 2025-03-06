@@ -13,6 +13,9 @@ return {
         python = { "ruff" },
         rust = { "rustfmt", lsp_format = "fallback" },
       },
+      default_format_opts = {
+        lsp_format = "fallback",
+      },
     })
     vim.keymap.set({ "n", "v" }, "<leader>cf", function()
       conform.format()

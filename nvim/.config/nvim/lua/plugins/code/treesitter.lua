@@ -23,7 +23,7 @@ return {
         "typescript",
       },
       highlight = {
-        enable = true
+        enable = true,
       },
     })
   end,
