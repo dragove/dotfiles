@@ -12,7 +12,6 @@ return {
       showImplicitArguments = false,
       showImplicitConversionsAndClasses = false,
       showInferredType = true,
-      superMethodLensesEnabled = false,
       autoImportBuild = "initial",
       serverProperties = {
         "-Xmx2G",

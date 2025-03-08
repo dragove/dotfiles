@@ -63,6 +63,13 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
           end, "Toggle Inlay Hints")
         end
+
+        if client and client.server_capabilities.codeLensProvider then
+          vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+            buffer = event.buf,
+            callback = vim.lsp.codelens.refresh,
+          })
+        end
       end,
     })
     require("lspconfig").lua_ls.setup({
