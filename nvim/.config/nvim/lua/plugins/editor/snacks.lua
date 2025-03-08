@@ -52,10 +52,10 @@ return {
     },
     {
       "<leader>sn",
-      function ()
+      function()
         Snacks.picker.notifications()
       end,
-      desc = "notifications"
+      desc = "notifications",
     },
     {
       "<C-`>",

@@ -15,7 +15,7 @@ return {
       max_typos = nil,
     },
     cmdline = {
-      enabled = false
+      enabled = false,
     },
   },
 }
