@@ -16,6 +16,7 @@ return {
 
         map("<leader>cr", vim.lsp.buf.rename, "rename")
         map("<leader>ca", vim.lsp.buf.code_action, "code action", { "n", "x" })
+        map("<leader>cl", vim.lsp.codelens.run, "run code lens")
         map("gd", function()
           Snacks.picker.lsp_definitions()
         end, "Goto Definition")
