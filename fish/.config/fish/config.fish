@@ -17,6 +17,11 @@ if status is-interactive
     abbr parur "paru -Qq | fzf --multi --preview 'paru -Qi {1}' | xargs -ro paru -Rns"
 end
 
+# fzf
+# set -g FZF_DEFAULT_COMMAND "fd --type file --color=always --follow --exclude .git"
+set -g FZF_CTRL_T_COMMAND "fd --type f --follow --color=always"
+set -g FZF_ALT_C_COMMAND "fd --type d --follow --color=always"
+set -g FZF_DEFAULT_OPTS "--ansi"
 
 set -gx PATH "/opt/cuda/bin" $PATH
 
