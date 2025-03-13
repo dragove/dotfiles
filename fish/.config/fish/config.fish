@@ -24,6 +24,7 @@ set -g FZF_ALT_C_COMMAND "fd --type d --follow --color=always"
 set -g FZF_DEFAULT_OPTS "--ansi"
 
 set -gx PATH "/opt/cuda/bin" $PATH
+set -gx PATH "$HOME/.local/bin" $PATH
 
 # pnpm
 set -gx PNPM_HOME "/home/dove/.local/share/pnpm"
@@ -35,7 +36,7 @@ end
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/dove/.ghcup/bin $PATH # ghcup-env
 
 # >>> coursier install directory >>>
-set -gx PATH "$PATH:/home/dove/.local/share/coursier/bin"
+set -gx PATH "$HOME/.local/share/coursier/bin" $PATH
 # <<< coursier install directory <<<
 
 # >>> scala-cli completions >>>
