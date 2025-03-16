@@ -56,4 +56,3 @@ opt.conceallevel = 1
 opt.showcmdloc = "statusline"
 opt.completeopt = "menuone,noselect,noinsert,popup"
 
--- require("config.messages").init()

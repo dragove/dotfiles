@@ -57,9 +57,9 @@
       "space f f": "file_finder::Toggle",
       "space f s": "project_symbols::Toggle",
       "space s r": "workspace::NewSearch",
-      "[ d": "editor::GoToPrevDiagnostic",
+      "[ d": "editor::GoToPreviousDiagnostic",
       "] d": "editor::GoToDiagnostic",
-      "[ c": "editor::GoToPrevHunk",
+      "[ c": "editor::GoToPreviousHunk",
       "] c": "editor::GoToHunk"
     }
   },
