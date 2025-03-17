@@ -47,6 +47,7 @@
     "context": "Editor && vim_mode == normal",
     "bindings": {
       "Q": "pane::CloseActiveItem",
+      "S": "workspace::Save",
       "space o": "outline::Toggle",
       "space c f": "editor::Format",
       "space c a": "editor::ToggleCodeActions",
