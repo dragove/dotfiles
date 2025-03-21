@@ -26,6 +26,8 @@ set -g FZF_DEFAULT_OPTS "--ansi"
 set -gx PATH "/opt/cuda/bin" $PATH
 set -gx PATH "$HOME/.local/bin" $PATH
 
+set --export EDITOR nvim
+
 # pnpm
 set -gx PNPM_HOME "/home/dove/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
