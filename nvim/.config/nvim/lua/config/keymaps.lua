@@ -10,8 +10,16 @@ map({ "n" }, "Q", utils.close_buf)
 map({ "n" }, "<leader>bd", "<CMD>confirm bd<CR>")
 
 -- jump window
-map({ "n", "i", "t" }, "<A-o>", function()
+map({ "n", "i", "t" }, "<M-o>", function()
+  local cur_win_conf = vim.api.nvim_win_get_config(0)
+  if (cur_win_conf.relative ~= "") then return
+  end
   vim.cmd.wincmd("w")
+  cur_win_conf = vim.api.nvim_win_get_config(0)
+  while cur_win_conf.relative ~= "" do
+    vim.cmd.wincmd("w")
+    cur_win_conf = vim.api.nvim_win_get_config(0)
+  end
 end, { desc = "jump to another window" })
 
 -- emacs like keymap on insert and terminal mode
