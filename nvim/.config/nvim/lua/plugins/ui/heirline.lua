@@ -5,8 +5,6 @@ return {
     local utils = require("heirline.utils")
     local conditions = require("heirline.conditions")
     local catppuccin = require("catppuccin.palettes").get_palette("frappe")
-    local Align = { provider = "%=", hl = { fg = "NONE" } }
-    local Space = { provider = " ", hl = { fg = "NONE" } }
     local colors = {
       bg = catppuccin.base,
       fg = catppuccin.text,
@@ -18,14 +16,18 @@ return {
       cyan = catppuccin.teal,
       dark = catppuccin.mantle,
     }
+    local bg = colors.bg
     require("heirline").load_colors(colors)
+
+    local Align = { provider = "%=", hl = { bg = bg } }
+    local Space = { provider = " ", hl = { bg = bg } }
 
     local viMode = {
       init = function(self)
         self.mode = vim.fn.mode(1)
       end,
       static = {
-        mode_names = { -- change the strings if you like it vvvvverbose!
+        mode_names = {
           n = "󰭩 N",
           no = "󰭩 N?",
           nov = "󰭩 N?",
@@ -82,7 +84,7 @@ return {
       end,
       hl = function(self)
         local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = self.mode_colors[mode], bold = true }
+        return { fg = self.mode_colors[mode], bold = true, bg = bg }
       end,
       update = {
         "ModeChanged",
@@ -110,7 +112,7 @@ return {
         return self.icon and (self.icon .. " ")
       end,
       hl = function(self)
-        return { fg = self.icon_color }
+        return { fg = self.icon_color, bg = bg }
       end,
     }
 
@@ -125,7 +127,7 @@ return {
         end
         return filename
       end,
-      hl = { fg = utils.get_highlight("Directory").fg },
+      hl = { fg = utils.get_highlight("Directory").fg, bg = bg },
     }
 
     local FileFlags = {
@@ -134,14 +136,14 @@ return {
           return vim.bo.modified
         end,
         provider = "[+]",
-        hl = { fg = "green" },
+        hl = { fg = "green", bg = bg },
       },
       {
         condition = function()
           return not vim.bo.modifiable or vim.bo.readonly
         end,
         provider = "",
-        hl = { fg = "orange" },
+        hl = { fg = "orange", bg = bg },
       },
     }
 
@@ -152,12 +154,12 @@ return {
         return vim.fn.reg_recording() ~= "" and vim.o.cmdheight == 0
       end,
       provider = " ",
-      hl = { fg = "orange", bold = true },
+      hl = { fg = "orange", bold = true, bg = bg },
       utils.surround({ "[", "]" }, nil, {
         provider = function()
           return vim.fn.reg_recording()
         end,
-        hl = { fg = "green", bold = true },
+        hl = { fg = "green", bold = true, bg = bg },
       }),
       update = {
         "RecordingEnter",
@@ -183,7 +185,7 @@ return {
           return ""
         end
       end,
-      hl = { fg = "cyan" },
+      hl = { fg = "cyan", bg = bg },
     }
 
     local ShowCmd = {
@@ -191,7 +193,7 @@ return {
         return vim.o.cmdheight == 0
       end,
       provider = "%2(%S%)",
-      hl = { fg = "white" },
+      hl = { fg = "white", bg = bg },
     }
 
     local lspProgress = require("lsp-progress")
@@ -228,12 +230,12 @@ return {
       provider = function()
         return lspProgress.progress()
       end,
-      hl = { fg = "green" },
+      hl = { fg = "green", bg = bg },
     }
 
     local Ruler = {
       provider = "%7(%l/%L%):%2c",
-      hl = { fg = "blue" },
+      hl = { fg = "blue", bg = bg },
     }
 
     local Git = {
@@ -242,7 +244,7 @@ return {
         self.status_dict = vim.b.gitsigns_status_dict
         self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
       end,
-      hl = { fg = "magenta" },
+      hl = { fg = "magenta", bg = bg },
       {
         provider = function(self)
           return " " .. self.status_dict.head
@@ -260,21 +262,21 @@ return {
           local count = self.status_dict.added or 0
           return count > 0 and ("+" .. count)
         end,
-        hl = { fg = "green" },
+        hl = { fg = "green", bg = bg },
       },
       {
         provider = function(self)
           local count = self.status_dict.removed or 0
           return count > 0 and ("-" .. count)
         end,
-        hl = { fg = "red" },
+        hl = { fg = "red", bg = bg },
       },
       {
         provider = function(self)
           local count = self.status_dict.changed or 0
           return count > 0 and ("~" .. count)
         end,
-        hl = { fg = "yellow" },
+        hl = { fg = "yellow", bg = bg },
       },
       {
         condition = function(self)
