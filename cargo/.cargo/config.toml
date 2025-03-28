@@ -1,18 +1,8 @@
 [source.crates-io]
-registry = "https://github.com/rust-lang/crates.io-index"
-
-# Use the prefered mirror
 replace-with = 'ustc'
 
-[source.tuna]
-registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
-
 [source.ustc]
-registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 
-[source.sjtu]
-registry = "https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index"
-
-[source.rustcc]
-registry = "git://crates.rustcc.cn/crates.io-index"
-
+[registries.ustc]
+index = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
