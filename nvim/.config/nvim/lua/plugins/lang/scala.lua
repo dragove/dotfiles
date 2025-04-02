@@ -16,9 +16,6 @@ return {
       serverProperties = {
         "-Xmx2G",
         "-Dmetals.enable-best-effort=true",
-        "-XX:+UseZGC",
-        "-XX:ZUncommitDelay=30",
-        "-XX:ZCollectionInterval=5",
       },
       inlayHints = {
         hintsInPatternMatch = { enable = true },
