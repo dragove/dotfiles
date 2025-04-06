@@ -842,24 +842,18 @@
   (markdown-fontify-code-blocks-natively t)
   (markdown-enable-hilighting-syntax t))
 
-(use-package flymake
-  :ensure nil
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
   :custom
-  (flymake-show-diagnostics-at-end-of-line 'short))
-(use-package eglot
-  :ensure nil
-  :commands eglot eglot-ensure
-  :hook ((web-mode . eglot-ensure)
-         (typescript-ts-mode . eglot-ensure))
-  :custom ((eglot-events-buffer-size 0))
-  :config
-  (add-to-list 'eglot-server-programs
-               '(astro-mode . ("astro-ls" "--stdio"
-                               :initializationOptions
-                               (:typescript (:tsdk "./node_modules/typescript/lib")))))
-  (add-to-list 'eglot-server-programs
-               `((scala-mode scala-ts-mode)
-                 . ,(alist-get 'scala-mode eglot-server-programs))))
+  (lsp-completion-provider :none)
+  (lsp-log-io nil)
+  :commands lsp)
+;; optionally
+(use-package lsp-ui :commands lsp-ui-mode)
+;; optionally if you want to use debugger
+(use-package dap-mode)
 
 (use-package treesit
   :ensure nil
@@ -896,6 +890,13 @@
               auto-mode-alist))
 
 (use-package scala-ts-mode)
+(use-package lsp-metals
+  :ensure t
+  :custom
+  (lsp-metals-server-args '("-J-Xmx2G"
+                            "-J-Dmetals.enable-best-effort=true"))
+  (lsp-metals-enable-semantic-highlighting t)
+  :hook (scala-ts-mode . lsp))
 
 (require 'treesit)
 (add-to-list 'treesit-language-source-alist '(kotlin . ("https://github.com/fwcd/tree-sitter-kotlin")))

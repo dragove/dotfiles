@@ -18,12 +18,12 @@
 ;; Skipping a bunch of regular expression searching in the =file-name-handler-alist= should improve start time.
 (defvar default-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
+;;
 
-(let ((normal-gc-cons-threshold (* 20 1024 1024))
-      (init-gc-cons-threshold (* 128 1024 1024)))
-  (setq gc-cons-threshold init-gc-cons-threshold)
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+(setenv "LSP_USE_PLISTS" "true")
+
+(setq gc-cons-threshold 134217728) ;; 128MB
+(setq read-process-output-max 1048576) ;; 1MB
 
 ;; Inhibit resizing frame
 (setq frame-inhibit-implied-resize t)

@@ -34,15 +34,18 @@ This code is heavily stolen from [[https://github.com/progfolio/.emacs.d][progfo
 ;; Skipping a bunch of regular expression searching in the =file-name-handler-alist= should improve start time.
 (defvar default-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
+;; 
+#+end_src
+
+*** ENV
+#+begin_src emacs-lisp
+(setenv "LSP_USE_PLISTS" "true")
 #+end_src
 
 *** Garbage Collection
 #+begin_src emacs-lisp
-(let ((normal-gc-cons-threshold (* 20 1024 1024))
-      (init-gc-cons-threshold (* 128 1024 1024)))
-  (setq gc-cons-threshold init-gc-cons-threshold)
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+(setq gc-cons-threshold 134217728) ;; 128MB
+(setq read-process-output-max 1048576) ;; 1MB
 #+end_src
 
 *** Default UI
@@ -1023,26 +1026,20 @@ Catppuccin Theme
   (markdown-enable-hilighting-syntax t))
 #+end_src
 * Programming Languages
-*** Eglot
+*** LSP Mode
 #+begin_src emacs-lisp
-(use-package flymake
-  :ensure nil
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
   :custom
-  (flymake-show-diagnostics-at-end-of-line 'short))
-(use-package eglot
-  :ensure nil
-  :commands eglot eglot-ensure
-  :hook ((web-mode . eglot-ensure)
-         (typescript-ts-mode . eglot-ensure))
-  :custom ((eglot-events-buffer-size 0))
-  :config
-  (add-to-list 'eglot-server-programs
-               '(astro-mode . ("astro-ls" "--stdio"
-                               :initializationOptions
-                               (:typescript (:tsdk "./node_modules/typescript/lib")))))
-  (add-to-list 'eglot-server-programs
-               `((scala-mode scala-ts-mode)
-                 . ,(alist-get 'scala-mode eglot-server-programs))))
+  (lsp-completion-provider :none)
+  (lsp-log-io nil)
+  :commands lsp)
+;; optionally
+(use-package lsp-ui :commands lsp-ui-mode)
+;; optionally if you want to use debugger
+(use-package dap-mode)
 #+end_src
 *** Tree-Sitter
 #+begin_src emacs-lisp
@@ -1094,6 +1091,13 @@ Catppuccin Theme
 *** Scala
 #+begin_src emacs-lisp
 (use-package scala-ts-mode)
+(use-package lsp-metals
+  :ensure t
+  :custom
+  (lsp-metals-server-args '("-J-Xmx2G"
+                            "-J-Dmetals.enable-best-effort=true"))
+  (lsp-metals-enable-semantic-highlighting t)
+  :hook (scala-ts-mode . lsp))
 #+end_src
 *** Kotlin
 #+begin_src emacs-lisp
