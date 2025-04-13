@@ -80,21 +80,8 @@ return {
         end
       end,
     })
-    require("lspconfig").lua_ls.setup({
-      settings = {
-        Lua = {
-          completion = {
-            callSnippet = "Replace",
-          },
-        },
-      },
-      capabilities = require("blink.cmp").get_lsp_capabilities(),
-    })
-    require("lspconfig").basedpyright.setup({
-      capabilities = require("blink.cmp").get_lsp_capabilities(),
-    })
-    require("lspconfig").clangd.setup({
-      capabilities = require("blink.cmp").get_lsp_capabilities(),
-    })
+    vim.lsp.enable("lua_ls")
+    vim.lsp.enable("basedpyright")
+    vim.lsp.enable("clangd")
   end,
 }
