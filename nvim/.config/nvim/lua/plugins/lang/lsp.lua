@@ -6,7 +6,26 @@ return {
     "saghen/blink.cmp",
   },
   config = function()
-    vim.diagnostic.config({ virtual_lines = true })
+    vim.diagnostic.config({ virtual_text = true })
+    -- code copied from https://www.reddit.com/r/neovim/comments/1jm5atz/comment/mk9w6v0/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+    local function jumpWithVirtLineDiags(jumpCount)
+      pcall(vim.api.nvim_del_augroup_by_name, "jumpWithVirtLineDiags")
+      vim.diagnostic.jump({ count = jumpCount })
+      vim.diagnostic.config({
+        virtual_text = false,
+        virtual_lines = { current_line = true },
+      })
+      vim.defer_fn(function()
+        vim.api.nvim_create_autocmd("CursorMoved", {
+          desc = "User(once): Reset diagnostics virtual lines",
+          once = true,
+          group = vim.api.nvim_create_augroup("jumpWithVirtLineDiags", {}),
+          callback = function()
+            vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
+          end,
+        })
+      end, 1)
+    end
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
@@ -31,6 +50,12 @@ return {
         map("<leader>o", function()
           Snacks.picker.lsp_symbols()
         end, "open outline")
+        map("]d", function()
+          jumpWithVirtLineDiags(1)
+        end, "Next diagnostic")
+        map("[d", function()
+          jumpWithVirtLineDiags(-1)
+        end, "Prev diagnostic")
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client == nil then
