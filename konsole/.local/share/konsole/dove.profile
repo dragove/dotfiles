@@ -1,6 +1,8 @@
 [Appearance]
 ColorScheme=catppuccin-frappe
 Font=Maple Mono NF CN,14,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+UseFontLineChararacters=true
+WordMode=false
 
 [General]
 Name=dove
