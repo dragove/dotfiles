@@ -6,7 +6,7 @@ shell-integration-features = no-cursor
 
 maximize = true
 window-theme = ghostty
-window-decoration = false
+window-decoration = true
 window-padding-x = 8
 window-padding-y = 8
 window-padding-balance = true
