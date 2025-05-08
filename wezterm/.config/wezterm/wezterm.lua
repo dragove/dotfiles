@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local mux = wezterm.mux
 wezterm.on('gui-startup', function(cmd)
-  local tab, pane, window = mux.spawn_window(cmd or {})
+  local _, _, window = mux.spawn_window(cmd or {})
   window:gui_window():maximize()
 end)
 return {
@@ -12,7 +12,7 @@ return {
   check_for_updates = false,
   audible_bell = "Disabled",
   font = wezterm.font("Maple Mono NF CN"),
-  font_size = 16,
+  font_size = 14,
   hide_tab_bar_if_only_one_tab = true,
   window_decorations = "RESIZE",
   window_padding = {
