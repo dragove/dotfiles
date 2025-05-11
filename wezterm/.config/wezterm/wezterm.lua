@@ -5,7 +5,6 @@ wezterm.on('gui-startup', function(cmd)
   window:gui_window():maximize()
 end)
 return {
-  front_end = "WebGpu",
   max_fps = 120,
   animation_fps = 1,
   use_dead_keys = false,
