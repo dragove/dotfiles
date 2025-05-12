@@ -13,7 +13,6 @@ return {
   font = wezterm.font("Maple Mono NF CN"),
   font_size = 14,
   hide_tab_bar_if_only_one_tab = true,
-  window_decorations = "RESIZE",
   window_padding = {
     left = 4,
     right = 4,
