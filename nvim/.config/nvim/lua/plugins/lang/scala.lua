@@ -26,7 +26,6 @@ return {
       },
     }
     metals_config.init_options.statusBarProvider = "off"
-    metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
     metals_config.on_attach = function()
       require("metals").setup_dap()
     end

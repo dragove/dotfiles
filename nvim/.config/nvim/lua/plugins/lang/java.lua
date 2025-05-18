@@ -41,8 +41,7 @@ return {
         init_options = {
           bundles = {},
         },
-        settings = settings,
-        capabilities = require("blink.cmp").get_lsp_capabilities(),
+        settings = settings
       }
       require("jdtls").start_or_attach(config)
     end
