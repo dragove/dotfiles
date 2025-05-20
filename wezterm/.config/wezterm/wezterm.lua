@@ -10,7 +10,7 @@ return {
   use_dead_keys = false,
   check_for_updates = false,
   audible_bell = "Disabled",
-  font = wezterm.font("Maple Mono NF CN"),
+  font = wezterm.font("Maple Mono NF CN", { weight = 'Medium' }),
   font_size = 14,
   hide_tab_bar_if_only_one_tab = true,
   window_padding = {
