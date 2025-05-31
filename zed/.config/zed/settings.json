@@ -9,18 +9,6 @@
   "ensure_final_newline_on_save": false,
   "buffer_font_family": "Maple Mono NF CN",
   "projects_online_by_default": false,
-  "features": {
-    "edit_prediction_provider": "supermaven"
-  },
-  "assistant": {
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4o"
-    },
-    "enabled": true,
-    "button": true,
-    "version": "2"
-  },
   "terminal": {
     "env": {
       "EDITOR": "zed --wait"
@@ -76,14 +64,11 @@
         "showImplicitArguments": false,
         "showImplicitConversionsAndClasses": false,
         "showInferredType": true,
-        "superMethodLensesEnabled": false,
+        "superMethodLensesEnabled": true,
         "autoImportBuild": "initial",
         "serverProperties": [
           "-Xmx2G",
-          "-Dmetals.enable-best-effort=true",
-          "-XX:+UseZGC",
-          "-XX:ZUncommitDelay=30",
-          "-XX:ZCollectionInterval=5"
+          "-Dmetals.enable-best-effort=true"
         ],
         "inlayHints": {
           "hintsInPatternMatch": { "enable": true },
