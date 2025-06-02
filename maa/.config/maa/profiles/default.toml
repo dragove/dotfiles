@@ -1,8 +1,9 @@
 [connection]
-type = "ADB"
-adb_path = "adb"
-device = "192.168.240.112:5555"
-# config = "CompatPOSIXShell"
+preset = "Waydroid"
+
+[static_options]
+cpu_ocr = false
+gpu_ocr = 1
 
 [instance_options]
 touch_mode = "MAATouch"
