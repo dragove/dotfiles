@@ -34,7 +34,7 @@ opt.termguicolors = true
 opt.wrap = false
 opt.list = true
 opt.listchars = "tab:» ,nbsp:+,trail:·,extends:→,precedes:←,"
-opt.colorcolumn = 120
+opt.colorcolumn = "120"
 
 opt.scrolloff = 3
 opt.autoindent = true
