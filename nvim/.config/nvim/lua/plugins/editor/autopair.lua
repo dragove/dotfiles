@@ -1,13 +1,28 @@
 return {
-  "windwp/nvim-autopairs",
-  event = "InsertEnter",
-  config = function()
-    local autopairs = require("nvim-autopairs")
-    local cond = require("nvim-autopairs.conds")
-    autopairs.setup({
-      disable_in_visualblock = true,
-    })
-    -- disable single quote for some languages for symbols
-    autopairs.get_rules("'")[1]:with_pair(cond.not_filetypes({ "scheme", "lisp", "ocaml", "ml" }))
-  end,
+  'saghen/blink.pairs',
+  version = '*',
+  dependencies = 'saghen/blink.download',
+
+  --- @module 'blink.pairs'
+  --- @type blink.pairs.Config
+  opts = {
+    mappings = {
+      enabled = true,
+      disabled_filetypes = {},
+      pairs = {},
+    },
+    highlights = {
+      enabled = true,
+      groups = {
+        'BlinkPairsOrange',
+        'BlinkPairsPurple',
+        'BlinkPairsBlue',
+      },
+      matchparen = {
+        enabled = true,
+        group = 'MatchParen',
+      },
+    },
+    debug = false,
+  }
 }
