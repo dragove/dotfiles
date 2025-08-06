@@ -1,0 +1,4 @@
+select_formation = 4
+use_sanity_potion = true
+need_navigate = true
+formation = true
