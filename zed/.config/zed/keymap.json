@@ -48,13 +48,15 @@
     "bindings": {
       "Q": "pane::CloseActiveItem",
       "S": "workspace::Save",
+      "H": "pane::ActivatePreviousItem",
+      "L": "pane::ActivateNextItem",
       "space o": "outline::Toggle",
       "space c f": "editor::Format",
       "space c a": "editor::ToggleCodeActions",
       "space c r": "editor::Rename",
       "space b p": "pane::TogglePinTab",
       "space b d": "pane::CloseActiveItem",
-      "space b D": "pane::CloseInactiveItems",
+      "space b D": "pane::CloseOtherItems",
       "space f f": "file_finder::Toggle",
       "space f s": "project_symbols::Toggle",
       "space s r": "workspace::NewSearch",
@@ -68,7 +70,8 @@
     "context": "Editor && vim_mode == visual",
     "bindings": {
       "backspace": "editor::SelectSmallerSyntaxNode",
-      "space c f": "editor::FormatSelections"
+      "space c f": "editor::FormatSelections",
+      "space y": ["workspace::SendKeystrokes", "\" + y"]
     }
   },
   {

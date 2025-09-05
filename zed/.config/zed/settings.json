@@ -1,4 +1,11 @@
 {
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4"
+    },
+    "always_allow_tool_actions": true
+  },
   "vim_mode": true,
   "ui_font_size": 16,
   "auto_update": false,
@@ -8,7 +15,6 @@
   "buffer_font_size": 20,
   "ensure_final_newline_on_save": false,
   "buffer_font_family": "Maple Mono NF CN",
-  "projects_online_by_default": false,
   "terminal": {
     "env": {
       "EDITOR": "zed --wait"
@@ -24,11 +30,6 @@
   "notification_panel": {
     "button": false
   },
-  "languages": {
-    "Java": {
-      "enable_language_server": false
-    }
-  },
   "telemetry": {
     "diagnostics": false,
     "metrics": false
@@ -43,11 +44,6 @@
     "git_status": true,
     "activate_on_close": "history"
   },
-  "theme": {
-    "mode": "system",
-    "light": "Catppuccin Mocha",
-    "dark": "Catppuccin Frappé"
-  },
   "inlay_hints": {
     "enabled": true,
     "show_type_hints": true,
@@ -58,6 +54,66 @@
     "scroll_debounce_ms": 50
   },
   "lsp": {
+    "jdtls": {
+      "initialization_options": {
+        "bundles": [],
+        "settings": {
+          "java": {
+            "errors": {
+              "incompleteClasspath": {
+                "severity": "warning"
+              }
+            },
+            "configuration": {
+              "updateBuildConfiguration": "interactive"
+            },
+            "import": {
+              "gradle": {
+                "enabled": true
+              },
+              "maven": {
+                "enabled": true
+              },
+              "exclusions": [
+                "**/node_modules/**",
+                "**/.metadata/**",
+                "**/archetype-resources/**",
+                "**/META-INF/maven/**",
+                "/**/test/**"
+              ]
+            },
+            "jdt": {
+              "ls": {
+                "lombokSupport": {
+                  "enabled": true
+                }
+              }
+            },
+            "referencesCodeLens": {
+              "enabled": true
+            },
+            "signatureHelp": {
+              "enabled": true
+            },
+            "implementationsCodeLens": {
+              "enabled": true
+            },
+            "format": {
+              "enabled": true
+            },
+            "saveActions": {
+              "organizeImports": false
+            },
+            "contentProvider": {
+              "preferred": null
+            },
+            "autobuild": {
+              "enabled": true
+            }
+          }
+        }
+      }
+    },
     "metals": {
       "settings": {
         "useGlobalExecutable": true,
@@ -66,10 +122,7 @@
         "showInferredType": true,
         "superMethodLensesEnabled": true,
         "autoImportBuild": "initial",
-        "serverProperties": [
-          "-Xmx2G",
-          "-Dmetals.enable-best-effort=true"
-        ],
+        "serverProperties": ["-Xmx2G", "-Dmetals.enable-best-effort=true"],
         "inlayHints": {
           "hintsInPatternMatch": { "enable": true },
           "implicitArguments": { "enable": false },
