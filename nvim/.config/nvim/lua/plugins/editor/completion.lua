@@ -15,6 +15,7 @@ return {
       enabled = true,
     },
     fuzzy = {
+      implementation = "lua",
       max_typos = nil,
     },
     cmdline = {

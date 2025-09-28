@@ -1,5 +1,11 @@
 {
+  "theme": "Catppuccin Frappé (lavender)",
+  "icon_theme": "Catppuccin Frappé",
   "agent": {
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+    },
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-sonnet-4"
@@ -56,16 +62,24 @@
   "lsp": {
     "jdtls": {
       "initialization_options": {
-        "bundles": [],
         "settings": {
           "java": {
-            "errors": {
-              "incompleteClasspath": {
-                "severity": "warning"
-              }
-            },
             "configuration": {
-              "updateBuildConfiguration": "interactive"
+              "runtimes": [
+                {
+                    "name": "JavaSE-21",
+                    "path": "/usr/lib/jvm/java-21-openjdk",
+                    "default": true
+                },
+                {
+                    "name": "JavaSE-17",
+                    "path": "/usr/lib/jvm/java-17-openjdk"
+                },
+                {
+                    "name": "JavaSE-1.8",
+                    "path": "/usr/lib/jvm/java-8-openjdk"
+                }
+              ]
             },
             "import": {
               "gradle": {
@@ -84,6 +98,9 @@
             },
             "jdt": {
               "ls": {
+                "java": {
+                  "home": "/usr/lib/jvm/java-21-openjdk"
+                },
                 "lombokSupport": {
                   "enabled": true
                 }
@@ -103,9 +120,6 @@
             },
             "saveActions": {
               "organizeImports": false
-            },
-            "contentProvider": {
-              "preferred": null
             },
             "autobuild": {
               "enabled": true

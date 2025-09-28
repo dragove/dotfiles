@@ -11,11 +11,11 @@ mode = "Maximized"
 
 [fonts]
 family = "Maple Mono NF CN"
-size = 20
+size = 19
 [fonts.regular]
 family = "Maple Mono NF CN"
 style = "Normal"
-weight = 480
+weight = 410
 
 [navigation]
 mode = "Bookmark"
