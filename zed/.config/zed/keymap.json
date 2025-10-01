@@ -19,6 +19,13 @@
     }
   },
   {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
+      "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"]
+    }
+  },
+  {
     "context": "Workspace",
     "bindings": {
       "ctrl-shift-n": "file_finder::Toggle",
@@ -41,6 +48,13 @@
       "delete": ["project_panel::Trash", { "skip_prompt": false }],
       "shift-delete": ["project_panel::Delete", { "skip_prompt": false }],
       "shift-f6": "project_panel::Rename"
+    }
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space n": "workspace::ToggleLeftDock",
+      "space e": "project_panel::ToggleFocus"
     }
   },
   {
