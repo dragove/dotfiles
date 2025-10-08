@@ -18,7 +18,7 @@
   "cursor_blink": false,
   "format_on_save": "off",
   "autosave": "on_focus_change",
-  "buffer_font_size": 20,
+  "buffer_font_size": 18,
   "ensure_final_newline_on_save": false,
   "buffer_font_family": "Maple Mono NF CN",
   "terminal": {
