@@ -29,10 +29,6 @@
   "collaboration_panel": {
     "button": false
   },
-  "chat_panel": {
-    "dock": null,
-    "button": "never"
-  },
   "notification_panel": {
     "button": false
   },
@@ -66,6 +62,10 @@
           "java": {
             "configuration": {
               "runtimes": [
+                {
+                  "name": "JavaSE-25",
+                  "path": "/usr/lib/jvm/java-25-openjdk"
+                },
                 {
                     "name": "JavaSE-21",
                     "path": "/usr/lib/jvm/java-21-openjdk",
@@ -136,7 +136,6 @@
         "showInferredType": true,
         "superMethodLensesEnabled": true,
         "autoImportBuild": "initial",
-        "serverProperties": ["-Xmx2G", "-Dmetals.enable-best-effort=true"],
         "inlayHints": {
           "hintsInPatternMatch": { "enable": true },
           "implicitArguments": { "enable": false },
