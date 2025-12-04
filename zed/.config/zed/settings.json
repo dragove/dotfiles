@@ -2,14 +2,6 @@
   "theme": "Catppuccin Frappé (lavender)",
   "icon_theme": "Catppuccin Frappé",
   "agent": {
-    "inline_assistant_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4o"
-    },
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-sonnet-4"
-    },
     "always_allow_tool_actions": true
   },
   "vim_mode": true,
@@ -19,9 +11,16 @@
   "format_on_save": "off",
   "autosave": "on_focus_change",
   "buffer_font_size": 18,
-  "ensure_final_newline_on_save": false,
   "buffer_font_family": "Maple Mono NF CN",
+  "buffer_font_features": {
+    "calt": true
+  },
+  "ensure_final_newline_on_save": false,
   "terminal": {
+    "font_family": "Maple Mono NF CN",
+    "font_features": {
+      "calt": true
+    },
     "env": {
       "EDITOR": "zed --wait"
     }
@@ -55,6 +54,12 @@
     "edit_debounce_ms": 700,
     "scroll_debounce_ms": 50
   },
+  "colorize_brackets": true,
+  "languages": {
+    "Python": {
+      "language_servers": ["ty", "!basedpyright"]
+    }
+  },
   "lsp": {
     "jdtls": {
       "initialization_options": {
@@ -70,10 +75,6 @@
                   "name": "JavaSE-21",
                   "path": "/usr/lib/jvm/java-21-openjdk",
                   "default": true
-                },
-                {
-                  "name": "JavaSE-17",
-                  "path": "/usr/lib/jvm/java-17-openjdk"
                 },
                 {
                   "name": "JavaSE-1.8",
