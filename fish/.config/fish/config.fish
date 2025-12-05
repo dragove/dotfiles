@@ -1,20 +1,30 @@
+if status is-login
+  if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+    # exec wayfire
+    # exec sway --unsupported-gpu
+    # exec Hyprland
+    exec niri-session
+    # startx
+  end
+end
+
 if status is-interactive
-    abbr vi nvim
-    abbr vim nvim
-    abbr gs git status
-    abbr ga git add
-    abbr gf git fetch
-    abbr gF git pull
-    abbr gp git push
-    abbr gco git checkout
-    abbr gc git commit -m
-    abbr tree lsd --tree
-    abbr ls lsd
-    abbr ll lsd -hl
-    abbr la lsd -ahl
-    abbr p paru
-    abbr parui "paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S"
-    abbr parur "paru -Qq | fzf --multi --preview 'paru -Qi {1}' | xargs -ro paru -Rns"
+  abbr vi nvim
+  abbr vim nvim
+  abbr gs git status
+  abbr ga git add
+  abbr gf git fetch
+  abbr gF git pull
+  abbr gp git push
+  abbr gco git checkout
+  abbr gc git commit -m
+  abbr tree lsd --tree
+  abbr ls lsd
+  abbr ll lsd -hl
+  abbr la lsd -ahl
+  abbr p paru
+  abbr parui "paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S"
+  abbr parur "paru -Qq | fzf --multi --preview 'paru -Qi {1}' | xargs -ro paru -Rns"
 end
 
 # fzf
