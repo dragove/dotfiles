@@ -277,6 +277,8 @@ window-rule {
   match app-id="Waydroid"
   match title="MainMenuPanelView" app-id="com.alibabainc.dingtalk"
   match title="分享的图片" app-id="com.alibabainc.dingtalk"
+  match title="图片查看器" app-id="QQ"
+  match title=r#"的聊天记录$"# app-id="QQ"
   match title="Picture-in-Picture"
   match app-id="mpv"
   open-floating true
