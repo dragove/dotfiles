@@ -30,7 +30,6 @@
     "bindings": {
       "ctrl-shift-n": "file_finder::Toggle",
       "ctrl-shift-a": "command_palette::Toggle",
-      "shift shift": "project_symbols::Toggle",
       "alt-x": "command_palette::Toggle"
     }
   },

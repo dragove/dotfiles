@@ -112,6 +112,11 @@
                 "/**/test/**"
               ]
             },
+            "completion": {
+              "filteredTypes": [
+                "com.alibaba.nacos.shaded.*"
+              ]
+            },
             "jdt": {
               "ls": {
                 "java": {

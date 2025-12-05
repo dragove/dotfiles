@@ -31,17 +31,22 @@ input {
   // focus-follows-mouse max-scroll-amount="0%"
 }
 
-output "HDMI-A-1" {
-  mode "3840x2160"
-  scale 2
-  transform "normal"
-  position x=0 y=0
-}
-output "eDP-1" {
-  mode "1920x1080@120"
+output "PNP(AOC) 2279W ADVG59A009812" {
+  mode "1920x1080@60"
   scale 1
   transform "normal"
   position x=1920 y=0
+}
+output "AU Optronics 0x26A4 Unknown" {
+  mode "2880x1800@60.001"
+  scale 1.5
+  transform "normal"
+  position x=0 y=0
+}
+
+cursor {
+    xcursor-theme "breeze_cursors"
+    xcursor-size 24
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -205,7 +210,7 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 // spawn-at-startup "waybar"
-
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -250,33 +255,27 @@ window-rule {
 }
 
 window-rule {
-  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+  match title=r#"^(Open File)(.*)$"#
+  match title=r#"^(Select a File)(.*)$"#
+  match title=r#"^(Choose wallpaper)(.*)$"#
+  match title=r#"^(Open Folder)(.*)$"#
+  match title=r#"^(Save As)(.*)$"#
+  match title=r#"^(Library)(.*)$"#
+  match app-id="imv"
+  match app-id="Waydroid"
+  match title="MainMenuPanelView" app-id="com.alibabainc.dingtalk"
+  match title="分享的图片" app-id="com.alibabainc.dingtalk"
+  match title="Picture-in-Picture"
+  match app-id="mpv"
   open-floating true
 }
 
 window-rule {
-  match app-id=r#"^Waydroid$"#
-  open-floating true
-}
-
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-  match app-id=r#"^org\.gnome\.World\.Secrets$"#
-
-  block-out-from "screen-capture"
-
-  // Use this instead if you want them visible on third-party screenshot tools.
-  // block-out-from "screencast"
-}
-
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
-window-rule {
+  draw-border-with-background false
   geometry-corner-radius 4
   clip-to-geometry true
 }
+
 
 binds {
   // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -295,22 +294,33 @@ binds {
 
   // Suggested binds for running programs: terminal, app launcher, screen locker.
   Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-  Mod+P hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-  Alt+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-  Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
+  Mod+P hotkey-overlay-title="Application Launcher" {
+      spawn "dms" "ipc" "call" "spotlight" "toggle";
+  }
+  Alt+Space hotkey-overlay-title="Application Launcher" {
+      spawn "dms" "ipc" "call" "spotlight" "toggle";
+  }
 
-  // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
-  // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
-  // For example, this is a standard bind to toggle the screen reader (orca).
-  Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
+  // call dms ipc
+  Mod+V hotkey-overlay-title="Clipboard" { spawn-sh "dms ipc call clipboard toggle"; }
+  Mod+Alt+L hotkey-overlay-title="Lock the Screen: dms lock" { spawn-sh "dms ipc call lock lock"; }
+  Mod+Shift+S hotkey-overlay-title="Rectangle Screenshot" { spawn-sh "dms ipc call niri screenshot"; }
+  Mod+Ctrl+Shift+S hotkey-overlay-title="Current Screen Screenshot" { spawn-sh "dms ipc call niri screenshotScreen"; }
 
   // Example volume keys mappings for PipeWire & WirePlumber.
   // The allow-when-locked=true property makes them work even when the session is locked.
   // Using spawn-sh allows to pass multiple arguments together with the command.
   // "-l 1.0" limits the volume to 100%.
-  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
-  XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+  // Audio Controls
+  XF86AudioRaiseVolume allow-when-locked=true {
+    spawn "dms" "ipc" "call" "audio" "increment" "3";
+  }
+  XF86AudioLowerVolume allow-when-locked=true {
+    spawn "dms" "ipc" "call" "audio" "decrement" "3";
+  }
+  XF86AudioMute allow-when-locked=true {
+    spawn "dms" "ipc" "call" "audio" "mute";
+  }
   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
   // Example media keys mapping using playerctl.
@@ -323,8 +333,13 @@ binds {
   // Example brightness key mappings for brightnessctl.
   // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
   // but you need to manually put each argument in separate "" quotes.
-  XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-  XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+      // Brightness Controls
+  XF86MonBrightnessUp allow-when-locked=true {
+   spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+  }
+  XF86MonBrightnessDown allow-when-locked=true {
+   spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+  }
 
   Mod+O repeat=false { toggle-overview; }
   Mod+Q repeat=false { close-window; }
@@ -467,4 +482,17 @@ binds {
   // Powers off the monitors. To turn them back on, do any input like
   // moving the mouse or pressing any other key.
   Mod+Shift+P { power-off-monitors; }
+}
+environment {
+    GTK_IM_MODULE null
+    QT_IM_MODULE "fcitx"
+    XMODIFIERS "@im=fcitx"
+    SDL_IM_MODULE "fcitx"
+    GLFW_IM_MODULE "ibus"
+    QT_IM_MODULES "wayland;fcitx;ibus"
+
+    QT_QPA_PLATFORM "wayland"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
 }
