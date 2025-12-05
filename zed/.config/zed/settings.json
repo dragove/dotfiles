@@ -1,8 +1,20 @@
 {
+  "preferred_line_length": 120,
+  "show_signature_help_after_edits": true,
+  "minimap": {
+    "max_width_columns": 120
+  },
   "theme": "Catppuccin Frappé (lavender)",
   "icon_theme": "Catppuccin Frappé",
   "agent": {
     "always_allow_tool_actions": true
+  },
+  "agent_servers": {
+    "OpenCode": {
+      "type": "custom",
+      "command": "opencode",
+      "args": ["acp"]
+    }
   },
   "vim_mode": true,
   "ui_font_size": 16,
@@ -16,6 +28,9 @@
     "calt": true
   },
   "ensure_final_newline_on_save": false,
+  "project_panel": {
+    "sticky_scroll": false
+  },
   "terminal": {
     "font_family": "Maple Mono NF CN",
     "font_features": {
