@@ -31,8 +31,13 @@ input {
   // focus-follows-mouse max-scroll-amount="0%"
 }
 
+gestures {
+    hot-corners {
+        off
+    }
+}
 output "Xiaomi Corporation Mi Monitor 0x00000004" {
-  mode "3840x2160@143.988"
+  mode "3840x2160@160.000"
   scale 2
   transform "normal"
   position x=0 y=0
@@ -273,6 +278,7 @@ window-rule {
   match title=r#"^(Open Folder)(.*)$"#
   match title=r#"^(Save As)(.*)$"#
   match title=r#"^(Library)(.*)$"#
+  match title=r#"flutter picker"#
   match app-id="imv"
   match app-id="Waydroid"
   match title="MainMenuPanelView" app-id="com.alibabainc.dingtalk"
@@ -498,15 +504,17 @@ binds {
   Mod+Shift+P { power-off-monitors; }
 }
 environment {
-    GTK_IM_MODULE null
-    QT_IM_MODULE "fcitx"
-    XMODIFIERS "@im=fcitx"
-    SDL_IM_MODULE "fcitx"
-    GLFW_IM_MODULE "ibus"
-    QT_IM_MODULES "wayland;fcitx;ibus"
+  GTK_IM_MODULE null
+  QT_IM_MODULE "fcitx"
+  XMODIFIERS "@im=fcitx"
+  SDL_IM_MODULE "fcitx"
+  GLFW_IM_MODULE "ibus"
+  QT_IM_MODULES "wayland;fcitx;ibus"
+  DMS_DISABLE_MATUGEN "1"
+  DMS_DANKBAR_LAYER "overlay"
 
-    QT_QPA_PLATFORM "wayland"
-    ELECTRON_OZONE_PLATFORM_HINT "auto"
-    QT_QPA_PLATFORMTHEME "gtk3"
-    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+  QT_QPA_PLATFORM "wayland"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+  QT_QPA_PLATFORMTHEME "qt6ct"
+  QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
 }
