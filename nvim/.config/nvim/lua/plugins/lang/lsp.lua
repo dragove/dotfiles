@@ -106,7 +106,7 @@ return {
       end,
     })
     vim.lsp.enable("lua_ls")
-    vim.lsp.enable("basedpyright")
+    vim.lsp.enable("ty")
     vim.lsp.enable("clangd")
   end,
 }
