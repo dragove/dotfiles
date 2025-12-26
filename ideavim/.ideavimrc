@@ -1,0 +1,116 @@
+"" Plugins
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+" vim settings
+set scrolloff=5
+set history=1000
+
+" leader
+let mapleader="\<space>"
+
+" find and replace
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+nmap <leader>nh :noh<CR>
+
+" quick jump
+nmap H <Action>(PreviousTab)
+nmap L <Action>(NextTab)
+nmap s <Action>(flash.search)
+xmap s <Action>(flash.search)
+nmap f <Action>(flash.find)
+xmap f <Action>(flash.find)
+nmap F <Action>(flash.find_backward)
+xmap F <Action>(flash.find_backward)
+nmap t <Action>(flash.till)
+xmap t <Action>(flash.till)
+nmap T <Action>(flash.till_backward)
+xmap T <Action>(flash.till_backward)
+nmap ; <Action>(flash.repeat)
+xmap ; <Action>(flash.repeat)
+nmap , <Action>(flash.repeat_backward)
+xmap , <Action>(flash.repeat_backward)
+
+" ideavim settings
+set ideamarks
+set idearefactormode=normal
+
+" emacs like keybinding on insert mode
+inoremap <C-A> <HOME>
+inoremap <C-E> <END>
+inoremap <C-F> <RIGHT>
+inoremap <C-B> <LEFT>
+inoremap <C-N> <DOWN>
+inoremap <C-P> <UP>
+
+" toggle inlay hints
+nmap <leader>th <Action>(ToggleInlayHintsGloballyAction)
+
+" expand selection
+nmap Q <Action>(CloseContent)
+nmap S <Action>(SaveAll)
+
+" copy to clipboard
+nnoremap <leader>yy "+yy
+nnoremap <leader>p "+p
+vnoremap <leader>y "+y
+
+" buffer (buffer < window < tab)
+nmap <leader>bd <Action>(CloseContent)
+nmap <leader>bD <Action>(CloseAllEditorsButActive)
+nmap <leader>bP <Action>(CloseAllUnpinnedEditors)
+nmap <leader>bp <Action>(PinActiveEditorTab)
+
+" switch windows
+nmap <A-o> <C-w>w
+
+" code
+nmap <leader>ca <Action>(ShowIntentionActions)
+nmap <leader>cf <Action>(ReformatCode)
+
+" debug
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+nmap <leader>de <Action>(EditBreakpoint)
+
+" refactor
+nmap <leader>cr <Action>(RenameElement)
+
+" zen
+nmap <leader>z <Action>(ToggleZenMode)
+
+" []
+nmap [d <Action>(GotoPreviousError)
+nmap ]d <Action>(GotoNextError)
+nmap [c <Action>(JumpToLastChange)
+nmap ]c <Action>(JumpToNextChange)
+
+" find
+nmap <Leader>fa <Action>(GotoAction)
+nmap <Leader>fc <Action>(GotoClass)
+nmap <Leader>ff <Action>(GotoFile)
+nmap <Leader>fs <Action>(GotoSymbol)
+nmap <Leader>sr <Action>(TextSearchAction)
+nmap gs <Action>(GotoSuperMethod)
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoTypeDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gI <Action>(QuickImplementations)
+
+" vcs
+nmap <leader>v <Action>(VcsGroups)
+
+" surround (bundle plugin)
+" usage: https://github.com/tpope/vim-surround
+set surround
+
+" nerdtree (bundle plugin)
+set NERDTree
+nmap <Leader>e :NERDTreeToggle<CR>
+
+" Sweep AI Tab completion mapping
+map <Tab> :action dev.sweep.assistant.autocomplete.edit.AcceptEditCompletionAction<CR>
