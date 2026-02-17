@@ -1,4 +1,3 @@
-# Add deno completions to search path
 if [[ ":$FPATH:" != *":/home/dove/.zsh/completions:"* ]]; then export FPATH="/home/dove/.zsh/completions:$FPATH"; fi
 # zsh config
 HISTFILE=~/.cache/zsh_history
@@ -54,4 +53,5 @@ source /usr/share/fzf/completion.zsh
 
 
 . "$HOME/.cargo/env"
-. "/home/dove/.deno/env"
+# Added by git-ai installer on Wed Feb 11 12:46:00 CST 2026
+export PATH="/home/dove/.git-ai/bin:$PATH"

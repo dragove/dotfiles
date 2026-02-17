@@ -1,0 +1,23 @@
+[core]
+channel = "Stable" # 更新通道，可选值为 "Alpha"，"Beta" "Stable"，默认为 "Stable"
+test_time = 0    # 用于测试镜像速度的时间，0 表示不测试，默认为 3
+
+# 配置是否安装 MaaCore 对应的组件，不推荐使用，分开安装可能会导致版本不一致，从而导致一些问题，该选项可能在未来的版本中移除
+[core.components]
+library = true  # 是否安装 MaaCore 的库，默认为 true
+resource = true # 是否安装 MaaCore 的资源，默认为 true
+
+# CLI 更新相关配置
+[cli]
+channel = "Stable" # 更新通道，可选值为 "Alpha"，"Beta" "Stable"，默认为 "Stable"
+
+# 配置是否安装 maa-cli 对应的组件
+[cli.components]
+binary = true # 是否安装 maa-cli 的二进制文件，默认为 true
+
+# 资源热更新相关配置
+[resource]
+auto_update = false  # 是否在每次运行任务时自动更新资源，默认为 false
+warn_on_update_failure = true # 是否在更新失败时发出警告而不是直接报错
+backend = "libgit2" # 资源热更新后端，可选值为 "git" 或者 "libgit2"，默认为 "git"
+

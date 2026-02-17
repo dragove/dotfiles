@@ -1,20 +1,16 @@
 {
+  "session": {
+    "trust_all_worktrees": true
+  },
   "preferred_line_length": 120,
   "show_signature_help_after_edits": true,
   "minimap": {
     "max_width_columns": 120
   },
-  "theme": "Catppuccin Frappé (lavender)",
+  "theme": "Catppuccin Frappé",
   "icon_theme": "Catppuccin Frappé",
   "agent": {
     "always_allow_tool_actions": true
-  },
-  "agent_servers": {
-    "OpenCode": {
-      "type": "custom",
-      "command": "opencode",
-      "args": ["acp"]
-    }
   },
   "vim_mode": true,
   "ui_font_size": 16,

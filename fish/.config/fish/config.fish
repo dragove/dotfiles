@@ -35,6 +35,7 @@ set -g FZF_DEFAULT_OPTS "--ansi"
 
 set -gx PATH "/opt/cuda/bin" $PATH
 set -gx PATH "$HOME/.local/bin" $PATH
+set -gx PATH "$HOME/Workspace/Scripts" $PATH
 
 set --export EDITOR nvim
 
@@ -59,3 +60,7 @@ complete scala -a '(scala complete fish-v1 (math 1 + (count (__fish_print_cmd_ar
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 set -gx PATH /home/dove/.local/bin $PATH
+
+# Added by git-ai installer on Wed Feb 11 12:46:00 CST 2026
+fish_add_path -g "/home/dove/.git-ai/bin"
+mise activate fish | source

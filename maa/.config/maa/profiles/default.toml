@@ -1,9 +1,11 @@
 [connection]
 preset = "Waydroid"
+adb_path = "/usr/bin/adb"
+address = "192.168.240.112:5555"
 
 [static_options]
 cpu_ocr = false
-gpu_ocr = 1
+gpu_ocr = 0
 
 [instance_options]
 touch_mode = "MAATouch"
