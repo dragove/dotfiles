@@ -30,25 +30,11 @@ return {
   end,
   keys = {
     {
-      "<leader>ff",
-      function()
-        Snacks.picker.smart()
-      end,
-      desc = "Smart Find Files",
-    },
-    {
       "<leader>fb",
       function()
         Snacks.picker.buffers()
       end,
       desc = "Buffers",
-    },
-    {
-      "<leader>sg",
-      function()
-        Snacks.picker.grep()
-      end,
-      desc = "Grep",
     },
     {
       "<leader>sn",
