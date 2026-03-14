@@ -3,7 +3,7 @@ if status is-login
     # exec wayfire
     # exec sway --unsupported-gpu
     # exec Hyprland
-    exec niri-session -l
+    # exec niri-session -l
     # startx
   end
 end
@@ -37,7 +37,7 @@ set -gx PATH "/opt/cuda/bin" $PATH
 set -gx PATH "$HOME/.local/bin" $PATH
 set -gx PATH "$HOME/Workspace/Scripts" $PATH
 
-set --export EDITOR nvim
+set -gx EDITOR nvim
 
 # pnpm
 set -gx PNPM_HOME "/home/dove/.local/share/pnpm"
@@ -60,6 +60,8 @@ complete scala -a '(scala complete fish-v1 (math 1 + (count (__fish_print_cmd_ar
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 set -gx PATH /home/dove/.local/bin $PATH
+
+set -gx npm_config_prefix "$HOME/.local"
 
 # Added by git-ai installer on Wed Feb 11 12:46:00 CST 2026
 fish_add_path -g "/home/dove/.git-ai/bin"
