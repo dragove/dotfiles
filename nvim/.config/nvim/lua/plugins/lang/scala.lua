@@ -12,7 +12,6 @@ return {
       showImplicitArguments = false,
       showImplicitConversionsAndClasses = false,
       showInferredType = true,
-      autoImportBuild = "initial",
       serverProperties = {
         "-Xmx2G",
         "-Dmetals.enable-best-effort=true",
