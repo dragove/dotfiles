@@ -18,10 +18,18 @@ for f in currentDir.iterdir():
 if not containsIndex:
     indexFile = currentDir / "index.html"
     with open(indexFile, 'w') as f:
+        f.write("""<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>imageServer</title>
+  </head>
+<body>""")
         f.write("<div style=\"text-align:center\">")
         for img in collected_files:
             f.write(f"<img src=\"{img.name}\">")
         f.write("</div>")
+        f.write("</body></html>")
 
 os.chdir(currentDir)
 handler = http.server.SimpleHTTPRequestHandler

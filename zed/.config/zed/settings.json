@@ -1,4 +1,15 @@
 {
+  "outline_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "session": {
     "trust_all_worktrees": true
   },
@@ -9,9 +20,6 @@
   },
   "theme": "Catppuccin Frappé",
   "icon_theme": "Catppuccin Frappé",
-  "agent": {
-    "always_allow_tool_actions": true
-  },
   "vim_mode": true,
   "ui_font_size": 16,
   "auto_update": false,
@@ -25,6 +33,7 @@
   },
   "ensure_final_newline_on_save": false,
   "project_panel": {
+    "dock": "left",
     "sticky_scroll": false
   },
   "terminal": {
@@ -37,6 +46,7 @@
     }
   },
   "collaboration_panel": {
+    "dock": "left",
     "button": false
   },
   "notification_panel": {
@@ -66,6 +76,7 @@
     "scroll_debounce_ms": 50
   },
   "colorize_brackets": true,
+  "language_servers": ["!eslint", "..."],
   "languages": {
     "Python": {
       "language_servers": ["ty", "!basedpyright"]

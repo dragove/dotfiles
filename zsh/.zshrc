@@ -52,6 +52,28 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 
-. "$HOME/.cargo/env"
 # Added by git-ai installer on Wed Feb 11 12:46:00 CST 2026
 export PATH="/home/dove/.git-ai/bin:$PATH"
+
+# >>> forge initialize >>>
+# !! Contents within this block are managed by 'forge zsh setup' !!
+# !! Do not edit manually - changes will be overwritten !!
+
+# Add required zsh plugins if not already present
+if [[ ! " ${plugins[@]} " =~ " zsh-autosuggestions " ]]; then
+    plugins+=(zsh-autosuggestions)
+fi
+if [[ ! " ${plugins[@]} " =~ " zsh-syntax-highlighting " ]]; then
+    plugins+=(zsh-syntax-highlighting)
+fi
+
+# Load forge shell plugin (commands, completions, keybindings) if not already loaded
+if [[ -z "$_FORGE_PLUGIN_LOADED" ]]; then
+    eval "$(forge zsh plugin)"
+fi
+
+# Load forge shell theme (prompt with AI context) if not already loaded
+if [[ -z "$_FORGE_THEME_LOADED" ]]; then
+    eval "$(forge zsh theme)"
+fi
+# <<< forge initialize <<<

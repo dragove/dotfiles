@@ -15,10 +15,6 @@ input {
     natural-scroll
   }
 
-  mouse {
-    scroll-method "on-button-down"
-    scroll-button 274
-  }
 
   trackpoint {
   }
@@ -518,3 +514,7 @@ environment {
   QT_QPA_PLATFORMTHEME "qt6ct"
   QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
 }
+
+include "dms/outputs.kdl"
+
+include "dms/cursor.kdl"
