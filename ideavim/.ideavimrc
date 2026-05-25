@@ -111,6 +111,3 @@ set surround
 " nerdtree (bundle plugin)
 set NERDTree
 nmap <Leader>e :NERDTreeToggle<CR>
-
-" Sweep AI Tab completion mapping
-map <Tab> :action dev.sweep.assistant.autocomplete.edit.AcceptEditCompletionAction<CR>
