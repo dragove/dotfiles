@@ -1,28 +1,7 @@
 return {
-  'saghen/blink.pairs',
-  version = '*',
-  dependencies = 'saghen/blink.download',
-
-  --- @module 'blink.pairs'
-  --- @type blink.pairs.Config
+  'windwp/nvim-autopairs',
+  event = "InsertEnter",
   opts = {
-    mappings = {
-      enabled = true,
-      disabled_filetypes = {},
-      pairs = {},
-    },
-    highlights = {
-      enabled = true,
-      groups = {
-        'BlinkPairsOrange',
-        'BlinkPairsPurple',
-        'BlinkPairsBlue',
-      },
-      matchparen = {
-        enabled = true,
-        group = 'MatchParen',
-      },
-    },
-    debug = false,
+      check_ts = true,
   }
 }
