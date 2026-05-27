@@ -1,10 +1,31 @@
 return {
-  "romus204/tree-sitter-manager.nvim",
+  'neovim-treesitter/nvim-treesitter',
+  dependencies = { 'neovim-treesitter/treesitter-parser-registry' },
   lazy = false,
+  build = ':TSUpdate',
   config = function()
-    require("tree-sitter-manager").setup({
-      auto_install = true,
-      ensure_installed = {
+    require('nvim-treesitter').setup()
+    require("nvim-treesitter").install({
+      "c",
+      "cpp",
+      "groovy",
+      "java",
+      "javascript",
+      "kotlin",
+      "lua",
+      "markdown",
+      "markdown_inline",
+      "python",
+      "query",
+      "rust",
+      "scala",
+      "typescript",
+      "vim",
+      "vimdoc",
+      "zig",
+    })
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = {
         "c",
         "cpp",
         "groovy",
@@ -13,16 +34,19 @@ return {
         "kotlin",
         "lua",
         "markdown",
-        "markdown_inline",
         "python",
-        "query",
         "rust",
         "scala",
         "typescript",
         "vim",
-        "vimdoc",
         "zig",
-      }
+      },
+      callback = function()
+        vim.treesitter.start()
+        vim.wo.foldmethod = "expr"
+        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
     })
   end,
 }

@@ -1,7 +1,7 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   dependencies = {
-    "romus204/tree-sitter-manager.nvim",
+    "neovim-treesitter/nvim-treesitter",
     "nvim-tree/nvim-web-devicons",
   },
   opts = {
@@ -27,7 +27,7 @@ return {
       right_pad = 1,
     },
     inline_highlight = {
-      enabled = false,
+      enabled = true,
     },
   },
 }

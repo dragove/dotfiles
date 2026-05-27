@@ -1,4 +1,5 @@
 {
+  "cli_default_open_behavior": "existing_window",
   "outline_panel": {
     "dock": "left"
   },
