@@ -8,14 +8,11 @@ return {
   config = function()
     local metals_config = require("metals").bare_config()
     metals_config.settings = {
-      useGlobalExecutable = true,
       showImplicitArguments = false,
       showImplicitConversionsAndClasses = false,
       showInferredType = true,
-      serverProperties = {
-        "-Xmx2G",
-        "-Dmetals.enable-best-effort=true",
-      },
+      serverVersion = "2.0.0-M14",
+      serverProperties = { "-Xmx4g" },
       inlayHints = {
         hintsInPatternMatch = { enable = true },
         implicitArguments = { enable = false },
