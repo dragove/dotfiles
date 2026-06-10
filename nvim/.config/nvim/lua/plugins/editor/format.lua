@@ -5,11 +5,11 @@ return {
     conform.setup({
       formatters_by_ft = {
         lua = { "stylua" },
-        json = { "biome" },
-        javascript = { "biome" },
-        typescript = { "biome" },
-        javascriptreact = { "biome" },
-        typescriptreact = { "biome" },
+        json = { "oxfmt" },
+        javascript = { "oxfmt" },
+        typescript = { "oxfmt" },
+        javascriptreact = { "oxfmt" },
+        typescriptreact = { "oxfmt" },
         python = { "ruff" },
         rust = { "rustfmt", lsp_format = "fallback" },
       },
