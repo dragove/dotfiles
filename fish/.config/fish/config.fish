@@ -66,3 +66,6 @@ set -gx npm_config_prefix "$HOME/.local"
 # Added by git-ai installer on Wed Feb 11 12:46:00 CST 2026
 fish_add_path -g "/home/dove/.git-ai/bin"
 mise activate fish | source
+
+# kimi-code
+fish_add_path -g "/home/dove/.kimi-code/bin"

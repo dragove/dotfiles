@@ -12,6 +12,7 @@
 [core]
 	editor = nvim
 	autocrlf = input
+	quotePath = false
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
