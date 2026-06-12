@@ -59,7 +59,6 @@ complete scala -a '(scala complete fish-v1 (math 1 + (count (__fish_print_cmd_ar
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
-set -gx PATH /home/dove/.local/bin $PATH
 
 set -gx npm_config_prefix "$HOME/.local"
 
