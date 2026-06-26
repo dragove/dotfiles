@@ -60,5 +60,9 @@ return {
           :totable())
       end,
     },
+    windows = {
+      preview = true,
+      width_preview = 50
+    }
   },
 }

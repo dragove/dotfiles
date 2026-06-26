@@ -68,3 +68,7 @@ mise activate fish | source
 
 # kimi-code
 fish_add_path -g "/home/dove/.kimi-code/bin"
+
+if type -q zoxide
+    zoxide init fish | source
+end
