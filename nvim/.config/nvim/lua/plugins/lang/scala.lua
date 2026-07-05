@@ -11,7 +11,7 @@ return {
       showImplicitArguments = false,
       showImplicitConversionsAndClasses = false,
       showInferredType = true,
-      serverVersion = "2.0.0-M14",
+      serverVersion = "2.0.0-M15",
       serverProperties = { "-Xmx4g" },
       inlayHints = {
         hintsInPatternMatch = { enable = true },
