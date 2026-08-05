@@ -1,0 +1,23 @@
+zed/.config/zed/settings.json
+  s_e3b6d0b9380155::t_3a4728dc5b1ec1 26-29
+  s_e3b6d0b9380155::t_539c54adff3a29 91-99,101,103-105
+zed/.config/zed/keymap.json
+  s_e3b6d0b9380155::t_f272c2c20d6d64 24-31,41,77,79,102-105
+  s_e3b6d0b9380155::t_cd43d3723a511e 32,67-68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "bbcb5116693710014c72b9b55de7b094a090665e",
+  "prompts": {},
+  "sessions": {
+    "s_e3b6d0b9380155": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019fd0ab-33ac-796c-aa15-8b1aaa6c1e32",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "dragove <dragove@qq.com>"
+    }
+  }
+}
