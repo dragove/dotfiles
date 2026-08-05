@@ -21,8 +21,15 @@
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
-      "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"]
+      "ctrl-f": ["terminal::SendKeystroke", "right"],
+      "ctrl-b": ["terminal::SendKeystroke", "left"],
+      "ctrl-a": ["terminal::SendKeystroke", "home"],
+      "ctrl-e": ["terminal::SendKeystroke", "end"],
+      "ctrl-p": ["terminal::SendKeystroke", "up"],
+      "ctrl-n": ["terminal::SendKeystroke", "down"],
+      "ctrl-v": ["terminal::SendKeystroke", "pagedown"],
+      "alt-v": ["terminal::SendKeystroke", "pageup"],
+      "ctrl-k": ["terminal::SendKeystroke", "ctrl-k"]
     }
   },
   {
@@ -31,9 +38,7 @@
       "ctrl-shift-n": "file_finder::Toggle",
       "ctrl-shift-a": "command_palette::Toggle",
       "alt-x": "command_palette::Toggle",
-      "space f f": "file_finder::Toggle",
-      "space f s": "project_symbols::Toggle",
-      "space s r": "workspace::NewSearch",
+      "ctrl-`": "terminal_panel::Toggle"
     }
   },
   {
@@ -53,19 +58,14 @@
     }
   },
   {
-    "context": "Editor && VimControl && !VimWaiting && !menu",
-    "bindings": {
-      "space n": "workspace::ToggleLeftDock",
-      "space e": "project_panel::ToggleFocus"
-    }
-  },
-  {
     "context": "Editor && vim_mode == normal",
     "bindings": {
       "Q": "pane::CloseActiveItem",
       "S": "workspace::Save",
       "H": "pane::ActivatePreviousItem",
       "L": "pane::ActivateNextItem",
+      "space n": "workspace::ToggleLeftDock",
+      "space e": "project_panel::ToggleFocus",
       "space o": "outline::Toggle",
       "space c f": "editor::Format",
       "space c a": "editor::ToggleCodeActions",
@@ -74,7 +74,9 @@
       "space b d": "pane::CloseActiveItem",
       "space b D": "pane::CloseOtherItems",
       "space f f": "file_finder::Toggle",
+      "space f b": "tab_switcher::Toggle",
       "space f s": "project_symbols::Toggle",
+      "space s g": "project_search::ToggleFocus",
       "space s r": "workspace::NewSearch",
       "[ d": "editor::GoToPreviousDiagnostic",
       "] d": "editor::GoToDiagnostic",
@@ -97,6 +99,10 @@
       "ctrl-e": "editor::MoveToEndOfLine",
       "ctrl-f": "editor::MoveRight",
       "ctrl-b": "editor::MoveLeft",
+      "ctrl-p": "editor::MoveUp",
+      "ctrl-n": "editor::MoveDown",
+      "ctrl-v": "editor::MovePageDown",
+      "alt-v": "editor::MovePageUp",
       "ctrl-k": "editor::DeleteToEndOfLine",
       "ctrl-w": "editor::DeleteToPreviousWordStart"
     }

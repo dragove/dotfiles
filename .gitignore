@@ -13,3 +13,4 @@ lazy-lock.json
 /musicfox
 !/musicfox/.config/go-musicfox/go-musicfox.ini
 /nu/.config/nushell/history*
+zed/.config/zed/.pi/

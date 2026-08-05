@@ -23,6 +23,10 @@
     "trust_all_worktrees": true
   },
   "preferred_line_length": 120,
+  "tab_size": 2,
+  "relative_line_numbers": "enabled",
+  "use_smartcase_search": true,
+  "wrap_guides": [120],
   "show_signature_help_after_edits": true,
   "minimap": {
     "max_width_columns": 120
@@ -58,9 +62,6 @@
     "dock": "left",
     "button": false
   },
-  "notification_panel": {
-    "button": false
-  },
   "telemetry": {
     "diagnostics": false,
     "metrics": false
@@ -87,8 +88,21 @@
   "colorize_brackets": true,
   "language_servers": ["!eslint", "..."],
   "languages": {
+    "C": {
+      "tab_size": 4
+    },
+    "C++": {
+      "tab_size": 4
+    },
+    "Java": {
+      "tab_size": 4
+    },
     "Python": {
+      "tab_size": 4,
       "language_servers": ["ty", "!basedpyright"]
+    },
+    "Rust": {
+      "tab_size": 4
     }
   },
   "lsp": {
