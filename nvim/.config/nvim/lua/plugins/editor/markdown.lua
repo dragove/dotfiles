@@ -1,7 +1,7 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   dependencies = {
-    "neovim-treesitter/nvim-treesitter",
+    "romus204/tree-sitter-manager.nvim",
     "nvim-tree/nvim-web-devicons",
   },
   opts = {
