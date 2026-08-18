@@ -72,3 +72,6 @@ fish_add_path -g "/home/dove/.kimi-code/bin"
 if type -q zoxide
     zoxide init fish | source
 end
+
+# nub
+set -gx PATH "$HOME/.nub/bin" $PATH
