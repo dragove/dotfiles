@@ -4,10 +4,10 @@
     "height": 28,
     "modules-left": [
         "custom/arch",
-        "wlr/workspaces"
+        "niri/workspaces"
     ],
     "modules-center": [
-        "hyprland/window"
+        "niri/window"
     ],
     "modules-right": [
         "network",
@@ -68,13 +68,22 @@
     },
     "network": {
         "interval": 5,
-        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-wifi": "   {essid} ({signalStrength}%)",
         "format-ethernet": "󰌘 {ifname}: {ipaddr}/{cidr}",
         "format-disconnected": "⚠ Disconnected",
         "tooltip": false
     },
-    "wlr/workspaces": {
-        "on-click": "activate"
+    "niri/workspaces": {
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+            "active": "●",
+            "default": "○"
+        }
+    },
+    "niri/window": {
+        "max-length": 60,
+        "separate-outputs": true
     },
     "temperature": {
         "critical-threshold": 80,

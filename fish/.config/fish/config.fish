@@ -3,7 +3,7 @@ if status is-login
     # exec wayfire
     # exec sway --unsupported-gpu
     # exec Hyprland
-    # exec niri-session -l
+    exec niri
     # startx
   end
 end
