@@ -101,12 +101,9 @@ return {
         end
 
         if client.server_capabilities.codeLensProvider then
-          vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
-            buffer = buf,
-            callback = function()
-              vim.lsp.codelens.enable(true, { bufnr = buf })
-            end,
-          })
+          map("<leader>tl", function()
+            vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled({ bufnr = buf }))
+          end, "Toggle Code Lens")
         end
       end,
     })
