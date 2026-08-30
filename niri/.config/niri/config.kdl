@@ -481,7 +481,6 @@ binds {
   // The quit action will show a confirmation dialog to avoid accidental exits.
   // Quick access terminal — `kitten quick-access-terminal` toggles show/hide; first press spawns it
   Mod+grave repeat=false { spawn "kitten" "quick-access-terminal" "--detach"; }
-  Ctrl+grave repeat=false { spawn "kitten" "quick-access-terminal" "--detach"; }
 
   Mod+Shift+E { quit; }
   Ctrl+Alt+Delete { quit; }
