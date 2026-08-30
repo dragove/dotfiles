@@ -75,3 +75,6 @@ end
 
 # nub
 set -gx PATH "$HOME/.nub/bin" $PATH
+
+# cargo
+set -gx PATH "$HOME/.cargo/bin" $PATH

@@ -31,8 +31,16 @@
   "minimap": {
     "max_width_columns": 120
   },
-  "theme": "Catppuccin Frappé",
-  "icon_theme": "Catppuccin Frappé",
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Catppuccin Frappé"
+  },
+  "icon_theme": {
+    "mode": "system",
+    "light": "Catppuccin Frappé",
+    "dark": "Catppuccin Frappé"
+  },
   "vim_mode": true,
   "ui_font_size": 16,
   "auto_update": false,

@@ -1,0 +1,354 @@
+// ============================================================
+// 全局默认：所有窗口最大化打开
+// ============================================================
+window-rule {
+    open-maximized true
+}
+
+// ============================================================
+// 全局：统一圆角 + 边框
+// ============================================================
+window-rule {
+    draw-border-with-background false
+    geometry-corner-radius 4
+    clip-to-geometry true
+}
+
+// ============================================================
+// 隐私保护：敏感窗口屏幕录制时隐藏
+// ============================================================
+window-rule {
+    match app-id="QQ"
+    match app-id="wechat"
+    match app-id=r#"^org\.telegram\.desktop$"#
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    match app-id=r#"^scrcpy$"#
+    match app-id="com.alibabainc.dingtalk"
+    block-out-from "screencast"
+}
+
+// ============================================================
+// 屏幕录制中的窗口高亮提示
+// ============================================================
+window-rule {
+    match is-window-cast-target=true
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+    border {
+        inactive-color "#7d0d2d"
+    }
+    shadow {
+        color "#7d0d2d70"
+    }
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+}
+
+// ============================================================
+// 通用浮动窗口：文件对话框、图片查看器、画中画等
+// ============================================================
+window-rule {
+    match title=r#"^(Open File)(.*)$"#
+    match title=r#"^(Select a File)(.*)$"#
+    match title=r#"^(Choose wallpaper)(.*)$"#
+    match title=r#"^(Open Folder)(.*)$"#
+    match title=r#"^(Save As)(.*)$"#
+    match title=r#"^(Library)(.*)$"#
+    match title="flutter picker"
+    match app-id="imv"
+    match app-id="Waydroid"
+    match title="Picture-in-Picture"
+    open-floating true
+}
+
+// Firefox 画中画：浮动 + 固定尺寸 + 左下角定位
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+    default-column-width { fixed 480; }
+    default-window-height { fixed 270; }
+    default-floating-position x=32 y=32 relative-to="bottom-left"
+}
+
+// ============================================================
+// QQ
+// ============================================================
+// 图片查看器 / 聊天记录浮动
+window-rule {
+    match title="图片查看器" app-id="QQ"
+    match title=r#"的聊天记录$"# app-id="QQ"
+    open-floating true
+    default-column-width { proportion 0.6; }
+    default-window-height { proportion 0.85; }
+}
+
+// QQ 登录/扫码界面
+window-rule {
+    match app-id="QQ" title=r#"登录|账号|扫码"#
+    open-floating true
+    default-column-width { fixed 480; }
+    default-window-height { fixed 400; }
+}
+
+// ============================================================
+// 微信
+// ============================================================
+// 搜索框不抢焦点，防止弹窗关闭
+window-rule {
+    match title=r#"^wechat$"# app-id=r#"^wechat$"# 
+    open-focused false
+}
+
+// 登录/授权弹窗
+window-rule {
+    match app-id="wechat" title=r#"登录|授权|扫码"#
+    open-floating true
+    default-column-width { fixed 420; }
+    default-window-height { fixed 320; }
+}
+
+// ============================================================
+// 钉钉
+// ============================================================
+window-rule {
+    match title="MainMenuPanelView" app-id="com.alibabainc.dingtalk"
+    match title="分享的图片" app-id="com.alibabainc.dingtalk"
+    open-floating true
+}
+
+// ============================================================
+// Telegram
+// ============================================================
+// 主窗口打开到 chat 工作区，排除媒体查看器
+window-rule {
+    match app-id=r#"^org\.telegram\.desktop$"#
+    exclude title="^Media viewer$"
+    open-on-workspace "chat"
+}
+
+// 媒体查看器不全屏
+window-rule {
+    match app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
+    open-fullscreen false
+}
+
+// ============================================================
+// 浏览器
+// ============================================================
+// Firefox
+window-rule {
+    match app-id=r#"firefox$"#
+    open-maximized true
+    scroll-factor 0.75
+}
+
+// Chromium 系
+window-rule {
+    match app-id="google-chrome"
+    match app-id="chromium-browser"
+    match app-id=r#"^chrome$"#
+    open-maximized true
+}
+
+// ============================================================
+// 文件管理器
+// ============================================================
+window-rule {
+    match app-id="thunar"
+    match app-id="org.gnome.Nautilus"
+    match app-id="org.kde.dolphin"
+    open-maximized true
+}
+
+// Thunar 重命名对话框浮动
+window-rule {
+    match app-id="thunar" title=r#"^Rename "#
+    open-floating true
+    default-column-width { fixed 500; }
+    default-window-height { fixed 200; }
+}
+
+// ============================================================
+// 媒体播放
+// ============================================================
+// mpv：启用 VRR + 慢速滚动
+window-rule {
+    match app-id="^mpv$"
+    open-floating true
+    variable-refresh-rate true
+    scroll-factor 0.75
+}
+
+// OBS Studio：修复最小宽度
+window-rule {
+    match app-id=r#"^com\.obsproject\.Studio$"#
+    min-width 876
+}
+
+// ============================================================
+// 创意工具：给足宽度
+// ============================================================
+window-rule {
+    match app-id=r#"^blender$"#
+    match app-id=r#"^gimp"#
+    default-column-width { fixed 1200; }
+}
+
+// GIMP 启动画面不抢焦点
+window-rule {
+    match app-id=r#"^gimp$"# title="^GIMP Startup$"
+    open-focused false
+}
+
+// GIMP 偏好设置浮动
+window-rule {
+    match app-id=r#"^gimp$"# title="Preferences"
+    open-floating true
+}
+
+// ============================================================
+// 系统工具：浮动 + 合适尺寸
+// ============================================================
+window-rule {
+    match app-id="pavucontrol-qt"
+    match app-id="org.pulseaudio.pavucontrol"
+    match app-id="blueman-manager"
+    match app-id="blueman-services"
+    match app-id="qt5ct|qt6ct"
+    match app-id="xarchiver"
+    match app-id=r#"^org\.gnome\.DiskUtility$"#
+    match app-id="org.qbittorrent.qBittorrent"
+    match app-id="org.manjaro.pamac.manager"
+    open-floating true
+    default-column-width { fixed 1200; }
+    default-window-height { fixed 800; }
+}
+
+// 计算器
+window-rule {
+    match app-id="galculator"
+    open-floating true
+    default-column-width { fixed 400; }
+    default-window-height { fixed 320; }
+    default-floating-position x=5 y=5 relative-to="bottom-right"
+}
+
+// fcitx5 配置窗口
+window-rule {
+    match app-id=r#"org\.fcitx\.fcitx5-config-qt$"#
+    open-floating true
+    default-column-width { fixed 640; }
+    default-window-height { fixed 400; }
+}
+
+// xdg 文件选择对话框
+window-rule {
+    match app-id="xdg-desktop-portal-gtk"
+    match app-id="xdg-desktop-portal-wlr"
+    open-floating true
+    default-column-width { fixed 1280; }
+    default-window-height { fixed 800; }
+}
+
+// ============================================================
+// Steam
+// ============================================================
+// 通知气泡移到右下角
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+    open-focused false
+    block-out-from "screen-capture"
+}
+
+// Steam Proton 游戏启用 VRR
+window-rule {
+    match app-id=r#"^steam_app_[0-9]+$"#
+    variable-refresh-rate true
+}
+
+// ============================================================
+// Electron 应用（Discord / VSCode / Slack 等）
+// ============================================================
+window-rule {
+    match app-id="discord"
+    match app-id=r#"^com\.slack\.Desktop$"#
+    match app-id="Code"
+    match app-id="teams-for-linux"
+    open-maximized true
+}
+
+// ============================================================
+// KeePassXC：密码解锁弹窗自动聚焦
+// ============================================================
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"# title="^Unlock Database - KeePassXC$"
+    open-focused true
+}
+
+// ============================================================
+// 浮动终端（下拉式）
+// ============================================================
+// 使用方法：启动时指定 class，如：
+//   alacritty --class dropdown
+//   ghostty --class dropdown
+window-rule {
+    match app-id="^dropdown$"
+    open-floating true
+    default-floating-position x=0 y=0 relative-to="top"
+    default-window-height { proportion 0.5; }
+    default-column-width { proportion 0.8; }
+}
+
+// ============================================================
+// WezTerm 初始化 bug 修复
+// ============================================================
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+// ============================================================
+// 通用弹窗浮动（Pinentry / Tk / 等）
+// ============================================================
+window-rule {
+    match app-id=r#"^Pinentry-gtk$"#
+    match app-id=r#"^Tk$"#
+    match app-id=r#"^wev$"#
+    open-floating true
+}
+
+// ============================================================
+// KDE Connect 演示指针覆盖层
+// ============================================================
+window-rule {
+    match app-id=r#"org\.kde\.kdeconnect\.daemon"#
+    open-floating true
+    open-fullscreen false
+    default-floating-position x=0 y=0 relative-to="top-left"
+    tiled-state false
+    draw-border-with-background false
+}
+
+// ============================================================
+// Noctalia 设置窗口
+// ============================================================
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
+}
+
+// ============================================================
+// 活动窗口半透明（可选，取消注释启用）
+// ============================================================
+// window-rule {
+//     match is-active=false
+//     opacity 0.95
+// }

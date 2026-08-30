@@ -223,11 +223,10 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 spawn-sh-at-startup "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP && dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP"
-spawn-at-startup "waybar"
-spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
-spawn-at-startup "dunst"
+spawn-at-startup "noctalia"
 spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "udiskie" "-a" "-t"
+spawn-at-startup "phonto" "/home/dove/Pictures/Wallpaper/hatsune-miku-night-vp9.webm"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -266,39 +265,20 @@ animations {
   // slowdown 3.0
 }
 
-// Window rules let you adjust behavior for individual windows.
-// Find more information on the wiki:
-// https://yalter.github.io/niri/Configuration:-Window-Rules
+// Window rules are in a separate file for easier maintenance.
+include "window-rules.kdl"
 
-// Work around WezTerm's initial configure bug
-// by setting an empty default-column-width.
-window-rule {
-  open-maximized true
+// Noctalia panel blur support
+layer-rule {
+  match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+  background-effect {
+    xray false
+  }
 }
 
-window-rule {
-  match title=r#"^(Open File)(.*)$"#
-  match title=r#"^(Select a File)(.*)$"#
-  match title=r#"^(Choose wallpaper)(.*)$"#
-  match title=r#"^(Open Folder)(.*)$"#
-  match title=r#"^(Save As)(.*)$"#
-  match title=r#"^(Library)(.*)$"#
-  match title=r#"flutter picker"#
-  match app-id="imv"
-  match app-id="Waydroid"
-  match title="MainMenuPanelView" app-id="com.alibabainc.dingtalk"
-  match title="分享的图片" app-id="com.alibabainc.dingtalk"
-  match title="图片查看器" app-id="QQ"
-  match title=r#"的聊天记录$"# app-id="QQ"
-  match title="Picture-in-Picture"
-  match app-id="mpv"
-  open-floating true
-}
-
-window-rule {
-  draw-border-with-background false
-  geometry-corner-radius 4
-  clip-to-geometry true
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
 }
 
 
@@ -319,35 +299,32 @@ binds {
 
   // Suggested binds for running programs: terminal, app launcher, screen locker.
   Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-  Mod+P hotkey-overlay-title="Application Launcher" {
-      spawn "fuzzel";
-  }
+  // Launcher — Noctalia (Alt+Space)
   Alt+Space hotkey-overlay-title="Application Launcher" {
-      spawn "fuzzel";
+      spawn-sh "noctalia msg panel-toggle launcher";
   }
 
-  Mod+V hotkey-overlay-title="Clipboard" { spawn-sh "cliphist list | fuzzel --dmenu --prompt 'clipboard: ' | cliphist decode | wl-copy"; }
-  Mod+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+  // Clipboard — Noctalia
+  Mod+V hotkey-overlay-title="Clipboard" { spawn-sh "noctalia msg panel-toggle clipboard"; }
 
-  // Rectangle Screenshot opens niri's built-in interactive screenshot UI.
-  Mod+Shift+S hotkey-overlay-title="Rectangle Screenshot" { screenshot; }
-  Mod+Ctrl+Shift+S hotkey-overlay-title="Current Screen Screenshot" { screenshot-screen; }
+  // Lock screen — Noctalia
+  Mod+Alt+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia msg session lock"; }
 
-  // Example volume keys mappings for PipeWire & WirePlumber.
-  // The allow-when-locked=true property makes them work even when the session is locked.
-  // Using spawn-sh allows to pass multiple arguments together with the command.
-  // "-l 1.0" limits the volume to 100%.
-  // Audio Controls
+  // Screenshots — Noctalia
+  Mod+Shift+S hotkey-overlay-title="Rectangle Screenshot" { spawn-sh "noctalia msg screenshot-region"; }
+  Mod+Ctrl+Shift+S hotkey-overlay-title="Current Screen Screenshot" { spawn-sh "noctalia msg screenshot-fullscreen"; }
+
+  // Audio Controls — Noctalia
   XF86AudioRaiseVolume allow-when-locked=true {
-    spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%+ -l 1.0";
+    spawn-sh "noctalia msg volume-up";
   }
   XF86AudioLowerVolume allow-when-locked=true {
-    spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-";
+    spawn-sh "noctalia msg volume-down";
   }
   XF86AudioMute allow-when-locked=true {
-    spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+    spawn-sh "noctalia msg volume-mute";
   }
-  XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+  XF86AudioMicMute     allow-when-locked=true { spawn-sh "noctalia msg mic-mute"; }
 
   // Example media keys mapping using playerctl.
   // This will work with any MPRIS-enabled media player.
@@ -359,12 +336,12 @@ binds {
   // Example brightness key mappings for brightnessctl.
   // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
   // but you need to manually put each argument in separate "" quotes.
-      // Brightness Controls
+  // Brightness Controls — Noctalia
   XF86MonBrightnessUp allow-when-locked=true {
-    spawn "brightnessctl" "set" "5%+";
+    spawn-sh "noctalia msg brightness-up";
   }
   XF86MonBrightnessDown allow-when-locked=true {
-    spawn "brightnessctl" "set" "5%-";
+    spawn-sh "noctalia msg brightness-down";
   }
 
   Mod+O repeat=false { toggle-overview; }
@@ -474,8 +451,8 @@ binds {
   Mod+Shift+Equal { set-window-height "+10%"; }
 
   // Move the focused window between the floating and the tiling layout.
-  Mod+Space       { toggle-window-floating; }
-  Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
+  Mod+Shift+Space { toggle-window-floating; }
+  Mod+Ctrl+Space  { switch-focus-between-floating-and-tiling; }
 
   Mod+T { toggle-column-tabbed-display; }
 
@@ -487,9 +464,9 @@ binds {
   // Mod+Space       { switch-layout "next"; }
   // Mod+Shift+Space { switch-layout "prev"; }
 
-  Print { screenshot; }
-  Ctrl+Print { screenshot-screen; }
-  Alt+Print { screenshot-window; }
+  Print { spawn-sh "noctalia msg screenshot-fullscreen"; }
+  Ctrl+Print { spawn-sh "noctalia msg screenshot-fullscreen"; }
+  Alt+Print { spawn-sh "noctalia msg screenshot-fullscreen"; }
 
   // Applications such as remote-desktop clients and software KVM switches may
   // request that niri stops processing the keyboard shortcuts defined here
@@ -502,6 +479,10 @@ binds {
   Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
   // The quit action will show a confirmation dialog to avoid accidental exits.
+  // Quick access terminal — `kitten quick-access-terminal` toggles show/hide; first press spawns it
+  Mod+grave repeat=false { spawn "kitten" "quick-access-terminal" "--detach"; }
+  Ctrl+grave repeat=false { spawn "kitten" "quick-access-terminal" "--detach"; }
+
   Mod+Shift+E { quit; }
   Ctrl+Alt+Delete { quit; }
 
@@ -523,3 +504,5 @@ environment {
   QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
   QTWEBENGINE_CHROMIUM_FLAGS "--force-dark-mode"
 }
+
+include "noctalia.kdl"
