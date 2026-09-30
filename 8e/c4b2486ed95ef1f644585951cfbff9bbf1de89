@@ -1,0 +1,18 @@
+fish/.config/fish/completions/bun.fish
+  h_78212b192cfe73 228
+fish/.config/fish/config.fish
+  h_78212b192cfe73 6
+git/.gitconfig
+  h_78212b192cfe73 26-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "8ec4b2486ed95ef1f644585951cfbff9bbf1de89",
+  "prompts": {},
+  "humans": {
+    "h_78212b192cfe73": {
+      "author": "dragove <dragove@qq.com>"
+    }
+  }
+}
