@@ -1,0 +1,261 @@
+# ==============================================================================
+# Umbriel —— Noctalia 团队的 Wayland 合成器
+# 键位对齐 ~/dotfiles/niri/.config/niri/config.kdl，配色 Catppuccin Frappe
+# 文档 https://docs.noctalia.dev/umbriel/   校验: umbriel config validate
+# ==============================================================================
+
+[include]
+files = []
+
+[include.optional]
+files = ["noctalia.toml"]            # Noctalia 主题模板写出的配色；缺失时忽略
+
+# ----------------------------------------------------------------- 会话
+[general]
+autostart = ["noctalia"]
+xwayland = true
+xwayland_native_resolution = true    # 4K@scale2 下 X11 应用保持清晰
+show_cheatsheet = false              # 与 niri 一致：不自动弹热键表
+
+# ----------------------------------------------------------------- 显示器 (niri: output "AU Optronics 0x26A4 Unknown" scale 1.5)
+[output."AU Optronics 0x26A4 Unknown"]
+scale = 1.5
+mode = "2880x1800@120.003"
+
+[environment]
+QT_IM_MODULE = "fcitx"
+XMODIFIERS = "@im=fcitx"
+SDL_IM_MODULE = "fcitx"
+GLFW_IM_MODULE = "ibus"
+QT_IM_MODULES = "wayland;fcitx;ibus"
+QT_QPA_PLATFORM = "wayland"
+ELECTRON_OZONE_PLATFORM_HINT = "auto"
+QT_QPA_PLATFORMTHEME = "qt6ct"
+QT_QPA_PLATFORMTHEME_QT6 = "qt6ct"
+QTWEBENGINE_CHROMIUM_FLAGS = "--force-dark-mode"
+# X11/Xwayland 应用的光标（系统默认是 Adwaita，和下面的 breeze 不一致）
+XCURSOR_THEME = "breeze_cursors"
+XCURSOR_SIZE = "32"
+
+# ----------------------------------------------------------------- 输入 (niri: layout us / numlock / tap / dwt / natural-scroll / focus-follows-mouse)
+# 光标：对齐 niri 的 cursor { xcursor-theme "breeze_cursors"; xcursor-size 32 }
+# size 是逻辑像素，wlroots 按输出 scale(1.5) 取对应尺寸的图标
+[input.cursor]
+theme = "breeze_cursors"
+size = 32
+
+[input.keyboard]
+layout = "us"
+# capslock 当作 escape（xkb options，libinput 本身不管键位映射）
+options = "caps:escape"
+numlock_toggle = true
+
+[input.touchpad]
+tap = true
+natural_scroll = true
+disable_while_typing = true
+
+[input.focus]
+follows_mouse = true
+
+# ----------------------------------------------------------------- 外观 (niri: prefer-no-csd / border 1.5 / corner 4 / shadow softness 30)
+[appearance]
+prefer_no_csd = true
+border_width = 2
+corner_radius = 4
+
+[appearance.shadow]
+enabled = true
+softness = 30
+offset_x = 0
+offset_y = 4
+
+[appearance.blur]
+enabled = true
+optimized = true
+passes = 3
+radius = 3
+noise = 0.02
+brightness = 0.9
+contrast = 0.9
+saturation = 1.1
+
+[hot_corners.top_left]
+enabled = false                      # niri: hot-corners off
+
+# ----------------------------------------------------------------- 布局 (niri: scrolling / gaps 8 / center-focused-column always)
+[layout]
+mode = "scrolling"
+gap = 8
+extent_presets = [0.333, 0.5, 0.667]
+
+[layout.scrolling]
+default_extent_fraction = 1.0        # niri window-rules: open-maximized true
+center_focused = "always"
+center_underfull_strip = true
+
+# ----------------------------------------------------------------- 窗口规则
+[[window_rule]]
+blur = true
+blur_optimized = false
+
+[[window_rule]]
+match.app_id = "^dev.noctalia.Noctalia$"
+default_floating = true
+default_floating_size_px = { width = 1020, height = 900 }
+
+[[window_rule]]
+match.app_id = "^dev.noctalia.UmbrielSharePicker$"
+default_floating = true
+default_floating_size_px = { width = 800, height = 600 }
+
+[[window_rule]]
+match.title = "^(Picture-in-Picture|Picture in picture)$"
+default_floating = true
+default_position = { x = 20, y = 20, anchor = "bottom_right" }
+
+[[window_rule]]
+match.title = "^notificationtoasts_.+_desktop"
+default_position = { x = 0, y = 0, anchor = "bottom_right" }
+default_focused = false
+default_pinned = true
+
+# 文件对话框 / 图片查看器浮动（对应 niri window-rules.kdl 的通用浮动规则）
+[[window_rule]]
+match.title = "^(Open File|Select a File|Choose wallpaper|Open Folder|Save As|Library)(.*)$"
+default_floating = true
+
+# Firefox 画中画：右下角固定尺寸
+[[window_rule]]
+match.app_id = "firefox$"
+match.title = "^Picture-in-Picture$"
+default_floating = true
+default_floating_size_px = { width = 480, height = 270 }
+default_position = { x = 32, y = 32, anchor = "bottom_left" }
+
+# 聊天软件：登录/授权弹窗浮动
+[[window_rule]]
+match.app_id = "^(QQ|wechat|com.alibabainc.dingtalk)$"
+match.title = "登录|授权|扫码"
+default_floating = true
+default_floating_size_px = { width = 460, height = 360 }
+
+# ----------------------------------------------------------------- 图层规则 (Noctalia 面板模糊)
+[[layer_rule]]
+match.namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd|desktop-widget-[^\"]*)$"
+blur = true
+blur_ignore_alpha = 0.5
+blur_popups = true
+blur_optimized = false
+
+# ----------------------------------------------------------------- 键位（与 niri 一致）
+[keybinds]
+
+# 应用 / 会话
+"Mod+Return" = { action = "spawn:kitty", repeat = false }
+"Alt+Space" = "spawn:noctalia msg panel-toggle launcher"
+"Mod" = "spawn:noctalia msg panel-toggle launcher"
+"Mod+Shift+Slash" = "cheatsheet-toggle"
+"Mod+V" = "spawn:noctalia msg panel-toggle clipboard"
+"Mod+Alt+L" = "spawn:noctalia msg session lock"
+"Mod+Shift+S" = "spawn:noctalia msg screenshot-region"
+"Mod+Ctrl+Shift+S" = "spawn:noctalia msg screenshot-fullscreen"
+"Mod+grave" = { action = "spawn:kitten quick-access-terminal --detach", repeat = false }
+"Mod+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
+"Mod+Shift+E" = "session-quit"
+"Ctrl+Alt+Delete" = "session-quit"
+"Mod+Shift+P" = "dpms-off"
+
+# 音量 / 亮度 / 媒体键（Noctalia + playerctl）
+"XF86AudioRaiseVolume" = { action = "spawn:noctalia msg volume-up", allow_when_locked = true }
+"XF86AudioLowerVolume" = { action = "spawn:noctalia msg volume-down", allow_when_locked = true }
+"XF86AudioMute" = { action = "spawn:noctalia msg volume-mute", allow_when_locked = true }
+"XF86AudioMicMute" = { action = "spawn:noctalia msg mic-mute", allow_when_locked = true }
+"XF86MonBrightnessUp" = { action = "spawn:noctalia msg brightness-up", allow_when_locked = true }
+"XF86MonBrightnessDown" = { action = "spawn:noctalia msg brightness-down", allow_when_locked = true }
+"XF86AudioPlay" = { action = "spawn:playerctl play-pause", allow_when_locked = true }
+"XF86AudioStop" = { action = "spawn:playerctl stop", allow_when_locked = true }
+"XF86AudioPrev" = { action = "spawn:playerctl previous", allow_when_locked = true }
+"XF86AudioNext" = { action = "spawn:playerctl next", allow_when_locked = true }
+
+# 焦点
+"Mod+O" = { action = "overview-toggle", repeat = false }
+"Mod+Q" = { action = "window-close", repeat = false }
+"Mod+H" = "window-focus-left"
+"Mod+J" = "window-focus-or-workspace-down"
+"Mod+K" = "window-focus-or-workspace-up"
+"Mod+L" = "window-focus-right"
+
+# 移动
+"Mod+Shift+H" = "column-move-left"
+"Mod+Shift+J" = "column-move-to-workspace-next"
+"Mod+Shift+K" = "column-move-to-workspace-previous"
+"Mod+Shift+L" = "column-move-right"
+"Mod+Home" = "column-focus-first"
+"Mod+End" = "column-focus-last"
+"Mod+Shift+Home" = "column-move-to-first"
+"Mod+Shift+End" = "column-move-to-last"
+
+# 输出之间
+"Mod+Left" = "output-focus-left"
+"Mod+Down" = "output-focus-down"
+"Mod+Up" = "output-focus-up"
+"Mod+Right" = "output-focus-right"
+"Mod+Shift+Left" = "column-move-to-output-left"
+"Mod+Shift+Down" = "column-move-to-output-down"
+"Mod+Shift+Up" = "column-move-to-output-up"
+"Mod+Shift+Right" = "column-move-to-output-right"
+
+# 工作区
+"Mod+Page_Down" = "workspace-next"
+"Mod+Page_Up" = "workspace-previous"
+"Mod+U" = "workspace-next"
+"Mod+I" = "workspace-previous"
+"Mod+Shift+Page_Down" = "column-move-to-workspace-next"
+"Mod+Shift+Page_Up" = "column-move-to-workspace-previous"
+"Mod+Shift+U" = "column-move-to-workspace-next"
+"Mod+Shift+I" = "column-move-to-workspace-previous"
+"Mod+WheelUp" = "window-focus-left"
+"Mod+WheelDown" = "window-focus-right"
+"Mod+Shift+WheelUp" = { action = "workspace-previous", cooldown_ms = 150 }
+"Mod+Shift+WheelDown" = { action = "workspace-next", cooldown_ms = 150 }
+
+"Mod+1" = "workspace-switch:1"
+"Mod+2" = "workspace-switch:2"
+"Mod+3" = "workspace-switch:3"
+"Mod+4" = "workspace-switch:4"
+"Mod+5" = "workspace-switch:5"
+"Mod+6" = "workspace-switch:6"
+"Mod+7" = "workspace-switch:7"
+"Mod+8" = "workspace-switch:8"
+"Mod+9" = "workspace-switch:9"
+"Mod+Shift+1" = "window-move-to-workspace:1"
+"Mod+Shift+2" = "window-move-to-workspace:2"
+"Mod+Shift+3" = "window-move-to-workspace:3"
+"Mod+Shift+4" = "window-move-to-workspace:4"
+"Mod+Shift+5" = "window-move-to-workspace:5"
+"Mod+Shift+6" = "window-move-to-workspace:6"
+"Mod+Shift+7" = "window-move-to-workspace:7"
+"Mod+Shift+8" = "window-move-to-workspace:8"
+"Mod+Shift+9" = "window-move-to-workspace:9"
+
+# 窗口状态 / 尺寸 / 标签组
+"Mod+T" = { action = "window-toggle-floating", repeat = false }
+"Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }
+"Mod+P" = { action = "window-toggle-pinned", repeat = false }
+"Mod+M" = { action = "window-toggle-maximize-to-edges", repeat = false }
+"Mod+F" = { action = "window-toggle-fullscreen", repeat = false }
+"Mod+Ctrl+F" = { action = "window-toggle-maximize", repeat = false }
+"Mod+R" = "window-cycle-primary-extent"
+"Mod+Shift+R" = "window-cycle-primary-extent-back"
+"Mod+Comma" = "window-consume-left"
+"Mod+Period" = "window-consume-right"
+"Mod+W" = { action = "column-toggle-tabbed", repeat = false }
+"Mod+Alt+Right" = "column-focus-tab-next"
+"Mod+Alt+Left" = "column-focus-tab-previous"
+
+# 暂存区
+"Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
+"Mod+Space" = "scratchpad-toggle"
+"Mod+Ctrl+Space" = { action = "window-restore-from-scratchpad", repeat = false }
+"Mod+Tab" = "scratchpad-focus-next"

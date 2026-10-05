@@ -3,6 +3,7 @@ input {
   keyboard {
     xkb {
       layout "us"
+      options "caps:escape"
     }
     numlock
   }

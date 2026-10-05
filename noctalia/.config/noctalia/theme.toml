@@ -1,0 +1,14 @@
+# Noctalia —— 主题与模板（手写配置，GUI 覆盖值在 ~/.local/state/noctalia/settings.toml）
+# 调色板：Catppuccin Frappe（自定义，见 palettes/CatppuccinFrappe.json）
+# 文档 https://docs.noctalia.dev/noctalia/theming/
+
+[theme]
+mode = "dark"                        # 终端/海报配色一直用 Frappe 深色
+shell_mode = "follow"
+source = "custom"
+custom_palette = "CatppuccinFrappe"
+
+# 把调色板渲染给合成器与编辑器
+[theme.templates]
+enable_builtin_templates = true
+builtin_ids = ["umbriel", "niri"]
