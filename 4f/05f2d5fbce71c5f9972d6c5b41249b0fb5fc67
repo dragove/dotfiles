@@ -1,0 +1,29 @@
+niri/.config/niri/config.kdl
+  s_944cb59eabdbce::t_751bdf5fe15b86 6
+noctalia/.config/noctalia/theme.toml
+  s_944cb59eabdbce::t_5911bcce4fb178 1-14
+noctalia/.config/noctalia/palettes/CatppuccinFrappe.json
+  s_944cb59eabdbce::t_4311449953e31b 1-48
+umbriel/.config/umbriel/noctalia.toml
+  s_944cb59eabdbce::t_5e6036c082f07a 1-25
+umbriel/.config/umbriel/config.toml
+  s_944cb59eabdbce::t_bc9186baf36a75 1-35,39-40,47-48,51-261
+  s_944cb59eabdbce::t_66dbfb86800c82 36-38,41-46
+  s_944cb59eabdbce::t_4f2475361dfeca 49-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "4f05f2d5fbce71c5f9972d6c5b41249b0fb5fc67",
+  "prompts": {},
+  "sessions": {
+    "s_944cb59eabdbce": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a10ab6-d17e-715d-ae91-910150c486e4",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "dragove <dragove@qq.com>"
+    }
+  }
+}
