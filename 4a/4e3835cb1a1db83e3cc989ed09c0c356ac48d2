@@ -1,0 +1,32 @@
+umbriel/.config/umbriel/config.toml
+  s_4e3c37eff8712e::t_ac143037ae90eb 36-37,41,44
+  s_4e3c37eff8712e::t_7ba3b357abd014 33-34
+noctalia/.config/noctalia/theme.toml
+  s_4e3c37eff8712e::t_54d67ae5279b51 14
+umbriel/.config/umbriel/noctalia.toml
+  s_ce9145b8e24073::t_1817aaabe722f7 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "4a4e3835cb1a1db83e3cc989ed09c0c356ac48d2",
+  "prompts": {},
+  "sessions": {
+    "s_4e3c37eff8712e": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a11901-d088-7682-8be5-37425a3107cf",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "dragove <dragove@qq.com>"
+    },
+    "s_ce9145b8e24073": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a11959-1149-72f7-8c35-98ef2fab6d51",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "dragove <dragove@qq.com>"
+    }
+  }
+}
