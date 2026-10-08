@@ -30,18 +30,18 @@ GLFW_IM_MODULE = "ibus"
 QT_IM_MODULES = "wayland;fcitx;ibus"
 QT_QPA_PLATFORM = "wayland"
 ELECTRON_OZONE_PLATFORM_HINT = "auto"
-QT_QPA_PLATFORMTHEME = "qt6ct"
-QT_QPA_PLATFORMTHEME_QT6 = "qt6ct"
+QT_QPA_PLATFORMTHEME = "kde"
+QT_QPA_PLATFORMTHEME_QT6 = "kde"
 QTWEBENGINE_CHROMIUM_FLAGS = "--force-dark-mode"
-# X11/Xwayland 应用的光标（系统默认是 Adwaita，和下面的 breeze 不一致）
-XCURSOR_THEME = "breeze_cursors"
+# X11/Xwayland 应用的光标（和下面的 input.cursor 保持一致）
+XCURSOR_THEME = "Catppuccin-Frappe-Dark-Cursors"
 XCURSOR_SIZE = "32"
 
 # ----------------------------------------------------------------- 输入 (niri: layout us / numlock / tap / dwt / natural-scroll / focus-follows-mouse)
-# 光标：对齐 niri 的 cursor { xcursor-theme "breeze_cursors"; xcursor-size 32 }
+# 光标：Catppuccin Frappe。素材只有 24/32/48/64px，逻辑 32 × scale 1.5 = 48px 正好命中，不会发虚/变小
 # size 是逻辑像素，wlroots 按输出 scale(1.5) 取对应尺寸的图标
 [input.cursor]
-theme = "breeze_cursors"
+theme = "Catppuccin-Frappe-Dark-Cursors"
 size = 32
 
 [input.keyboard]
@@ -154,7 +154,6 @@ blur_optimized = false
 # 应用 / 会话
 "Mod+Return" = { action = "spawn:kitty", repeat = false }
 "Alt+Space" = "spawn:noctalia msg panel-toggle launcher"
-"Mod" = "spawn:noctalia msg panel-toggle launcher"
 "Mod+Shift+Slash" = "cheatsheet-toggle"
 "Mod+V" = "spawn:noctalia msg panel-toggle clipboard"
 "Mod+Alt+L" = "spawn:noctalia msg session lock"

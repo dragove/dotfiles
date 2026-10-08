@@ -11,4 +11,4 @@ custom_palette = "CatppuccinFrappe"
 # 把调色板渲染给合成器与编辑器
 [theme.templates]
 enable_builtin_templates = true
-builtin_ids = ["umbriel", "niri"]
+builtin_ids = ["umbriel", "niri", "gtk3", "gtk4", "kcolorscheme", "qt"]

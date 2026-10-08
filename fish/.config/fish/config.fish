@@ -78,3 +78,6 @@ set -gx PATH "$HOME/.nub/bin" $PATH
 
 # cargo
 set -gx PATH "$HOME/.cargo/bin" $PATH
+
+# Pi
+fish_add_path "/home/dove/.pi/agent/bin"
