@@ -12,7 +12,7 @@ return {
       showImplicitArguments = false,
       showImplicitConversionsAndClasses = false,
       showInferredType = true,
-      serverVersion = "2.0.0-M19",
+      serverVersion = "2.0.0-RC1",
       serverProperties = { "-Xmx2g" },
       inlayHints = {
         hintsInPatternMatch = { enable = true },
