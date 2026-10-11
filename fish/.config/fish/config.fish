@@ -1,13 +1,3 @@
-if status is-login
-  if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-    # exec wayfire
-    # exec sway --unsupported-gpu
-    # exec Hyprland
-    # exec niri
-    # startx
-  end
-end
-
 if status is-interactive
   abbr vi nvim
   abbr vim nvim
@@ -81,3 +71,9 @@ set -gx PATH "$HOME/.cargo/bin" $PATH
 
 # Pi
 fish_add_path "/home/dove/.pi/agent/bin"
+# opencode
+fish_add_path "/home/dove/.opencode/bin"
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/dove/.local/bin" $PATH
+

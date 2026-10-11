@@ -77,3 +77,7 @@ if [[ -z "$_FORGE_THEME_LOADED" ]]; then
     eval "$(forge zsh theme)"
 fi
 # <<< forge initialize <<<
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/dove/.local/bin:$PATH"

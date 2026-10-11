@@ -1,26 +1,23 @@
 {
   "agent_servers": {
-    "opencode": {
-      "type": "registry"
-    },
     "codex-acp": {
-      "type": "registry"
-    }
+      "type": "registry",
+    },
   },
   "cli_default_open_behavior": "existing_window",
   "outline_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "agent": {
     "dock": "right",
     "favorite_models": [],
-    "model_parameters": []
+    "model_parameters": [],
   },
   "git_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "session": {
-    "trust_all_worktrees": true
+    "trust_all_worktrees": true,
   },
   "preferred_line_length": 120,
   "tab_size": 2,
@@ -29,17 +26,17 @@
   "wrap_guides": [120],
   "show_signature_help_after_edits": true,
   "minimap": {
-    "max_width_columns": 120
+    "max_width_columns": 120,
   },
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Catppuccin Frappé"
+    "dark": "Catppuccin Frappé",
   },
   "icon_theme": {
     "mode": "system",
     "light": "Catppuccin Frappé",
-    "dark": "Catppuccin Frappé"
+    "dark": "Catppuccin Frappé",
   },
   "vim_mode": true,
   "ui_font_size": 16,
@@ -50,39 +47,39 @@
   "buffer_font_size": 18,
   "buffer_font_family": "Maple Mono NF CN",
   "buffer_font_features": {
-    "calt": true
+    "calt": true,
   },
   "ensure_final_newline_on_save": false,
   "project_panel": {
     "dock": "left",
-    "sticky_scroll": false
+    "sticky_scroll": false,
   },
   "terminal": {
     "font_family": "Maple Mono NF CN",
     "font_features": {
-      "calt": true
+      "calt": true,
     },
     "env": {
-      "EDITOR": "zed --wait"
-    }
+      "EDITOR": "zed --wait",
+    },
   },
   "collaboration_panel": {
     "dock": "left",
-    "button": false
+    "button": false,
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "vim": {
     "toggle_relative_line_numbers": true,
-    "use_system_clipboard": "never"
+    "use_system_clipboard": "never",
   },
   "tabs": {
     "close_position": "right",
     "file_icons": true,
     "git_status": true,
-    "activate_on_close": "history"
+    "activate_on_close": "history",
   },
   "inlay_hints": {
     "enabled": true,
@@ -91,29 +88,48 @@
     "show_other_hints": true,
     "show_background": false,
     "edit_debounce_ms": 700,
-    "scroll_debounce_ms": 50
+    "scroll_debounce_ms": 50,
   },
   "colorize_brackets": true,
   "language_servers": ["!eslint", "..."],
   "languages": {
     "C": {
-      "tab_size": 4
+      "tab_size": 4,
     },
     "C++": {
-      "tab_size": 4
+      "tab_size": 4,
     },
     "Java": {
-      "tab_size": 4
+      "tab_size": 4,
     },
     "Python": {
       "tab_size": 4,
-      "language_servers": ["ty", "!basedpyright"]
+      "language_servers": ["ty", "!basedpyright"],
     },
     "Rust": {
-      "tab_size": 4
-    }
+      "tab_size": 4,
+    },
   },
   "lsp": {
+    "vtsls": {
+      "binary": {
+        "path": "tsc",
+        "arguments": ["--lsp", "--stdio"],
+      },
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+      },
+      "enable_lsp_tasks": true,
+    },
     "jdtls": {
       "initialization_options": {
         "settings": {
@@ -122,70 +138,68 @@
               "runtimes": [
                 {
                   "name": "JavaSE-25",
-                  "path": "/usr/lib/jvm/java-25-openjdk"
+                  "path": "/usr/lib/jvm/java-25-openjdk",
                 },
                 {
                   "name": "JavaSE-21",
                   "path": "/usr/lib/jvm/java-21-openjdk",
-                  "default": true
+                  "default": true,
                 },
                 {
                   "name": "JavaSE-1.8",
-                  "path": "/usr/lib/jvm/java-8-openjdk"
-                }
-              ]
+                  "path": "/usr/lib/jvm/java-8-openjdk",
+                },
+              ],
             },
             "import": {
               "gradle": {
-                "enabled": true
+                "enabled": true,
               },
               "maven": {
-                "enabled": true
+                "enabled": true,
               },
               "exclusions": [
                 "**/node_modules/**",
                 "**/.metadata/**",
                 "**/archetype-resources/**",
                 "**/META-INF/maven/**",
-                "/**/test/**"
-              ]
+                "/**/test/**",
+              ],
             },
             "completion": {
-              "filteredTypes": [
-                "com.alibaba.nacos.shaded.*"
-              ]
+              "filteredTypes": ["com.alibaba.nacos.shaded.*"],
             },
             "jdt": {
               "ls": {
                 "java": {
-                  "home": "/usr/lib/jvm/java-21-openjdk"
+                  "home": "/usr/lib/jvm/java-21-openjdk",
                 },
                 "lombokSupport": {
-                  "enabled": true
-                }
-              }
+                  "enabled": true,
+                },
+              },
             },
             "referencesCodeLens": {
-              "enabled": true
+              "enabled": true,
             },
             "signatureHelp": {
-              "enabled": true
+              "enabled": true,
             },
             "implementationsCodeLens": {
-              "enabled": true
+              "enabled": true,
             },
             "format": {
-              "enabled": true
+              "enabled": true,
             },
             "saveActions": {
-              "organizeImports": false
+              "organizeImports": false,
             },
             "autobuild": {
-              "enabled": true
-            }
-          }
-        }
-      }
+              "enabled": true,
+            },
+          },
+        },
+      },
     },
     "metals": {
       "initialization_options": { "isHttpEnabled": true },
@@ -201,9 +215,9 @@
           "implicitArguments": { "enable": false },
           "implicitConversions": { "enable": false },
           "inferredTypes": { "enable": true },
-          "typeParameters": { "enable": false }
-        }
-      }
-    }
-  }
+          "typeParameters": { "enable": false },
+        },
+      },
+    },
+  },
 }

@@ -1,0 +1,19 @@
+# Login/greeter config, versioned in ~/dotfiles (package: greetd).
+# Restore on a new machine (after installing greetd + noctalia-greeter-git):
+#   cd ~/dotfiles && sudo stow -t / greetd
+#   sudo systemctl enable --now greetd
+# See man greetd.5
+[terminal]
+vt = 1
+
+[default_session]
+# Noctalia greeter. Shown whenever no session is running, e.g. after logout.
+command = "/usr/bin/noctalia-greeter-session"
+user = "greeter"
+
+[initial_session]
+# Autologin: boot straight into niri, once per boot (greetd runfile).
+# -l: greetd already sourced /etc/profile + ~/.profile, so tell niri-session
+# not to re-exec a login shell.
+command = "niri-session -l"
+user = "dove"

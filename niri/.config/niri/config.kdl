@@ -223,7 +223,16 @@ layout {
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
-spawn-sh-at-startup "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP && dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP"
+// niri --session already sets XDG_CURRENT_DESKTOP=niri and
+// XDG_SESSION_TYPE=wayland itself, and exports those (plus WAYLAND_DISPLAY,
+// DISPLAY, NIRI_SOCKET) to systemd and D-Bus — see import_environment() in
+// niri's src/main.rs. What it cannot export is the environment{} block above:
+// niri applies that only to the processes it spawns, never to its own
+// environment. Services started through dbus/systemd (xdg-desktop-portal-kde is
+// a systemd user unit) read the systemd user environment instead, so the Qt
+// theme/IME vars would be missing there and the KDE file dialog would render
+// with Qt's default light palette.
+spawn-sh-at-startup "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME QT_QPA_PLATFORMTHEME_QT6 QT_IM_MODULE QT_IM_MODULES XMODIFIERS GTK_USE_PORTAL ELECTRON_OZONE_PLATFORM_HINT && dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME QT_QPA_PLATFORMTHEME_QT6 QT_IM_MODULE QT_IM_MODULES XMODIFIERS GTK_USE_PORTAL ELECTRON_OZONE_PLATFORM_HINT"
 spawn-at-startup "noctalia"
 spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "udiskie" "-a" "-t"
@@ -304,6 +313,9 @@ binds {
   Alt+Space hotkey-overlay-title="Application Launcher" {
       spawn-sh "noctalia msg panel-toggle launcher";
   }
+
+  // File Manager
+  Mod+E { spawn "dolphin"; }
 
   // Clipboard — Noctalia
   Mod+V hotkey-overlay-title="Clipboard" { spawn-sh "noctalia msg panel-toggle clipboard"; }
@@ -499,10 +511,41 @@ environment {
   QT_IM_MODULES "wayland;fcitx;ibus"
 
   QT_QPA_PLATFORM "wayland"
+  // Electron apps prefer Wayland: "auto" follows XDG_SESSION_TYPE, which
+  // niri --session sets to "wayland". If one app misbehaves, pin it alone by
+  // adding ELECTRON_OZONE_PLATFORM_HINT=x11 to its launcher/desktop file
+  // instead of flipping this back for everything.
   ELECTRON_OZONE_PLATFORM_HINT "auto"
   QT_QPA_PLATFORMTHEME "qt6ct"
   QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
   QTWEBENGINE_CHROMIUM_FLAGS "--force-dark-mode"
+
+  // xdg-desktop-portal picks its backends based on the desktop name: it only
+  // reads niri-portals.conf when this is "niri". niri --session sets it
+  // itself; this line is belt-and-braces so that starting niri directly keeps
+  // working too.
+  XDG_CURRENT_DESKTOP "niri"
+  // GTK apps keep their own file chooser unless they are told to use the
+  // portal; that is what routes them to the KDE dialog
+  // (~/.config/xdg-desktop-portal/niri-portals.conf).
+  GTK_USE_PORTAL "1"
+
+  // Firefox: force the native Wayland backend explicitly. This dates from the
+  // tty start, where XDG_SESSION_TYPE was "tty"; harmless to keep now that
+  // niri runs under niri-session.
+  MOZ_ENABLE_WAYLAND "1"
+  // Firefox VA-API decode has to happen on the Intel iGPU: Firefox on Wayland
+  // has no own GPU process, its WebRender GL context comes from the compositor
+  // (niri renders each output on its connected GPU), so VA-API frames on the
+  // dGPU cannot be imported into the Intel GL context -> Firefox drops back to
+  // software decoding. Chromium has the same constraint, but left alone it
+  // already picks the Intel node itself (see ~/.config/chromium-flags.conf).
+  //
+  // MOZ_DRM_DEVICE is deliberately NOT set here: its value is a
+  // machine-specific render node, so it lives in /etc/environment (pam_env,
+  // so it reaches the whole session) and only needs restoring there.
+  // On this machine: renderD129 = Intel Iris Xe iGPU (00:02.0),
+  // renderD128 = NVIDIA RTX 3070 Ti (01:00.0).
 }
 
 include "noctalia.kdl"

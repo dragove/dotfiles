@@ -13,6 +13,7 @@
 	editor = nvim
 	autocrlf = input
 	quotePath = false
+	excludesFile = /home/dove/.config/git/ignore
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
