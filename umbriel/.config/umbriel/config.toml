@@ -153,6 +153,8 @@ blur_optimized = false
 
 # 应用 / 会话
 "Mod+Return" = { action = "spawn:kitty", repeat = false }
+# 文件管理器：按系统默认处理器无参启动（保留其默认行为/上次会话），回退 dolphin
+"Mod+E" = { action = "spawn:d=$(xdg-mime query default inode/directory); [ -n \"$d\" ] && gtk-launch \"$d\" || dolphin", repeat = false }
 "Alt+Space" = "spawn:noctalia msg panel-toggle launcher"
 "Mod+Shift+Slash" = "cheatsheet-toggle"
 "Mod+V" = "spawn:noctalia msg panel-toggle clipboard"

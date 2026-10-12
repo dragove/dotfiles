@@ -309,13 +309,12 @@ binds {
 
   // Suggested binds for running programs: terminal, app launcher, screen locker.
   Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
+  // File manager: system default handler, launched with no args (keeps its own default behavior), dolphin as fallback
+  Mod+E hotkey-overlay-title="File Manager" { spawn-sh "d=$(xdg-mime query default inode/directory); [ -n \"$d\" ] && gtk-launch \"$d\" || dolphin"; }
   // Launcher — Noctalia (Alt+Space)
   Alt+Space hotkey-overlay-title="Application Launcher" {
       spawn-sh "noctalia msg panel-toggle launcher";
   }
-
-  // File Manager
-  Mod+E { spawn "dolphin"; }
 
   // Clipboard — Noctalia
   Mod+V hotkey-overlay-title="Clipboard" { spawn-sh "noctalia msg panel-toggle clipboard"; }
