@@ -104,6 +104,14 @@ window-rule {
     open-focused false
 }
 
+// 图片和视频窗口：浮动（对齐 QQ「图片查看器」的处理）
+window-rule {
+    match app-id=r#"^wechat$"# title=r#"图片和视频"#
+    open-floating true
+    default-column-width { proportion 0.6; }
+    default-window-height { proportion 0.85; }
+}
+
 // 登录/授权弹窗
 window-rule {
     match app-id="wechat" title=r#"登录|授权|扫码"#
@@ -118,7 +126,17 @@ window-rule {
 window-rule {
     match title="MainMenuPanelView" app-id="com.alibabainc.dingtalk"
     match title="分享的图片" app-id="com.alibabainc.dingtalk"
+    // 钉钉内部窗口（标题就是包名，多为透明/空白载体）：class 有大小写两种写法，app-id 都要覆盖
+    match title="com.alibabainc.dingtalk" app-id=r#"^[Cc]om\.alibabainc\.dingtalk$"#
     open-floating true
+}
+
+// @ 选人面板 / 头像资料卡（Qt 弹窗，标题统一为 "Form"）：平铺会被拉伸
+// open-focused false：抢焦点会触发 warp-mouse-to-focus 把鼠标拉进弹窗，钉钉随即收起它
+window-rule {
+    match title="Form" app-id="com.alibabainc.dingtalk"
+    open-floating true
+    open-focused false
 }
 
 // ============================================================

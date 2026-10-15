@@ -171,8 +171,8 @@ layout {
 
   // You can enable drop shadows for windows.
   shadow {
-      // Uncomment the next line to enable shadows.
-      // on
+      // 阴影开启（softness / spread / offset / color 用下面的值）
+      on
 
       // By default, the shadow draws only around its window, and not behind it.
       // Uncomment this setting to make the shadow draw behind its window.
@@ -233,10 +233,14 @@ layout {
 // theme/IME vars would be missing there and the KDE file dialog would render
 // with Qt's default light palette.
 spawn-sh-at-startup "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME QT_QPA_PLATFORMTHEME_QT6 QT_IM_MODULE QT_IM_MODULES XMODIFIERS GTK_USE_PORTAL ELECTRON_OZONE_PLATFORM_HINT && dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME QT_QPA_PLATFORMTHEME_QT6 QT_IM_MODULE QT_IM_MODULES XMODIFIERS GTK_USE_PORTAL ELECTRON_OZONE_PLATFORM_HINT"
-spawn-at-startup "noctalia"
+// noctalia 的语言只能跟着 POSIX locale 走（没有配置项），中文界面/中文农历插件都靠它。
+// 只给 noctalia 一个进程设，不动整个会话的 en_US。
+spawn-at-startup "sh" "-c" "LC_ALL=zh_CN.UTF-8 exec noctalia"
 spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "udiskie" "-a" "-t"
-spawn-at-startup "phonto" "/home/dove/Pictures/Wallpaper/hatsune-miku-night-vp9.webm"
+// phonto 动态壁纸属于另一台设备（本机既没装 phonto 也没有那个壁纸文件），
+// 用 shell 守卫：装了才执行，没装就静默跳过，同一份配置两台机器都能用。
+spawn-sh-at-startup "command -v phonto >/dev/null 2>&1 && phonto /home/dove/Pictures/Wallpaper/hatsune-miku-night-vp9.webm"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 

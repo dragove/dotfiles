@@ -1,7 +1,15 @@
 # ==============================================================================
 # Umbriel —— Noctalia 团队的 Wayland 合成器
-# 键位对齐 ~/dotfiles/niri/.config/niri/config.kdl，配色 Catppuccin Frappe
-# 文档 https://docs.noctalia.dev/umbriel/   校验: umbriel config validate
+# 取值逐条对齐 ~/dotfiles/niri/.config/niri/{config.kdl,window-rules.kdl,noctalia.kdl}
+# 文档 https://docs.noctalia.dev/umbriel/      校验: umbriel config validate
+#
+# niri 有、umbriel 表达不了的能力（下文对应位置也标了）：
+#   · 按窗口屏蔽录屏（block-out-from "screencast"）与「录制目标」高亮
+#   · 按窗口 scroll-factor / min-width / default-column-width {}（交给应用定宽）
+#   · screenshot-path、recent-windows 高亮、draw-border-with-background、
+#     clip-to-geometry、tiled-state，以及 debug honor-xdg-activation-with-invalid-serial
+#     （最后一条用 general.focus_on_activate 近似）
+# 反过来，umbriel 有而 niri 没有的（窗口模糊、scratchpad、tab 组、effects）保留在下面。
 # ==============================================================================
 
 [include]
@@ -11,17 +19,52 @@ files = []
 files = ["noctalia.toml"]            # Noctalia 主题模板写出的配色；缺失时忽略
 
 # ----------------------------------------------------------------- 会话
+# niri: spawn-at-startup "noctalia" / "fcitx5 -d" / "udiskie -a -t" / "phonto <壁纸>"
+# phonto 那条按设备区分：只有装了 phonto 的机器才跑（见 niri 同处注释）
+# （niri 另有一条 spawn-sh 把环境导入 systemd/dbus；umbriel 的 [environment] 会自动
+#   发布到 systemd user manager 与 D-Bus，因此不需要那条命令）
 [general]
-autostart = ["noctalia"]
-xwayland = true
+autostart = [
+  "LC_ALL=zh_CN.UTF-8 noctalia",  # 语言只跟 POSIX locale 走；同时决定农历插件的中文
+  "fcitx5 -d",
+  "udiskie -a -t",
+  "command -v phonto >/dev/null 2>&1 && phonto /home/dove/Pictures/Wallpaper/hatsune-miku-night-vp9.webm",  # 仅装了 phonto 的设备
+]
+xwayland = true                      # niri: xwayland-satellite {}
 xwayland_native_resolution = true    # 4K@scale2 下 X11 应用保持清晰
-show_cheatsheet = false              # 与 niri 一致：不自动弹热键表
+show_cheatsheet = false              # niri: hotkey-overlay { skip-at-startup }
+focus_on_activate = true             # niri: debug honor-xdg-activation-with-invalid-serial
 
-# ----------------------------------------------------------------- 显示器 (niri: output "AU Optronics 0x26A4 Unknown" scale 1.5)
-[output."AU Optronics 0x26A4 Unknown"]
+# ----------------------------------------------------------------- 显示器
+# niri 的 output 段名本来就是 "<make> <model> <serial>"，与 umbriel 的身份串同一格式；
+# 缺失的部分 umbriel 用 Unknown 补（和 niri 显示的 "AU Optronics 0x26A4 Unknown" 一致）。
+# transform 都是 normal，即 umbriel 默认值，故省略。
+[output."Xiaomi Corporation Mi Monitor 0x00000004"]   # niri: 3840x2160@160 scale 2 @0,0
+mode = "3840x2160@160.000"
+scale = 2
+position = [0, 0]
+
+[output."BOE 0x09EE Unknown"]                         # niri: 1920x1080@144.003 scale 1 @1920,0
+mode = "1920x1080@144.003"
+scale = 1
+position = [1920, 0]
+
+[output."PNP(AOC) 2279W ADVG59A009812"]               # niri: 1920x1080@60 scale 1 @1920,0
+mode = "1920x1080@60"
+scale = 1
+position = [1920, 0]
+
+[output."AU Optronics 0x26A4 Unknown"]                # niri: 2880x1800@60.001 scale 1.5 @0,0
+mode = "2880x1800@60.001"
 scale = 1.5
-mode = "2880x1800@120.003"
+position = [0, 0]
 
+# ----------------------------------------------------------------- 环境变量
+# niri: environment { ... } 里除 XDG_CURRENT_DESKTOP 之外的全部。
+# umbriel 自己拥有 WAYLAND_DISPLAY / DISPLAY / XDG_CURRENT_DESKTOP 等（桌面名固定为
+# umbriel，xdg-desktop-portal 因此读 umbriel-portals.conf），这里设不了也不用设。
+# niri 还有 GTK_IM_MODULE null（取消设置）；umbriel 的值必须是字符串，没有「取消设置」，
+# 若本机别处设过 GTK_IM_MODULE 需要手动清掉。
 [environment]
 QT_IM_MODULE = "fcitx"
 XMODIFIERS = "@im=fcitx"
@@ -30,47 +73,48 @@ GLFW_IM_MODULE = "ibus"
 QT_IM_MODULES = "wayland;fcitx;ibus"
 QT_QPA_PLATFORM = "wayland"
 ELECTRON_OZONE_PLATFORM_HINT = "auto"
-QT_QPA_PLATFORMTHEME = "kde"
-QT_QPA_PLATFORMTHEME_QT6 = "kde"
+QT_QPA_PLATFORMTHEME = "qt6ct"       # 跟随 niri（原来是 kde）
+QT_QPA_PLATFORMTHEME_QT6 = "qt6ct"
 QTWEBENGINE_CHROMIUM_FLAGS = "--force-dark-mode"
-# X11/Xwayland 应用的光标（和下面的 input.cursor 保持一致）
-XCURSOR_THEME = "Catppuccin-Frappe-Dark-Cursors"
+GTK_USE_PORTAL = "1"                 # 同 niri：GTK 文件对话框走 portal
+MOZ_ENABLE_WAYLAND = "1"             # 同 niri：Firefox 原生 Wayland
+XCURSOR_THEME = "breeze_cursors"     # 同 niri cursor {}；X11 应用用
 XCURSOR_SIZE = "32"
 
-# ----------------------------------------------------------------- 输入 (niri: layout us / numlock / tap / dwt / natural-scroll / focus-follows-mouse)
-# 光标：Catppuccin Frappe。素材只有 24/32/48/64px，逻辑 32 × scale 1.5 = 48px 正好命中，不会发虚/变小
-# size 是逻辑像素，wlroots 按输出 scale(1.5) 取对应尺寸的图标
+# ----------------------------------------------------------------- 输入
 [input.cursor]
-theme = "Catppuccin-Frappe-Dark-Cursors"
-size = 32
+theme = "breeze_cursors"             # niri: cursor { xcursor-theme }
+size = 32                            # niri: xcursor-size 32
+follows_focus = true                 # niri: warp-mouse-to-focus
 
 [input.keyboard]
-layout = "us"
-# capslock 当作 escape（xkb options，libinput 本身不管键位映射）
-options = "caps:escape"
-numlock_toggle = true
+layout = "us"                        # niri: keyboard { xkb { layout "us" } }
+options = "caps:escape"              # niri: options "caps:escape"
+numlock_toggle = true                # niri: numlock
 
 [input.touchpad]
-tap = true
-natural_scroll = true
-disable_while_typing = true
+tap = true                           # niri: tap
+natural_scroll = true                # niri: natural-scroll
+disable_while_typing = true          # niri: dwt
+# niri 的 touchpad "drag true"（触摸板拖拽）在 umbriel 里没有开关，故不写
 
 [input.focus]
-follows_mouse = true
+follows_mouse = true                 # niri: focus-follows-mouse
 
-# ----------------------------------------------------------------- 外观 (niri: prefer-no-csd / border 1.5 / corner 4 / shadow softness 30)
+# ----------------------------------------------------------------- 外观
 [appearance]
-prefer_no_csd = true
-border_width = 2
-corner_radius = 4
+prefer_no_csd = true                 # niri: prefer-no-csd
+border_width = 2                     # niri 是 1.5，umbriel 只接受整数
+corner_radius = 4                    # niri window-rules: geometry-corner-radius 4
+# niri 的 draw-border-with-background / clip-to-geometry 无对应键
 
 [appearance.shadow]
-enabled = true
-softness = 30
+enabled = true                       # 与 niri 一致：阴影开启
+softness = 30                        # 取值对齐 niri 的 shadow 块
 offset_x = 0
-offset_y = 4
+offset_y = 5
 
-[appearance.blur]
+[appearance.blur]                    # niri 没有窗口模糊；这组是 umbriel 自己的特性，保留
 enabled = true
 optimized = true
 passes = 3
@@ -80,52 +124,57 @@ brightness = 0.9
 contrast = 0.9
 saturation = 1.1
 
+# ----------------------------------------------------------------- 热角 (niri: gestures { hot-corners { off } })
 [hot_corners.top_left]
-enabled = false                      # niri: hot-corners off
+enabled = false
+[hot_corners.top_right]
+enabled = false
+[hot_corners.bottom_left]
+enabled = false
+[hot_corners.bottom_right]
+enabled = false
 
-# ----------------------------------------------------------------- 布局 (niri: scrolling / gaps 8 / center-focused-column always)
+# ----------------------------------------------------------------- 布局
 [layout]
-mode = "scrolling"
-gap = 8
-extent_presets = [0.333, 0.5, 0.667]
+mode = "scrolling"                        # niri 默认即滚动平铺
+gap = 8                                   # niri: gaps 8
+extent_presets = [0.33333, 0.5, 0.66667]  # niri: preset-column-widths 1/3、1/2、2/3
+# primary 与 secondary 的 extent 动作共用这份列表（niri 的列宽/行高预设）
 
 [layout.scrolling]
-default_extent_fraction = 1.0        # niri window-rules: open-maximized true
-center_focused = "always"
+default_extent_fraction = 1.0        # niri window-rules 全局 open-maximized true
+center_focused = "always"            # niri: center-focused-column "always"
 center_underfull_strip = true
 
-# ----------------------------------------------------------------- 窗口规则
+# ----------------------------------------------------------------- 工作区
+# niri: Telegram 规则里的 open-on-workspace "chat"（具名工作区按需出现）
+[[workspace]]
+name = "chat"
+
+# ==============================================================================
+# 窗口规则（逐条对齐 niri window-rules.kdl；niri 的全局规则落在 [layout]/[appearance]）
+# 匹配是正则、子串语义，与 niri 的 title/app-id 匹配一致。
+# ==============================================================================
+
+# 全局：所有窗口开启模糊（umbriel 独有，niri 无窗口模糊）
 [[window_rule]]
 blur = true
 blur_optimized = false
 
-[[window_rule]]
-match.app_id = "^dev.noctalia.Noctalia$"
-default_floating = true
-default_floating_size_px = { width = 1020, height = 900 }
-
-[[window_rule]]
-match.app_id = "^dev.noctalia.UmbrielSharePicker$"
-default_floating = true
-default_floating_size_px = { width = 800, height = 600 }
-
-[[window_rule]]
-match.title = "^(Picture-in-Picture|Picture in picture)$"
-default_floating = true
-default_position = { x = 20, y = 20, anchor = "bottom_right" }
-
-[[window_rule]]
-match.title = "^notificationtoasts_.+_desktop"
-default_position = { x = 0, y = 0, anchor = "bottom_right" }
-default_focused = false
-default_pinned = true
-
-# 文件对话框 / 图片查看器浮动（对应 niri window-rules.kdl 的通用浮动规则）
+# niri 通用浮动：文件对话框 / 图片查看器
 [[window_rule]]
 match.title = "^(Open File|Select a File|Choose wallpaper|Open Folder|Save As|Library)(.*)$"
 default_floating = true
 
-# Firefox 画中画：右下角固定尺寸
+[[window_rule]]                      # niri: match app-id="imv" / "Waydroid" / title="flutter picker"
+match.app_id = "^(imv|Waydroid)$"
+default_floating = true
+
+[[window_rule]]
+match.title = "flutter picker"
+default_floating = true
+
+# Firefox 画中画：浮动 + 固定尺寸 + 左下角
 [[window_rule]]
 match.app_id = "firefox$"
 match.title = "^Picture-in-Picture$"
@@ -133,14 +182,175 @@ default_floating = true
 default_floating_size_px = { width = 480, height = 270 }
 default_position = { x = 32, y = 32, anchor = "bottom_left" }
 
-# 聊天软件：登录/授权弹窗浮动
+# QQ：图片查看器 / 聊天记录（niri: 0.6 x 0.85）
 [[window_rule]]
-match.app_id = "^(QQ|wechat|com.alibabainc.dingtalk)$"
+match.app_id = "^QQ$"
+match.title = "图片查看器|的聊天记录$"
+default_floating = true
+default_floating_size = { width = 0.6, height = 0.85 }
+
+# 微信：图片和视频（与 QQ 的图片查看器同一套尺寸）
+[[window_rule]]
+match.app_id = "^wechat$"
+match.title = "图片和视频"
+default_floating = true
+default_floating_size = { width = 0.6, height = 0.85 }
+
+# QQ 登录/扫码界面（niri: 480x400）
+[[window_rule]]
+match.app_id = "^QQ$"
+match.title = "登录|账号|扫码"
+default_floating = true
+default_floating_size_px = { width = 480, height = 400 }
+
+# 微信登录/授权弹窗（niri: 420x320）
+[[window_rule]]
+match.app_id = "^wechat$"
 match.title = "登录|授权|扫码"
 default_floating = true
-default_floating_size_px = { width = 460, height = 360 }
+default_floating_size_px = { width = 420, height = 320 }
 
-# ----------------------------------------------------------------- 图层规则 (Noctalia 面板模糊)
+# 微信搜索框不抢焦点，防止弹窗关闭（niri 原样搬来；niri 那边匹配的是旧版标题 ^wechat$）
+[[window_rule]]
+match.app_id = "^wechat$"
+match.title = "^wechat$"
+default_focused = false
+
+# 钉钉：主菜单面板 / 分享的图片
+[[window_rule]]
+match.app_id = "^com.alibabainc.dingtalk$"
+match.title = "MainMenuPanelView|分享的图片"
+default_floating = true
+
+# Telegram 主窗口开到 chat 工作区（排除媒体查看器：niri 用 exclude，这里用否定前瞻）
+[[window_rule]]
+match.app_id = "^org[.]telegram[.]desktop$"
+match.title = "^(?!Media viewer$)"
+default_workspace = "chat"
+
+# Telegram 媒体查看器不全屏
+[[window_rule]]
+match.app_id = "^org[.]telegram[.]desktop$"
+match.title = "^Media viewer$"
+default_fullscreen = false
+
+# 浏览器 / 文件管理器 / Electron 应用等：niri 那几条 open-maximized 与全局规则重复，
+# 已由上面的 default_extent_fraction = 1.0 覆盖，这里不再逐条列出。
+# niri 给 firefox/mpv 的 scroll-factor 0.75 无对应键。
+
+# Thunar 重命名对话框
+[[window_rule]]
+match.app_id = "^thunar$"
+match.title = "^Rename "
+default_floating = true
+default_floating_size_px = { width = 500, height = 200 }
+
+# mpv：浮动 + 该窗口启用 VRR
+[[window_rule]]
+match.app_id = "^mpv$"
+default_floating = true
+vrr = "always"
+
+# OBS：niri 的 min-width 876 无对应键（只能力度不同的默认宽度，故不写）
+
+# 创意工具：niri default-column-width { fixed 1200 }
+[[window_rule]]
+match.app_id = "^(blender|gimp)$"
+default_scrolling_extent_px = 1200
+
+# GIMP 启动画面不抢焦点 / 偏好设置浮动
+[[window_rule]]
+match.title = "^GIMP Startup$"
+default_focused = false
+
+[[window_rule]]
+match.app_id = "^gimp"
+match.title = "Preferences"
+default_floating = true
+
+# 系统工具：浮动 + 1200x800
+[[window_rule]]
+match.app_id = "^(pavucontrol-qt|org[.]pulseaudio[.]pavucontrol|blueman-manager|blueman-services|qt5ct|qt6ct|xarchiver|org[.]gnome[.]DiskUtility|org[.]qbittorrent[.]qBittorrent|org[.]manjaro[.]pamac[.]manager)$"
+default_floating = true
+default_floating_size_px = { width = 1200, height = 800 }
+
+# 计算器：浮动 + 右下角
+[[window_rule]]
+match.app_id = "^galculator$"
+default_floating = true
+default_floating_size_px = { width = 400, height = 320 }
+default_position = { x = 5, y = 5, anchor = "bottom_right" }
+
+# fcitx5 配置窗口
+[[window_rule]]
+match.app_id = "^org[.]fcitx[.]fcitx5-config-qt$"
+default_floating = true
+default_floating_size_px = { width = 640, height = 400 }
+
+# xdg 文件选择对话框
+[[window_rule]]
+match.app_id = "^(xdg-desktop-portal-gtk|xdg-desktop-portal-wlr)$"
+default_floating = true
+default_floating_size_px = { width = 1280, height = 800 }
+
+# Steam 通知气泡右下角（niri 另有 block-out-from screen-capture，umbriel 无对应）
+[[window_rule]]
+match.app_id = "^steam$"
+match.title = "^notificationtoasts_[0-9]+_desktop$"
+default_position = { x = 10, y = 10, anchor = "bottom_right" }
+default_focused = false
+default_pinned = true
+
+# Steam Proton 游戏启用 VRR
+[[window_rule]]
+match.app_id = "^steam_app_[0-9]+$"
+vrr = "always"
+
+# KeePassXC 解锁弹窗自动聚焦
+[[window_rule]]
+match.app_id = "^org[.]keepassxc[.]KeePassXC$"
+match.title = "^Unlock Database - KeePassXC$"
+default_focused = true
+
+# 下拉式浮动终端（启动时指定 class，如 kitty --class dropdown）
+[[window_rule]]
+match.app_id = "^dropdown$"
+default_floating = true
+default_floating_size = { width = 0.8, height = 0.5 }
+default_position = { x = 0, y = 0, anchor = "top" }
+
+# WezTerm：niri 用 default-column-width {} 交给应用自己定宽，umbriel 无对应键
+
+# Pinentry / Tk / wev 等通用弹窗
+[[window_rule]]
+match.app_id = "^(Pinentry-gtk|Tk|wev)$"
+default_floating = true
+
+# KDE Connect 演示指针覆盖层
+[[window_rule]]
+match.app_id = "org[.]kde[.]kdeconnect[.]daemon"
+default_floating = true
+default_fullscreen = false
+default_position = { x = 0, y = 0, anchor = "top_left" }
+
+# Noctalia 设置窗口（niri: 1080x920）
+[[window_rule]]
+match.app_id = "^dev[.]noctalia[.]Noctalia$"
+default_floating = true
+default_floating_size_px = { width = 1080, height = 920 }
+
+# Umbriel 自己的共享选择器（niri 没有这个窗口）
+[[window_rule]]
+match.app_id = "^dev[.]noctalia[.]UmbrielSharePicker$"
+default_floating = true
+default_floating_size_px = { width = 800, height = 600 }
+
+# niri 还把这些窗口排除出录屏（umbriel 无此能力）：QQ / wechat / telegram /
+# keepassxc / gnome.World.Secrets / scrcpy / dingtalk；
+# niri 的「录制目标」高亮（focus-ring/border/tab-indicator 变红）同样无对应。
+
+# ----------------------------------------------------------------- 图层规则（Noctalia 面板模糊）
+# 命名空间列表抄自 niri 的 layer-rule，额外保留 Noctalia 的 desktop-widget 面板
 [[layer_rule]]
 match.namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd|desktop-widget-[^\"]*)$"
 blur = true
@@ -148,12 +358,14 @@ blur_ignore_alpha = 0.5
 blur_popups = true
 blur_optimized = false
 
-# ----------------------------------------------------------------- 键位（与 niri 一致）
+# ==============================================================================
+# 键位：前半段逐条对齐 niri 的 binds，末尾是 umbriel 独有能力（固定在 niri 未用的键上）
+# ==============================================================================
 [keybinds]
 
 # 应用 / 会话
 "Mod+Return" = { action = "spawn:kitty", repeat = false }
-# 文件管理器：按系统默认处理器无参启动（保留其默认行为/上次会话），回退 dolphin
+# 文件管理器：按系统默认处理器无参启动（保留其默认行为），回退 dolphin
 "Mod+E" = { action = "spawn:d=$(xdg-mime query default inode/directory); [ -n \"$d\" ] && gtk-launch \"$d\" || dolphin", repeat = false }
 "Alt+Space" = "spawn:noctalia msg panel-toggle launcher"
 "Mod+Shift+Slash" = "cheatsheet-toggle"
@@ -161,6 +373,9 @@ blur_optimized = false
 "Mod+Alt+L" = "spawn:noctalia msg session lock"
 "Mod+Shift+S" = "spawn:noctalia msg screenshot-region"
 "Mod+Ctrl+Shift+S" = "spawn:noctalia msg screenshot-fullscreen"
+"Print" = "spawn:noctalia msg screenshot-fullscreen"
+"Ctrl+Print" = "spawn:noctalia msg screenshot-fullscreen"
+"Alt+Print" = "spawn:noctalia msg screenshot-fullscreen"
 "Mod+grave" = { action = "spawn:kitten quick-access-terminal --detach", repeat = false }
 "Mod+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
 "Mod+Shift+E" = "session-quit"
@@ -189,15 +404,15 @@ blur_optimized = false
 
 # 移动
 "Mod+Shift+H" = "column-move-left"
-"Mod+Shift+J" = "column-move-to-workspace-next"
-"Mod+Shift+K" = "column-move-to-workspace-previous"
+"Mod+Shift+J" = "window-move-or-workspace-down"
+"Mod+Shift+K" = "window-move-or-workspace-up"
 "Mod+Shift+L" = "column-move-right"
 "Mod+Home" = "column-focus-first"
 "Mod+End" = "column-focus-last"
 "Mod+Shift+Home" = "column-move-to-first"
 "Mod+Shift+End" = "column-move-to-last"
 
-# 输出之间
+# 输出（显示器）之间
 "Mod+Left" = "output-focus-left"
 "Mod+Down" = "output-focus-down"
 "Mod+Up" = "output-focus-up"
@@ -230,33 +445,49 @@ blur_optimized = false
 "Mod+7" = "workspace-switch:7"
 "Mod+8" = "workspace-switch:8"
 "Mod+9" = "workspace-switch:9"
-"Mod+Shift+1" = "window-move-to-workspace:1"
-"Mod+Shift+2" = "window-move-to-workspace:2"
-"Mod+Shift+3" = "window-move-to-workspace:3"
-"Mod+Shift+4" = "window-move-to-workspace:4"
-"Mod+Shift+5" = "window-move-to-workspace:5"
-"Mod+Shift+6" = "window-move-to-workspace:6"
-"Mod+Shift+7" = "window-move-to-workspace:7"
-"Mod+Shift+8" = "window-move-to-workspace:8"
-"Mod+Shift+9" = "window-move-to-workspace:9"
+"Mod+Shift+1" = "column-move-to-workspace:1"
+"Mod+Shift+2" = "column-move-to-workspace:2"
+"Mod+Shift+3" = "column-move-to-workspace:3"
+"Mod+Shift+4" = "column-move-to-workspace:4"
+"Mod+Shift+5" = "column-move-to-workspace:5"
+"Mod+Shift+6" = "column-move-to-workspace:6"
+"Mod+Shift+7" = "column-move-to-workspace:7"
+"Mod+Shift+8" = "column-move-to-workspace:8"
+"Mod+Shift+9" = "column-move-to-workspace:9"
 
-# 窗口状态 / 尺寸 / 标签组
-"Mod+T" = { action = "window-toggle-floating", repeat = false }
-"Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }
-"Mod+P" = { action = "window-toggle-pinned", repeat = false }
-"Mod+M" = { action = "window-toggle-maximize-to-edges", repeat = false }
-"Mod+F" = { action = "window-toggle-fullscreen", repeat = false }
-"Mod+Ctrl+F" = { action = "window-toggle-maximize", repeat = false }
-"Mod+R" = "window-cycle-primary-extent"
-"Mod+Shift+R" = "window-cycle-primary-extent-back"
+# 窗口收进 / 抽出
+"Mod+BracketLeft" = "window-consume-or-expel-left"
+"Mod+BracketRight" = "window-consume-or-expel-right"
+# niri 这两键分别是 consume-window-into-column / expel-window-from-column，
+# umbriel 没有「只抽出」的动作，用最接近的收进动作代替
 "Mod+Comma" = "window-consume-left"
 "Mod+Period" = "window-consume-right"
+
+# 尺寸 / 状态
+"Mod+R" = "window-cycle-primary-extent"
+"Mod+Shift+R" = "window-cycle-secondary-extent"
+"Mod+Minus" = "window-modify-primary-extent:-0.1"
+"Mod+Equal" = "window-modify-primary-extent:0.1"
+"Mod+Shift+Minus" = "window-modify-secondary-extent:-0.1"
+"Mod+Shift+Equal" = "window-modify-secondary-extent:0.1"
+"Mod+C" = "column-center"
+"Mod+Shift+Space" = { action = "window-toggle-floating", repeat = false }
+"Mod+Ctrl+Space" = { action = "window-focus-switch-floating", repeat = false }
+"Mod+T" = { action = "column-toggle-tabbed", repeat = false }
+"Mod+F" = { action = "window-toggle-maximize", repeat = false }
+"Mod+Shift+F" = { action = "window-toggle-fullscreen", repeat = false }
+"Mod+Ctrl+F" = { action = "window-toggle-maximize-to-edges", repeat = false }
+# niri 的 Mod+Ctrl+R（reset-window-height）、Mod+Ctrl+C（center-visible-columns）无对应动作
+
+# ---- 以下为 umbriel 独有，钉在 niri 没有用到的键上 ----
+"Mod+P" = { action = "window-toggle-pinned", repeat = false }
 "Mod+W" = { action = "column-toggle-tabbed", repeat = false }
+"Mod+M" = { action = "window-toggle-maximize-to-edges", repeat = false }
+"Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }
 "Mod+Alt+Right" = "column-focus-tab-next"
 "Mod+Alt+Left" = "column-focus-tab-previous"
-
-# 暂存区
-"Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
-"Mod+Space" = "scratchpad-toggle"
-"Mod+Ctrl+Space" = { action = "window-restore-from-scratchpad", repeat = false }
-"Mod+Tab" = "scratchpad-focus-next"
+# niri 没有 scratchpad：开关放在 Tab 系列键上
+"Mod+Tab" = { action = "scratchpad-toggle", repeat = false }
+"Mod+Shift+Tab" = { action = "window-move-to-scratchpad", repeat = false }
+"Mod+Ctrl+Tab" = { action = "window-restore-from-scratchpad", repeat = false }
+"Mod+Alt+Tab" = { action = "scratchpad-focus-next", repeat = false }
