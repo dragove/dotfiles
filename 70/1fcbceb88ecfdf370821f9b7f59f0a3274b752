@@ -1,0 +1,49 @@
+niri/.config/niri/config.kdl
+  s_59c997914c33e0::t_cafd3cb30c0586 241-243
+  s_bf922e6ba1720a::t_10a5915c7f8796 236-238
+  s_59c997914c33e0::t_33054d1a796dc5 174-175
+umbriel/.config/umbriel/config.toml
+  s_59c997914c33e0::t_00636292665afb 3-12,22,24-25,27,29-30,32-33,35-58,60-67,76-77,79-81,84,86-88,91-93,96-99,102,104,106-109,115,117,127,129-137,139-142,145-146,149-159,164,166-170,174,177-261,263-268,271,273-300,304,306-317,319-322,324,326,329,331-344,346-350,352-353,361-363,368,376-378,407-408,415,448-462,465-483,485-486,489-493
+  s_59c997914c33e0::t_a2f052d0a854af 23,31
+  s_bf922e6ba1720a::t_e5997218ca8b94 28
+  s_59c997914c33e0::t_d3adff3a930582 112-113
+niri/.config/niri/window-rules.kdl
+  s_59c997914c33e0::t_fd07b4e6fb81a1 107-114,138,140
+  s_f851433f57d162::t_56486c90f43ec9 139
+  s_f851433f57d162::t_9bc1d3c2d298dc 137
+  s_f851433f57d162::t_33cacc94933a10 129-130
+  s_f851433f57d162::t_8cb2811cfe2b17 134-136
+  s_59c997914c33e0::t_99e7f45429c31d 141
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "701fcbceb88ecfdf370821f9b7f59f0a3274b752",
+  "prompts": {},
+  "sessions": {
+    "s_59c997914c33e0": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a12e0b-e7f6-76e4-b526-59adaab007db",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "dragove <dragove@qq.com>"
+    },
+    "s_bf922e6ba1720a": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a12f23-f6eb-761e-bccd-a74a89b6eb47",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "dragove <dragove@qq.com>"
+    },
+    "s_f851433f57d162": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a12ec6-b79a-73af-83ec-b36178047135",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "dragove <dragove@qq.com>"
+    }
+  }
+}
