@@ -1,0 +1,21 @@
+fish/.config/fish/fish_variables
+  s_af916c86f3fdb2::t_9aca3010bbf5b8 7
+fish/.config/fish/functions/fish_jj_prompt.fish
+  s_af916c86f3fdb2::t_e6a8af43e1362d 1-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "c1131c847bcff08e5d2cb76ff0831b8080176993",
+  "prompts": {},
+  "sessions": {
+    "s_af916c86f3fdb2": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a13f57-e80c-721c-885a-bd98b4047721",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "dragove <dragove@qq.com>"
+    }
+  }
+}
