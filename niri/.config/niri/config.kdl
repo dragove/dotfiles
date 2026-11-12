@@ -1,5 +1,5 @@
 input {
-  focus-follows-mouse
+  focus-follows-mouse max-scroll-amount="0%"
   keyboard {
     xkb {
       layout "us"
@@ -34,7 +34,7 @@ gestures {
     }
 }
 output "Xiaomi Corporation Mi Monitor 0x00000004" {
-  mode "3840x2160@160.000"
+  mode "3840x2160@119.880"
   scale 2
   transform "normal"
   position x=0 y=0
@@ -238,9 +238,6 @@ spawn-sh-at-startup "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY
 spawn-at-startup "sh" "-c" "LC_ALL=zh_CN.UTF-8 exec noctalia"
 spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "udiskie" "-a" "-t"
-// phonto 动态壁纸属于另一台设备（本机既没装 phonto 也没有那个壁纸文件），
-// 用 shell 守卫：装了才执行，没装就静默跳过，同一份配置两台机器都能用。
-spawn-sh-at-startup "command -v phonto >/dev/null 2>&1 && phonto /home/dove/Pictures/Wallpaper/hatsune-miku-night-vp9.webm"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -293,6 +290,17 @@ layer-rule {
 debug {
   // Allows notification actions and window activation from Noctalia.
   honor-xdg-activation-with-invalid-serial
+
+  // 混合显卡：外接 4K 屏（HDMI-A-1）挂在 NVIDIA（renderD128）上，内屏挂在 Intel
+  // （renderD129）上，而 niri 默认用 Intel 渲染，于是每帧都要跨 GPU 拷贝，外接屏上
+  // 合成和鼠标跟手明显发卡。强制全局用独显渲染，见 niri issue #3674。
+  // 代价：内屏（Intel 输出）变成反向拷贝；若内屏反而变卡，注释掉下面这行即可。
+  render-drm-device "/dev/dri/renderD128"
+
+  // NVIDIA 输出（外接 4K 屏接在独显上）会在上一帧 flip 完成前就排队下一帧，导致画面
+  // 撕裂；这是 niri 官方针对此症状建议的选项，但它按设计会延后一帧排队、增加延迟。
+  // A/B 中：先关掉看是否仍撕裂；若撕裂复现，取消下面这行注释并重启 niri。
+  // wait-for-frame-completion-before-queueing
 }
 
 
