@@ -14,6 +14,7 @@
 	autocrlf = input
 	quotePath = false
 	excludesFile = /home/dove/.config/git/ignore
+	hooksPath = /home/dove/.esign-inter/hooks
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -21,12 +22,12 @@
 	required = true
 [includeIf "gitdir:~/Workspace/**/Comp/**"]
     path = ~/.gitconfig-comp
-[trace2]
-	eventTarget = af_unix:stream:/home/dove/.git-ai/internal/daemon/trace2.sock
-	eventNesting = 10
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[trace2]
+	eventNesting = 0
+	eventTarget = af_unix:stream:/home/dove/.git-ai/internal/daemon/trace2.sock
