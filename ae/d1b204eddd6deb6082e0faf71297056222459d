@@ -1,0 +1,22 @@
+fish/.config/fish/conf.d/ai-hub.fish
+  h_78212b192cfe73 1-4
+fish/.config/fish/conf.d/esx.fish
+  h_78212b192cfe73 1-4
+git/.gitconfig
+  h_78212b192cfe73 17,31-33
+niri/.config/niri/noctalia.kdl
+  h_78212b192cfe73 18
+umbriel/.config/umbriel/noctalia.toml
+  h_78212b192cfe73 22-40,44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "aed1b204eddd6deb6082e0faf71297056222459d",
+  "prompts": {},
+  "humans": {
+    "h_78212b192cfe73": {
+      "author": "dragove <dragove@qq.com>"
+    }
+  }
+}
