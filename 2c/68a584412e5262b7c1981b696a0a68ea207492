@@ -1,0 +1,14 @@
+umbriel/.config/umbriel/noctalia.toml
+  h_78212b192cfe73 38-39,41-42,44-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2c68a584412e5262b7c1981b696a0a68ea207492",
+  "prompts": {},
+  "humans": {
+    "h_78212b192cfe73": {
+      "author": "dragove <dragove@qq.com>"
+    }
+  }
+}
