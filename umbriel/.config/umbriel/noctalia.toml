@@ -35,8 +35,14 @@ background_unfocused = "#303446FF"
 text = "#c6d0f5FF"
 text_unfocused = "#a5adceFF"
 close = "#e78284FF"
+close_glyph = "#303446FF"
+close_glyph_hover = "#303446FF"
 maximize = "#8caaeeFF"
+maximize_glyph = "#303446FF"
+maximize_glyph_hover = "#303446FF"
 minimize = "#babbf1FF"
+minimize_glyph = "#303446FF"
+minimize_glyph_hover = "#303446FF"
 
 [[window_rule]]
 match.is_scratchpad = true
