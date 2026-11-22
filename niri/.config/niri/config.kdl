@@ -334,9 +334,9 @@ binds {
   // Lock screen — Noctalia
   Mod+Alt+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia msg session lock"; }
 
-  // Screenshots — Noctalia
-  Mod+Shift+S hotkey-overlay-title="Rectangle Screenshot" { spawn-sh "noctalia msg screenshot-region"; }
-  Mod+Ctrl+Shift+S hotkey-overlay-title="Current Screen Screenshot" { spawn-sh "noctalia msg screenshot-fullscreen"; }
+  // Screenshots — mark-shot
+  Mod+Shift+S hotkey-overlay-title="Rectangle Screenshot" { spawn-sh "mark-shot"; }
+  Mod+Ctrl+Shift+S hotkey-overlay-title="Current Screen Screenshot" { spawn-sh "mark-shot --fullscreen"; }
 
   // Audio Controls — Noctalia
   XF86AudioRaiseVolume allow-when-locked=true {
@@ -488,9 +488,9 @@ binds {
   // Mod+Space       { switch-layout "next"; }
   // Mod+Shift+Space { switch-layout "prev"; }
 
-  Print { spawn-sh "noctalia msg screenshot-fullscreen"; }
-  Ctrl+Print { spawn-sh "noctalia msg screenshot-fullscreen"; }
-  Alt+Print { spawn-sh "noctalia msg screenshot-fullscreen"; }
+  Print { spawn-sh "mark-shot -f"; }
+  Ctrl+Print { spawn-sh "mark-shot -f"; }
+  Alt+Print { spawn-sh "mark-shot -f"; }
 
   // Applications such as remote-desktop clients and software KVM switches may
   // request that niri stops processing the keyboard shortcuts defined here
