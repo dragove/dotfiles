@@ -1,0 +1,31 @@
+niri/.config/niri/config.kdl
+  s_7af3f844600187::t_a458fce33b1c73 339,491-493
+umbriel/.config/umbriel/config.toml
+  s_7af3f844600187::t_6b82081cec6447 374-378
+fish/.config/fish/conf.d/vite-plus.fish
+  s_d81ea9b0f2e27f::t_8a2134d99bbf1d 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d338382a28084718322fad27b5bcde42b36458f4",
+  "prompts": {},
+  "sessions": {
+    "s_7af3f844600187": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a1ec47-cff4-7090-b692-7f2ae5ff884f",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": null
+    },
+    "s_d81ea9b0f2e27f": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a1ed98-cb75-730d-8f7d-70ef86b5896a",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "dragove <dragove@qq.com>"
+    }
+  }
+}
