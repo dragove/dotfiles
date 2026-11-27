@@ -142,13 +142,6 @@ window-rule {
 // ============================================================
 // Telegram
 // ============================================================
-// 主窗口打开到 chat 工作区，排除媒体查看器
-window-rule {
-    match app-id=r#"^org\.telegram\.desktop$"#
-    exclude title="^Media viewer$"
-    open-on-workspace "chat"
-}
-
 // 媒体查看器不全屏
 window-rule {
     match app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"

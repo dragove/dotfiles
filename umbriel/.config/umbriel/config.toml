@@ -371,11 +371,11 @@ blur_optimized = false
 "Mod+Shift+Slash" = "cheatsheet-toggle"
 "Mod+V" = "spawn:noctalia msg panel-toggle clipboard"
 "Mod+Alt+L" = "spawn:noctalia msg session lock"
-"Mod+Shift+S" = "spawn:noctalia msg screenshot-region"
-"Mod+Ctrl+Shift+S" = "spawn:noctalia msg screenshot-fullscreen"
-"Print" = "spawn:noctalia msg screenshot-fullscreen"
-"Ctrl+Print" = "spawn:noctalia msg screenshot-fullscreen"
-"Alt+Print" = "spawn:noctalia msg screenshot-fullscreen"
+"Mod+Shift+S" = "spawn:mark-shot"
+"Mod+Ctrl+Shift+S" = "spawn:mark-shot -m -f -t s"
+"Print" = "spawn:mark-shot -m -f -t s"
+"Ctrl+Print" = "spawn:mark-shot -m -f -t s"
+"Alt+Print" = "spawn:mark-shot -m -f -t s"
 "Mod+grave" = { action = "spawn:kitten quick-access-terminal --detach", repeat = false }
 "Mod+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
 "Mod+Shift+E" = "session-quit"

@@ -336,7 +336,7 @@ binds {
 
   // Screenshots — mark-shot
   Mod+Shift+S hotkey-overlay-title="Rectangle Screenshot" { spawn-sh "mark-shot"; }
-  Mod+Ctrl+Shift+S hotkey-overlay-title="Current Screen Screenshot" { spawn-sh "mark-shot --fullscreen"; }
+  Mod+Ctrl+Shift+S hotkey-overlay-title="Current Screen Screenshot" { spawn-sh "mark-shot -m -f -t s"; }
 
   // Audio Controls — Noctalia
   XF86AudioRaiseVolume allow-when-locked=true {
@@ -488,9 +488,9 @@ binds {
   // Mod+Space       { switch-layout "next"; }
   // Mod+Shift+Space { switch-layout "prev"; }
 
-  Print { spawn-sh "mark-shot -f"; }
-  Ctrl+Print { spawn-sh "mark-shot -f"; }
-  Alt+Print { spawn-sh "mark-shot -f"; }
+  Print { spawn-sh "mark-shot -m -f -t s"; }
+  Ctrl+Print { spawn-sh "mark-shot -m -f -t s"; }
+  Alt+Print { spawn-sh "mark-shot -m -f -t s"; }
 
   // Applications such as remote-desktop clients and software KVM switches may
   // request that niri stops processing the keyboard shortcuts defined here
